@@ -1,0 +1,3 @@
+interface:
+  display_name: "Risk-first"
+  short_description: "Hunt risks before code, pin each with a discriminating check"

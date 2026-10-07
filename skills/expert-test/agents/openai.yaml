@@ -1,0 +1,5 @@
+interface:
+  display_name: "Expert Test"
+  short_description: "Test each decision against the best expert in its field"
+policy:
+  allow_implicit_invocation: false

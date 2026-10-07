@@ -1,0 +1,5 @@
+interface:
+  display_name: "No Comments"
+  short_description: "Delete comments in a diff and fix what they hid"
+policy:
+  allow_implicit_invocation: false

@@ -1,0 +1,5 @@
+interface:
+  display_name: "Build Spec"
+  short_description: "Implement the result of /to-spec and /to-tickets in code, building each ticket risk-first."
+policy:
+  allow_implicit_invocation: false
