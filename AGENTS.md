@@ -30,7 +30,8 @@ For a user-invoked skill, tell the user to type it.
 
 `README.md` has one section for each skill, under **User-invoked** or **Model-invoked**.
 A section has a short description, the `npx skills@latest add` command, and the invoke line.
-The command also installs each skill that the skill calls, from this repo or another repo.
+The command also installs each skill that the skill calls from this repo.
+The README tells the user to install all of Matt Pocock's skills first, so the command does not install them.
 When you add, rename, or change a skill, update its section.
 
 ## Upstream copies

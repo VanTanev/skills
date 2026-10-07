@@ -5,6 +5,13 @@ They work in any agent that reads `SKILL.md` files: Claude Code, Codex, OpenCode
 
 ## Install
 
+These skills pair with [Matt Pocock's skills](https://github.com/mattpocock/skills), and some of them call his skills.
+Install his skills first:
+
+```bash
+npx skills@latest add mattpocock/skills
+```
+
 The [skills](https://github.com/vercel-labs/skills) CLI copies the skills into each agent that you select:
 
 ```bash
@@ -34,7 +41,6 @@ Implements a spec or tickets with the `risk-first` skill, then runs `code-review
 
 ```bash
 npx skills@latest add VanTanev/skills --skill build --skill risk-first
-npx skills@latest add mattpocock/skills --skill code-review
 ```
 
 Then invoke:
@@ -50,7 +56,6 @@ Implementer subagents build each ready ticket in parallel with the `risk-first` 
 
 ```bash
 npx skills@latest add VanTanev/skills --skill build-spec --skill risk-first
-npx skills@latest add mattpocock/skills --skill to-spec --skill to-tickets --skill code-review --skill setup-matt-pocock-skills
 ```
 
 Run `/setup-matt-pocock-skills` once in the repo, then invoke:
