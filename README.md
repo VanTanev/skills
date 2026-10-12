@@ -84,6 +84,7 @@ Then invoke:
 Sends a diff to Comment Sicko, a subagent that deletes comments and marks the code that the comments explained.
 The skill then fixes that code, and offers to put each "do not remove" rule into a type, test, or lint rule.
 Your agent must be able to start subagents.
+Based on the [Cursor pstack](https://github.com/cursor/plugins/tree/main/pstack) skill (MIT).
 
 ```bash
 npx skills@latest add VanTanev/skills --skill no-comments
