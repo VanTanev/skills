@@ -6,12 +6,13 @@ This skill is a vendored copy of `create-verification-skill` from the Cursor pst
 
 - Repository: https://github.com/cursor/plugins, branch `main`.
 - Path: `pstack/skills/create-verification-skill/`.
-- Base: `4483dcd246c3212ff38890bd53977c16d7b54fb7` (2026-07-30, "Add feature map reference to create-verification-skill (#178)").
+- Base: `c49b37a2c0e7bede60a71ad7322e3f12c337a3da` (2026-10-12, "fix(pstack): create-verification-skill readiness means the app is usable (#573)").
   The files here are equal to upstream at this commit, except for the local changes below.
-- Checked up to: `fadd23794c0075468eb8964b0fd93e06e09486ad` (upstream `main`, 2026-09-24).
+- Checked up to: `997ffc7fe26bdaa6478a14e7f5b8d5f9ed747102` (upstream `main`, 2026-10-12).
   Upstream has no changes to this directory between the base and this commit.
 
-The port recorded no upstream SHA, so the base is the last upstream commit that changes this directory.
+The port recorded no upstream SHA, so the first base was `4483dcd` (#178), the last upstream commit that changed this directory before the port.
+The skill was updated to upstream #573 on 2026-10-12.
 Ivan ported the skill on 2026-09-03 into his dotfiles (`VanTanev/motors-dotfiles` commit `b527a29`, `~/.agents/skills/create-verification-skill`).
 https://github.com/mcu-development/agentic-workflows/pull/5 copied it unchanged into that repo, and `VanTanev/skills` took the copy from there.
 
@@ -59,14 +60,14 @@ This is the exact diff of `SKILL.md` from the upstream base to this copy:
 -Write `.cursor/skills/verify-<app>/SKILL.md` with YAML frontmatter (`name: verify-<app>` and a `description` that names the app, the surface, and when to reach for it — without frontmatter the skill never registers) and these sections, each grounded in what the interview actually found (no placeholders left):
 +Write `.agents/skills/verify-<app>/SKILL.md` with YAML frontmatter (`name: verify-<app>` and a `description` that names the app, the surface, and when to reach for it — without a description, agents do not advertise the skill to the model) and these sections, each grounded in what the interview actually found (no placeholders left). Create `.claude/skills/verify-<app>` as a relative symlink to `../../.agents/skills/verify-<app>` so both runtimes use the same project-local skill; never maintain a second copy.
  
- - **Launch:** the exact command that starts the app for verification, and how to tell it's ready (a log line, a port answering, a prompt). Include teardown. For a short-lived CLI or TUI there is no server to keep alive: launch means build the binary (or install deps) once, then start each drive in its own isolated PTY or tmux session.
+ - **Launch:** the exact command that starts the app for verification, and how to tell it's ready (a log line, a prompt). Launch must reach a usable state from an empty data dir, including any migrations and seed data. Ready means usable, not just that a process answers. A database health check can pass while its init scripts are still running. Include teardown. For a short-lived CLI or TUI there is no server to keep alive: launch means build the binary (or install deps) once, then start each drive in its own isolated PTY or tmux session.
  - **Doctor:** one read-only check that answers "is this instance worth driving?" — process up, right version/build, port owned by us, auth valid. An agent runs this first whenever anything looks off.
 @@ -33,7 +35,7 @@
  
  ## 3. Seed the feature map
  
--Create `.cursor/skills/verify-<app>/features/README.md` plus one file per user-facing feature you can identify (aim for the top 3-5 to start, from routes, commands, menus, or docs). Follow the shape in [`references/feature-map-example/`](references/feature-map-example/), with a README index and one file per feature. Each file answers, from the user's point of view: what the feature is, how to reach it, how to drive it with the harness, and what observable end state proves it works. The four H2s are `Sub-features`, `How to get to it (user POV)`, `Driving it with <harness>`, and `Gotchas`. The map is the repo's maintained verification source; a proof that drives one convenient entry point is incomplete when the map lists others.
-+Create `.agents/skills/verify-<app>/features/README.md` plus one file per user-facing feature you can identify (aim for the top 3-5 to start, from routes, commands, menus, or docs). Follow the shape in [`references/feature-map-example/`](references/feature-map-example/), with a README index and one file per feature. Each file answers, from the user's point of view: what the feature is, how to reach it, how to drive it with the harness, and what observable end state proves it works. The four H2s are `Sub-features`, `How to get to it (user POV)`, `Driving it with <harness>`, and `Gotchas`. The map is the repo's maintained verification source; a proof that drives one convenient entry point is incomplete when the map lists others.
+-Create `.cursor/skills/verify-<app>/features/README.md` plus one file per user-facing feature you can identify (aim for the top 3-5 to start, from routes, commands, menus, or docs). Follow the shape in [`references/feature-map-example/`](references/feature-map-example/), with a README index and one file per feature. Each file answers, from the user's point of view: what the feature is, how to reach it, how to drive it with the harness, and what observable end state proves it works. The four H2s are `Sub-features`, `How to get to it (user POV)`, `Driving it with <harness>`, and `Gotchas`. If the seed data lacks a precondition that a journey needs, the journey reports a failure and the reason goes in that feature's `Gotchas`. Never weaken the journey to make it pass. The map is the repo's maintained verification source; a proof that drives one convenient entry point is incomplete when the map lists others.
++Create `.agents/skills/verify-<app>/features/README.md` plus one file per user-facing feature you can identify (aim for the top 3-5 to start, from routes, commands, menus, or docs). Follow the shape in [`references/feature-map-example/`](references/feature-map-example/), with a README index and one file per feature. Each file answers, from the user's point of view: what the feature is, how to reach it, how to drive it with the harness, and what observable end state proves it works. The four H2s are `Sub-features`, `How to get to it (user POV)`, `Driving it with <harness>`, and `Gotchas`. If the seed data lacks a precondition that a journey needs, the journey reports a failure and the reason goes in that feature's `Gotchas`. Never weaken the journey to make it pass. The map is the repo's maintained verification source; a proof that drives one convenient entry point is incomplete when the map lists others.
  
  ## 4. Prove the generated skill before handing it over
  

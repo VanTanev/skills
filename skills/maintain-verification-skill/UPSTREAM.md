@@ -12,8 +12,8 @@ This skill is a vendored copy of `maintain-verification-skill` from the Cursor p
   We take only its `SKILL.md`: the coverage table, derived outcomes, and multi-directory Locate.
   We do not take its `poteto-mode` lint script and playbook edit, because this repo does not vendor `poteto-mode`.
   The files here are equal to `SKILL.md` at `f4588ce`, except for the local changes below.
-- Checked up to: `fadd23794c0075468eb8964b0fd93e06e09486ad` (upstream `main`, 2026-09-24).
-  Upstream `main` has no changes to this directory between the base and this commit.
+- Checked up to: `997ffc7fe26bdaa6478a14e7f5b8d5f9ed747102` (upstream `main`, 2026-10-12).
+  Upstream `main` has no changes to this directory between the base and this commit, and PR 334 has the same head.
 
 The port recorded no upstream SHA, so the base is the last upstream commit that changes either verification skill.
 Ivan ported the skill on 2026-09-03 into his dotfiles (`VanTanev/motors-dotfiles` commit `b527a29`, `~/.agents/skills/maintain-verification-skill`).
