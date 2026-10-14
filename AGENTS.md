@@ -36,7 +36,7 @@ When you add, rename, or change a skill, update its section.
 
 ## Upstream copies
 
-A skill with an `UPSTREAM.md` is a changed copy of another project's skill.
+A skill with an `UPSTREAM.md` is, or contains, a changed copy of another project's skill.
 Keep its `LICENSE` file.
 When you change the skill, update the list of local changes and the diff in `UPSTREAM.md`.
 
@@ -45,6 +45,8 @@ Write the rule inline when the copy needs only one sentence of it.
 When the copy needs the whole text, copy that skill's `SKILL.md`, frontmatter included, to a file in `references/`, and point to it as `{SKILLBASE}/references/<file>.md`.
 This also works when the source skill is user-invoked, because the copy reads a file and does not start a skill.
 Record each reference file in `UPSTREAM.md`, with its upstream path, base, and diff.
+`scripts/check-repeats.sh` runs in CI.
+It requires every copy of a skill to be byte-identical to `skills/<name>/SKILL.md` when this repo has that skill, and otherwise to the other copies with the same frontmatter `name`.
 
 ## Agent skills
 

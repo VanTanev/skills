@@ -48,6 +48,8 @@ When a check fails, use its oracle or stated assumption to decide whether the co
 Cite the basis for any changed expected value.
 
 When implementation reveals a new risk or changes an assumption, update the risk analysis and verify the affected behavior.
+Before a check result counts as evidence that the work is done, read `{SKILLBASE}/references/prove-it-works.md`.
+For a UI, a link, or a video, that check opens it the way the user will.
 Continue until the requested behavior is implemented, every identified risk has its check result or a named gap, and the repository's required checks pass.
 
 ## 3. Account

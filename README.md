@@ -329,6 +329,6 @@ To start it yourself:
 
 ## License
 
-[MIT](LICENSE), except for the skills that have an `UPSTREAM.md` file.
-These skills are changed copies of skills from [cursor/plugins](https://github.com/cursor/plugins), under the MIT license in their own `LICENSE` file.
-Their `UPSTREAM.md` file records the upstream version and each change.
+[MIT](LICENSE).
+A skill that has an `UPSTREAM.md` file is, or contains, a changed copy of a skill from [cursor/plugins](https://github.com/cursor/plugins), under the MIT license in the skill's own `LICENSE` file.
+Its `UPSTREAM.md` file records which files are copies, the upstream version, and each change.

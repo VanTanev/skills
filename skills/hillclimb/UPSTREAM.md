@@ -109,3 +109,5 @@ The `a/SKILL.md` side is upstream `pstack/skills/poteto-mode/playbooks/hillclimb
    `diff -u --label a/SKILL.md --label b/SKILL.md <(git -C <clone> show origin/main:pstack/skills/poteto-mode/playbooks/hillclimb.md) SKILL.md` and
    `diff -u --label a/references/prove-it-works.md --label b/references/prove-it-works.md <(git -C <clone> show origin/main:pstack/skills/principle-prove-it-works/SKILL.md) references/prove-it-works.md`.
    Set both bases and "Checked up to" to the new upstream SHA and date.
+5. Run `scripts/check-repeats.sh` from the repo root.
+   It fails until every other copy of `principle-prove-it-works`, such as `skills/risk-first/references/prove-it-works.md`, has the same update.
