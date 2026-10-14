@@ -16,6 +16,14 @@ Only `references/prove-it-works.md` is a vendored copy, of the `principle-prove-
 `VanTanev/skills` added the copy on 2026-10-14.
 It is byte-identical to `skills/hillclimb/references/prove-it-works.md`, and `scripts/check-repeats.sh` keeps the two copies equal.
 
+```upstream
+repo: cursor/plugins
+branch: main
+checked: 1e5c90a4b6f249917bd21fe361b3a2a7deb741b8
+path: pstack/skills/principle-prove-it-works/
+path: pstack/LICENSE
+```
+
 ## Local changes
 
 - The frontmatter stays, so the copy is the whole upstream `SKILL.md`.
