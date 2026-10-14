@@ -30,6 +30,10 @@ For each check, choose a **discriminating input** that distinguishes the intende
 Derive the expected result from the oracle or stated assumption.
 Prefer a **boundary pair**, one input on each side of the boundary, plus the boundary itself, and an **asymmetric** input, where swapped arguments or a reversed comparison give a different answer.
 
+Call the code as its users do, and assert the literal result or effect they see: for a mock, the payload it received; for an absence, also the presence on another input; for a constant, the behavior of the code that reads it.
+A test that would still pass if every imported function returned `undefined` or a wrong value discriminates nothing: `toBeDefined`, `toBeTruthy`, `toHaveBeenCalled`, `expect(f(a)).toBe(f(a))`, a restated constant or prompt string, an assertion on data the test built.
+Rewrite or delete each such test in the change.
+
 Extend existing property tests when the change affects the behavior they cover.
 When a risk generalises into a **relation** that must hold across valid inputs, put it in a property test: extend the one that covers the behavior, or write one.
 When writing that property test:
