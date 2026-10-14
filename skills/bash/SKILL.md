@@ -51,6 +51,8 @@ For every script or library creation, edit, or review, apply [Portability](refer
 - Use `[[ ]]` for Bash string and file tests; quote the right operand for literal equality.
 - Test command status directly and distinguish an expected negative result from an execution error.
 - Check prerequisites such as `cd` explicitly before dependent work.
+- Make a script that changes state converge: a second run, or a run after a failure at any step, ends in the same state as one clean run.
+  If the result depends on what an earlier run left behind, reconcile that state first.
 - Separate declarations from command substitutions whose exit status matters.
 - Keep output data on standard output and diagnostics on standard error.
 - Prefer simple parameter expansion for simple string operations and a format-aware parser for structured data.
