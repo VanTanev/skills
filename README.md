@@ -128,6 +128,23 @@ Then invoke:
 /maintain-verification-skill
 ```
 
+### correct
+
+Finds the mistakes that agents repeat in a repo, from commits, reverts, and review comments.
+It makes each mistake impossible at the highest level that works: architecture, then types or a lint, then a test, and docs last.
+It proves that each new check fails on a real past mistake, and keeps a rule table in `docs/agents/corrections.md`.
+Based on the [Cursor pstack](https://github.com/cursor/plugins/tree/main/pstack) skill (MIT).
+
+```bash
+npx skills@latest add VanTanev/skills --skill correct
+```
+
+Then invoke:
+
+```
+/correct
+```
+
 ## Model-invoked
 
 ### risk-first

@@ -1,0 +1,5 @@
+interface:
+  display_name: "Correct"
+  short_description: "Make the mistakes agents repeat in a repo impossible"
+policy:
+  allow_implicit_invocation: false
