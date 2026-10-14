@@ -9,8 +9,9 @@ This skill is a vendored copy of `no-comments` and the Comment Sicko agent from 
   Here the agent is `references/comment-sicko.md`.
 - Base: `99559f2f52047978602ef365589275831e76af07` (2026-08-02, "pstack: add bro, babysit/shipping/orchestrate/worktree-cleanup, and catch-up ports (0.14.0) (#187)").
   The files here are equal to upstream at this commit, except for the local changes below.
-- Checked up to: `997ffc7fe26bdaa6478a14e7f5b8d5f9ed747102` (upstream `main`, 2026-10-12).
-  Upstream has two changes after the base that are not applied here. See "Upstream changes not applied".
+- Checked up to: `79afd75d5bd51383fbb526b72f36db03180b8301` (upstream `main`, 2026-10-14).
+  Upstream has three changes after the base.
+  This copy has #613 in a changed form (see "Local changes"), and does not apply the other two (see "Upstream changes not applied").
 
 The copy recorded no upstream SHA.
 Its text has "Authoring agents defend comments.", which upstream #329 removed, so the base is the last upstream commit before #329 that changes these files.
@@ -31,6 +32,11 @@ All changes let Claude Code, OpenCode, and other agents run the skill without th
   Step 2 and Comment Sicko run the Trace.
 - `/architect`: step 3 makes the sketch itself (caller usage first, signatures with `not implemented` bodies, two shapes, keep the one with the smaller public surface), because this repo does not vendor `architect`.
   Step 6 reports the "sketch", not the "architect sketch".
+- Step 1 effort: adds "Set the subagent's effort one step below your own. If you do not know your effort, do not set it."
+  This is the Claude Code form of the sentence that upstream https://github.com/cursor/plugins/pull/613 (`ce649c0`) adds to step 1: "Pick each subagent's reasoning level and fast or standard speed for the job, per the Subagents section of the **poteto-mode** skill."
+  This repo does not vendor `poteto-mode`, so the sentence gives its rule for judgment work directly.
+  Claude Code has no speed setting for each subagent, so the sentence has no speed part.
+  It has no lower limit, because step 2 examines each deletion and keep that a low-effort Comment Sicko makes.
 - Principle skills: step 4 gives the two rules from `principle-fix-root-causes` and `principle-redesign-from-first-principles` directly, because this repo does not vendor them.
 - Step 5: "Wait for interactive approval. Unattended and eval require caller pre-approval." becomes "Ask in chat and wait for approval. Unattended runs require caller pre-approval."
 - Comment Sicko scope: "If none exists, feed me the current diff against `main`." becomes "Nothing outside it exists.", to agree with the skill scope.
@@ -73,7 +79,7 @@ The `a/references/comment-sicko.md` side is upstream `pstack/agents/comment-sick
 -4. Implement the smallest root-cause fix in scope. Remove every named workaround. If the root cause is out of scope, land the smallest in-scope fix and report the rest open. The **principle-fix-root-causes** and **principle-redesign-from-first-principles** skills guide intent only: fix real causes, redesign as if requirements always existed, never bolt on symptom guards. Neither authorizes widening the fence nor fixing instances outside it.
 -5. Constraint comments say `do not remove`, `do not change wording`, or `talk to X before changing`. Leave keeps about things we cannot change. Offer the cheapest in-scope type, runtime, test, or CI lint. Wait for interactive approval. Unattended and eval require caller pre-approval. If approved, encode then delete. Otherwise delete, report the constraint open, and sketch out-of-scope work.
 -6. Report the deletion count, restored comments, reruns, architect sketch, fixes, encoding offers, encodings, unenforced constraints, and other open work.
-+1. Read `references/comment-sicko.md`. Spawn `Agent` with `subagent_type: "general-purpose"` and that file verbatim as the prompt, followed by the scope.
++1. Read `references/comment-sicko.md`. Spawn `Agent` with `subagent_type: "general-purpose"` and that file verbatim as the prompt, followed by the scope. Set the subagent's effort one step below your own. If you do not know your effort, do not set it.
 +2. Inspect its report and diff. Reject application-code edits, scope escapes, exception-protected deletions, misstated `MUST KILL` reasons, and flags that treat kept intentional code as guilty. Reshape flags on our-code surprises stay actionable. Do not restore those comments. A keep survives only with proof it is about something we cannot change. Audit missed scoped lint and TypeScript suppressions. Correctness or safety suppressions stay actionable `MUST KILL`s. Restore deletions only with exact exceptions and scoped proof. Before accepting thin `IMPORTANT` or `do not remove` kills or keeps, run the Sicko's Trace on their symbol. If a kill is ambiguous, do not restore. If a keep is refuted or still ambiguous, delete it. Revert and rerun one rejected report with the failure named. Reject a second, report it open, and fail `/no-comments`.
 +3. Fix trivial accepted flags directly by deleting a dead path, dropping a parameter, or using the real API. If any fix needs a shape, sketch once for the accepted set and surrounding code: write the caller's usage first, then types and signatures with `not implemented` bodies. Sketch two structurally distinct shapes and keep the one that hides more behind a smaller public surface. Stop at the sketch. Step 4 implements.
 +4. Implement the smallest root-cause fix in scope against the sketch. Remove every named workaround. Fix the cause where it lives: a guard that silences a symptom is not a fix. Redesign as if the requirement had existed from day one. If the root cause is out of scope, land the smallest in-scope fix and report the rest open. Neither rule authorizes widening the fence nor fixing instances outside it.
