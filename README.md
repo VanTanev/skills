@@ -110,6 +110,22 @@ Then invoke:
 /in-your-own-words
 ```
 
+### ketchup
+
+Catches you up on what changed in the chat since your last message, in less than 150 words.
+It lists each decision that waits on you, with a recommendation and what happens if you do not answer.
+Based on the [Cursor pstack](https://github.com/cursor/plugins/tree/main/pstack) skill (MIT).
+
+```bash
+npx skills@latest add VanTanev/skills --skill ketchup
+```
+
+Then invoke:
+
+```
+/ketchup
+```
+
 ### no-comments
 
 Sends a diff to Comment Sicko, a subagent that deletes comments and marks the code that the comments explained.
@@ -193,8 +209,25 @@ To start it yourself:
 /bash
 ```
 
+### benchmark-checklist
+
+Checks a measured number before the agent reports it or acts on it: a speedup, a regression, or an eval score such as precision and recall.
+It asks what limits the number, whether both sides were tuned, whether errors or skipped work explain it, and whether it repeats.
+Based on the [Cursor pstack](https://github.com/cursor/plugins/tree/main/pstack) skill (MIT).
+
+```bash
+npx skills@latest add VanTanev/skills --skill benchmark-checklist
+```
+
+The agent uses it when it runs a benchmark or reports a measured number.
+To start it yourself:
+
+```
+/benchmark-checklist
+```
+
 ## License
 
-[MIT](LICENSE), except for `create-verification-skill` and `maintain-verification-skill`.
-These two skills are changed copies of skills from [cursor/plugins](https://github.com/cursor/plugins), under the MIT license in their own `LICENSE` file.
+[MIT](LICENSE), except for the skills that have an `UPSTREAM.md` file.
+These skills are changed copies of skills from [cursor/plugins](https://github.com/cursor/plugins), under the MIT license in their own `LICENSE` file.
 Their `UPSTREAM.md` file records the upstream version and each change.
