@@ -228,10 +228,9 @@ Then invoke, with your question:
 
 ### correct
 
-Finds the mistakes that agents repeat in a repo, and makes each one impossible.
-It tries the architecture first, then types, then a lint rule whose error names the fix, then a test, and docs last.
-It proves each new check on a real past mistake.
-Run it again each time you correct an agent.
+Finds the mistakes that agents repeat in a repo, from commits, reverts, review comments, and agent memory.
+It makes each mistake impossible at the highest level that works: architecture, then types or a lint, then a test, and docs last.
+It proves that each new check fails on a real past mistake, and keeps a rule table in `docs/agents/corrections.md`.
 Based on the [Cursor pstack](https://github.com/cursor/plugins/tree/main/pstack) skill (MIT).
 
 ```bash
