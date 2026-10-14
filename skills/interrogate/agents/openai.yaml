@@ -1,0 +1,5 @@
+interface:
+  display_name: "Interrogate"
+  short_description: "Review a change with reviewers from two model families"
+policy:
+  allow_implicit_invocation: false

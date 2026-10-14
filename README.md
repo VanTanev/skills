@@ -175,6 +175,75 @@ Then invoke:
 /maintain-verification-skill
 ```
 
+### interrogate
+
+Sends a change to two reviewers on different model families, and sorts their findings into Act on, Consider, Noted, and Dismissed.
+A map shows where the models agree, because a finding that two models raise on their own is the strongest signal.
+Requires the CLI of the other model family: `codex` for a Claude agent, or `claude` for other agents.
+Based on the [Cursor pstack](https://github.com/cursor/plugins/tree/main/pstack) skill (MIT).
+
+```bash
+npx skills@latest add VanTanev/skills --skill interrogate
+```
+
+Then invoke:
+
+```
+/interrogate
+```
+
+### blast-radius
+
+Finds what a change can break outside the diff: library code at the pinned version, wire formats, DB columns, feature flags, and code three calls away.
+It proves the one fact that makes the change safe with a script that runs the real code, or marks the fact unproven.
+Based on the [Cursor pstack](https://github.com/cursor/plugins/tree/main/pstack) skill (MIT).
+
+```bash
+npx skills@latest add VanTanev/skills --skill blast-radius --skill unslop
+```
+
+Then invoke:
+
+```
+/blast-radius
+```
+
+### why
+
+Finds why code has its current shape.
+One subagent searches git and the PRs, and one subagent searches each other source that the agent can reach through MCP: tickets, docs, chat, monitoring, error tracking, and analytics.
+The answer keeps what the sources say apart from what the agent infers, and lists what it could not find.
+Your agent must be able to start subagents.
+Based on the [Cursor pstack](https://github.com/cursor/plugins/tree/main/pstack) skill (MIT).
+
+```bash
+npx skills@latest add VanTanev/skills --skill why
+```
+
+Then invoke, with your question:
+
+```
+/why <question>
+```
+
+### correct
+
+Finds the mistakes that agents repeat in a repo, and makes each one impossible.
+It tries the architecture first, then types, then a lint rule whose error names the fix, then a test, and docs last.
+It proves each new check on a real past mistake.
+Run it again each time you correct an agent.
+Based on the [Cursor pstack](https://github.com/cursor/plugins/tree/main/pstack) skill (MIT).
+
+```bash
+npx skills@latest add VanTanev/skills --skill correct
+```
+
+Then invoke:
+
+```
+/correct
+```
+
 ## Model-invoked
 
 ### risk-first
@@ -224,6 +293,22 @@ To start it yourself:
 
 ```
 /benchmark-checklist
+```
+
+### unslop
+
+A numbered list of AI writing patterns, with the fix for each: filler, AI vocabulary, metaphor nouns, mannered prose, and over-compressed text.
+Based on the [Cursor pstack](https://github.com/cursor/plugins/tree/main/pstack) skill (MIT).
+
+```bash
+npx skills@latest add VanTanev/skills --skill unslop
+```
+
+The agent uses it when it writes prose that a person reads, such as a doc, a PR description, or a ticket.
+To start it yourself:
+
+```
+/unslop
 ```
 
 ## License
