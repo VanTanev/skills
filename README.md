@@ -310,6 +310,23 @@ To start it yourself:
 /unslop
 ```
 
+### hillclimb
+
+Improves one measured number in a loop: one change, one measurement, keep or revert.
+It freezes a measurement harness, logs each attempt, and scores a held-out test set one time at the end, so the loop does not fit the data it tunes on.
+Based on the [Cursor pstack](https://github.com/cursor/plugins/tree/main/pstack) playbook (MIT).
+
+```bash
+npx skills@latest add VanTanev/skills --skill hillclimb --skill benchmark-checklist
+```
+
+The agent uses it when a metric must improve over many attempts, or when a matcher or ranker needs tuning.
+To start it yourself:
+
+```
+/hillclimb
+```
+
 ## License
 
 [MIT](LICENSE), except for the skills that have an `UPSTREAM.md` file.
