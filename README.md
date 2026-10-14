@@ -79,6 +79,37 @@ Then invoke:
 /expert-test
 ```
 
+### sharpen
+
+Before the work starts, the agent asks how a top expert would do the task, what you really want, and whether the task has too many or too few constraints.
+Then it does the work, with one outside check that the result is correct.
+Based on the [Cursor pstack](https://github.com/cursor/plugins/tree/main/pstack) skill (MIT).
+
+```bash
+npx skills@latest add VanTanev/skills --skill sharpen
+```
+
+Then invoke, with your task:
+
+```
+/sharpen <task>
+```
+
+### in-your-own-words
+
+The agent restates your goals and your problem in its own words, so that you can correct it before the work starts.
+Based on the [Cursor pstack](https://github.com/cursor/plugins/tree/main/pstack) skill (MIT).
+
+```bash
+npx skills@latest add VanTanev/skills --skill in-your-own-words
+```
+
+Then invoke:
+
+```
+/in-your-own-words
+```
+
 ### no-comments
 
 Sends a diff to Comment Sicko, a subagent that deletes comments and marks the code that the comments explained.
