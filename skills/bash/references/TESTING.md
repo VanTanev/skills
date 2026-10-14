@@ -21,6 +21,7 @@ Select relevant cases:
 | Status handling | Producer failure, consumer failure, expected negative result, missing prerequisite |
 | File updates | Failed transformation, original preserved, permissions and link policy |
 | Background work | One failed child, interruption, cleanup, no remaining owned children |
+| State changes | Second run, rerun after a failure at each state-changing step, end state equal to one clean run |
 | Environment | Different working directory, redirected stdin, supported Bash versions |
 | Prerequisites | Missing tool, unsupported version or OS, rejected capability, no operational side effects before failure |
 
