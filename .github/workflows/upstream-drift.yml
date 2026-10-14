@@ -1,0 +1,43 @@
+name: upstream-drift
+
+on:
+  schedule:
+    - cron: '17 6 * * 1'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: Only print the report; do not open, update, or close the issue
+        type: boolean
+        default: true
+  pull_request:
+    paths:
+      - 'skills/*/UPSTREAM.md'
+      - 'scripts/upstream-drift.sh'
+      - '.github/workflows/upstream-drift.yml'
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: ShellCheck
+        run: shellcheck -x --enable=check-extra-masked-returns -- scripts/upstream-drift.sh
+      - name: Report upstream changes
+        env:
+          GH_TOKEN: ${{ github.token }}
+          UPDATE_ISSUE: ${{ github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && !inputs.dry_run) }}
+        run: |
+          args=()
+          if [[ $UPDATE_ISSUE == true ]]; then
+            args=(--issue)
+          fi
+          status=0
+          scripts/upstream-drift.sh "${args[@]}" > report.md || status=$?
+          cat report.md >> "$GITHUB_STEP_SUMMARY"
+          if (( status > 1 )); then
+            exit "$status"
+          fi

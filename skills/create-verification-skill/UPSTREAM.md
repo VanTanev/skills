@@ -16,6 +16,14 @@ The skill was updated to upstream #573 on 2026-10-12.
 Ivan ported the skill on 2026-09-03 into his dotfiles (`VanTanev/motors-dotfiles` commit `b527a29`, `~/.agents/skills/create-verification-skill`).
 https://github.com/mcu-development/agentic-workflows/pull/5 copied it unchanged into that repo, and `VanTanev/skills` took the copy from there.
 
+```upstream
+repo: cursor/plugins
+branch: main
+checked: 79afd75d5bd51383fbb526b72f36db03180b8301
+path: pstack/skills/create-verification-skill/
+path: pstack/LICENSE
+```
+
 ## Local changes
 
 All changes let Claude Code, OpenCode, and other agents run the skill from one canonical copy in `.agents/skills`.

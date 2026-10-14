@@ -16,6 +16,15 @@ This skill is a vendored copy of the `hillclimb` playbook of the `poteto-mode` s
 
 `VanTanev/skills` added the copy on 2026-10-14.
 
+```upstream
+repo: cursor/plugins
+branch: main
+checked: 1e5c90a4b6f249917bd21fe361b3a2a7deb741b8
+path: pstack/skills/poteto-mode/playbooks/hillclimb.md
+path: pstack/skills/principle-prove-it-works/
+path: pstack/LICENSE
+```
+
 ## Local changes
 
 The playbook becomes a skill that Claude Code, OpenCode, and Codex run without the rest of pstack.

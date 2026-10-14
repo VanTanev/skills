@@ -40,6 +40,10 @@ A skill with an `UPSTREAM.md` is a changed copy of another project's skill.
 Keep its `LICENSE` file.
 When you change the skill, update the list of local changes and the diff in `UPSTREAM.md`.
 
+Each `UPSTREAM.md` has one fenced `upstream` block: `repo`, `branch`, `checked` (the "Checked up to" SHA), one `path` line for each upstream file or directory, and an optional `pr: <number> <head SHA>`.
+When you change "Checked up to" or the tracked PR head, change the block too.
+`scripts/upstream-drift.sh` reads only this block. A weekly workflow runs it and keeps one issue, labeled `upstream-drift`, with each new upstream commit on a tracked path.
+
 A copy can depend on a skill from its source that this repo does not have.
 Write the rule inline when the copy needs only one sentence of it.
 When the copy needs the whole text, copy that skill's `SKILL.md`, frontmatter included, to a file in `references/`, and point to it as `{SKILLBASE}/references/<file>.md`.

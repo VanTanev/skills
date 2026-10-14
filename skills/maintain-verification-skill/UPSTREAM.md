@@ -20,6 +20,15 @@ Ivan ported the skill on 2026-09-03 into his dotfiles (`VanTanev/motors-dotfiles
 https://github.com/mcu-development/agentic-workflows/pull/5 copied it unchanged into that repo, and `VanTanev/skills` took the copy from there.
 PR 334 was applied on top on 2026-09-25.
 
+```upstream
+repo: cursor/plugins
+branch: main
+checked: 79afd75d5bd51383fbb526b72f36db03180b8301
+path: pstack/skills/maintain-verification-skill/
+path: pstack/LICENSE
+pr: 334 f4588ce223f7dee992a36e56d58c723da15b8e88
+```
+
 ## Local changes
 
 All changes let Claude Code, OpenCode, and other agents run the skill from one canonical copy in `.agents/skills`.

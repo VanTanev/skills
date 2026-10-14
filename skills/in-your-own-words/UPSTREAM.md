@@ -13,6 +13,14 @@ This skill is a vendored copy of `in-your-own-words` from the Cursor pstack plug
 
 `VanTanev/skills` added the copy on 2026-10-14.
 
+```upstream
+repo: cursor/plugins
+branch: main
+checked: 79afd75d5bd51383fbb526b72f36db03180b8301
+path: pstack/skills/in-your-own-words/
+path: pstack/LICENSE
+```
+
 ## Local changes
 
 All changes let Claude Code, OpenCode, and Codex run the skill from one canonical copy in `.agents/skills`.

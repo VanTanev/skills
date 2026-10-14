@@ -17,6 +17,15 @@ The copy recorded no upstream SHA.
 Its text has "Authoring agents defend comments.", which upstream #329 removed, so the base is the last upstream commit before #329 that changes these files.
 `VanTanev/skills` added the copy on 2026-10-07 in commit `e159729`.
 
+```upstream
+repo: cursor/plugins
+branch: main
+checked: 79afd75d5bd51383fbb526b72f36db03180b8301
+path: pstack/skills/no-comments/
+path: pstack/agents/comment-sicko.md
+path: pstack/LICENSE
+```
+
 ## Local changes
 
 All changes let Claude Code, OpenCode, and other agents run the skill without the rest of pstack.

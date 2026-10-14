@@ -13,6 +13,14 @@ This skill is a vendored copy of `sharpen` from the Cursor pstack plugin.
 
 `VanTanev/skills` added the copy on 2026-10-14.
 
+```upstream
+repo: cursor/plugins
+branch: main
+checked: 79afd75d5bd51383fbb526b72f36db03180b8301
+path: pstack/skills/sharpen/
+path: pstack/LICENSE
+```
+
 ## Local changes
 
 All changes let Claude Code, OpenCode, and Codex run the skill from one canonical copy in `.agents/skills`.

@@ -15,6 +15,15 @@ This skill is a vendored copy of `correct` from the Cursor pstack plugin, with t
 
 `VanTanev/skills` added the copy on 2026-10-14.
 
+```upstream
+repo: cursor/plugins
+branch: main
+checked: 1e5c90a4b6f249917bd21fe361b3a2a7deb741b8
+path: pstack/skills/correct/
+path: pstack/skills/architect/references/design-red-flags.md
+path: pstack/LICENSE
+```
+
 ## Local changes
 
 All changes let Claude Code, OpenCode, and Codex run the skill from one canonical copy in `.agents/skills`, without the rest of pstack.
