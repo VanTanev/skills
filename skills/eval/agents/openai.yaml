@@ -1,0 +1,3 @@
+interface:
+  display_name: "Eval"
+  short_description: "Measure a skill change with blind candidates and a blind judge"
