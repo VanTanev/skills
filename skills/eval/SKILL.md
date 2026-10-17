@@ -23,10 +23,8 @@ description: "Measure whether a variant of a skill, prompt, or agent document ch
 2. **Set up sanitized environments.** Per-candidate working dir with the variant in place. Plant any context an organic task would have: a project skeleton, the skills the candidate would naturally read. Skills go in `.claude/skills/` for Claude and `.agents/skills/` for Codex. Keep transcripts and outputs outside the candidate's dir.
 3. **Author one organic prompt.** What a user would type. No leakage of what's being measured.
 4. **Spawn N parallel candidates** on different model families, in the background. Each is a fresh CLI process in its own sanitized dir, so it loads only what you planted there, never your own instructions, skills, or memory. A subagent shares yours, so it cannot be a candidate. Same prompt to each.
-   - Claude: `claude -p --setting-sources project --output-format json`, with `--permission-mode acceptEdits` and `--allowedTools` for the commands the task needs. `--setting-sources project` drops your `~/.claude/CLAUDE.md`, skills, and settings.
-   - Codex: `HOME=<empty dir> CODEX_HOME=~/.codex codex exec -c features.memories=false --json -s workspace-write -C <dir> -`, with the prompt on stdin and stdout saved as the transcript. The empty `HOME` drops your skills; `CODEX_HOME` keeps the login, and also loads `$CODEX_HOME/AGENTS.md` when it exists.
-
-   Before the first candidate, prove the blank slate: in a throwaway dir, ask each CLI, with no tools, to list its skills and instruction files. Only what you planted may appear. Your own instructions or memory system in a candidate poisons both the run and the memory.
+   - Claude: `claude -p --setting-sources project --output-format json`, with `--permission-mode acceptEdits` and `--allowedTools` for the commands the task needs.
+   - Codex: `HOME=<empty dir> CODEX_HOME=~/.codex codex exec -c features.memories=false --json -s workspace-write -C <dir> -`, with the prompt on stdin and stdout saved as the transcript.
 
    If a candidate produces no output, go on with N-1 and note the dropout.
 5. **Spawn one blinded judge** on a different model family from yours, read-only, after every candidate finishes: `codex exec -s read-only` if you are a Claude model, `claude -p --permission-mode plan` otherwise. Judge sees outputs by sanitized label and the rubric, scores each criterion, and never sees a model name.
