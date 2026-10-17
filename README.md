@@ -327,6 +327,24 @@ To start it yourself:
 /hillclimb
 ```
 
+### eval
+
+Measures whether a change to a skill, prompt, or agent document changes what agents do.
+It runs blind candidates on Claude and Codex in clean folders, has one blind judge of the other model family score them against a rubric, and checks from the transcripts which files each candidate read.
+Requires the `claude` and `codex` CLIs.
+Based on the [Cursor pstack](https://github.com/cursor/plugins/tree/main/pstack) playbook (MIT).
+
+```bash
+npx skills@latest add VanTanev/skills --skill eval
+```
+
+The agent uses it when a change to a skill or agent document needs evidence before it ships.
+To start it yourself:
+
+```
+/eval
+```
+
 ## License
 
 [MIT](LICENSE), except for the skills that have an `UPSTREAM.md` file.
