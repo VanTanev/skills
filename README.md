@@ -52,11 +52,14 @@ Then invoke:
 
 ### build-spec
 
-Implements a whole spec from `/to-spec` and `/to-tickets` on one integration branch.
+Implements a whole spec from `/to-spec` and `/to-tickets` on one integration branch, and opens the PR.
 Implementer subagents build each ready ticket in parallel with the `risk-first` skill.
+Then it cuts what the tickets repeat, runs `no-comments`, runs `code-review`, and writes the PR description with `visual-pr`.
+It has its own copies of `no-comments` and [HumanLayer](https://github.com/humanlayer/skills)'s `visual-pr` (MIT), so you do not install them.
+Requires the GitHub CLI, `gh`.
 
 ```bash
-npx skills@latest add VanTanev/skills --skill build-spec --skill risk-first
+npx skills@latest add VanTanev/skills --skill build-spec --skill risk-first --skill unslop
 ```
 
 Run `/setup-matt-pocock-skills` once in the repo, then invoke:
@@ -282,10 +285,10 @@ Then invoke, with the text or file to fix:
 
 Finds the risks in a change before code: unclear spec lines and likely mistakes.
 It settles each risk with an oracle and proves the result with a check that tells the correct behavior apart from the wrong one.
+It builds the smallest change: it deletes the old code that the change replaces, adds a guard or a layer only when the work needs it, and cuts the diff before it reports.
 
 ```bash
 npx skills@latest add VanTanev/skills --skill risk-first
-It builds the smallest change: it deletes the old code that the change replaces, adds a guard or a layer only when the work needs it, and cuts the diff before it reports.
 ```
 
 The agent uses it when it implements a spec, ticket, feature, or bug fix.
@@ -368,6 +371,6 @@ To start it yourself:
 
 ## License
 
-[MIT](LICENSE), except for the skills that have an `UPSTREAM.md` file.
-These skills are changed copies of skills from [cursor/plugins](https://github.com/cursor/plugins), under the MIT license in their own `LICENSE` file.
-Their `UPSTREAM.md` file records the upstream version and each change.
+[MIT](LICENSE), except for the files that an `UPSTREAM.md` file records.
+These files are copies of skills from [cursor/plugins](https://github.com/cursor/plugins) or [humanlayer/skills](https://github.com/humanlayer/skills), under the MIT license in the skill's own `LICENSE` file.
+The `UPSTREAM.md` file records the upstream version and each change.
