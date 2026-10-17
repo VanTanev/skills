@@ -37,7 +37,8 @@ A **model-invoked** skill also runs when the agent finds that the task matches i
 
 ### build
 
-Implements a spec or tickets with the `risk-first` skill, then runs `code-review` and fixes its findings.
+Implements a spec or tickets with the `risk-first` skill, then runs `code-review`.
+It fixes each defect with the smallest change, and adds a type, helper, or layer only when the fix removes as much code as it adds.
 
 ```bash
 npx skills@latest add VanTanev/skills --skill build --skill risk-first
@@ -284,6 +285,7 @@ It settles each risk with an oracle and proves the result with a check that tell
 
 ```bash
 npx skills@latest add VanTanev/skills --skill risk-first
+It builds the smallest change: it deletes the old code that the change replaces, adds a guard or a layer only when the work needs it, and cuts the diff before it reports.
 ```
 
 The agent uses it when it implements a spec, ticket, feature, or bug fix.
