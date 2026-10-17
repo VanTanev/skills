@@ -26,6 +26,7 @@ The playbook becomes a skill that Claude Code, OpenCode, and Codex run without t
   A subagent shares the parent's instructions, skills, and memory, so it sees more than an organic user's agent would.
   `claude -p --setting-sources project` loads only the project's skills and `CLAUDE.md`, and `codex exec` with `HOME` set to an empty folder loads only the project's skills and `AGENTS.md`.
   Step 2 names the skill folder of each CLI, and keeps transcripts and outputs out of the candidate's dir.
+  Step 4 says what each command drops, turns Codex memories off, and proves the blank slate before the first run, because the user's global instructions and memory system would poison both the candidate and the memory.
 - Subagents: step 4 drops the poteto-mode effort rule.
 - Transcripts: step 6 reads the Claude Code session file and the saved Codex `--json` stream, in place of the Cursor `agent-transcripts/` folder.
 - `agents/openai.yaml`: added, with `interface` only, because the skill is model-invoked.
@@ -48,7 +49,7 @@ The `a/SKILL.md` side is upstream `pstack/skills/poteto-mode/playbooks/eval.md`.
  
  **You own the experiment design. Plan, blind, run, synthesize.**
  
-@@ -15,11 +20,15 @@
+@@ -15,11 +20,17 @@
  **Steps:**
  
  1. **Frame.** State what variant is under test and what behavior counts as success. Write the rubric (3-6 concrete criteria) for the judge only. Hold it back from candidates.
@@ -59,8 +60,10 @@ The `a/SKILL.md` side is upstream `pstack/skills/poteto-mode/playbooks/eval.md`.
 -5. **Spawn one blinded judge** on a different model family per the **arena** skill's Phase C. Judge sees outputs by sanitized label and the rubric, never a model name.
 -6. **Verify the chain from transcripts, not self-report.** Read each candidate's local transcript under the active workspace's `agent-transcripts/` directory (the system prompt names this path). Do not glob across `~/.cursor/projects/*/`. That crosses workspace boundaries and reads private chats from unrelated projects. Look at which files each candidate actually opened. Grade chain-following from the files it really read plus the shape of the code, never from the candidate's own claims.
 +4. **Spawn N parallel candidates** on different model families, in the background. Each is a fresh CLI process in its own sanitized dir, so it loads only what you planted there, never your own instructions, skills, or memory. A subagent shares yours, so it cannot be a candidate. Same prompt to each.
-+   - Claude: `claude -p --setting-sources project --output-format json`, with `--permission-mode acceptEdits` and `--allowedTools` for the commands the task needs.
-+   - Codex: `HOME=<empty dir> CODEX_HOME=~/.codex codex exec --json -s workspace-write -C <dir> -`, with the prompt on stdin and stdout saved as the transcript.
++   - Claude: `claude -p --setting-sources project --output-format json`, with `--permission-mode acceptEdits` and `--allowedTools` for the commands the task needs. `--setting-sources project` drops your `~/.claude/CLAUDE.md`, skills, and settings.
++   - Codex: `HOME=<empty dir> CODEX_HOME=~/.codex codex exec -c features.memories=false --json -s workspace-write -C <dir> -`, with the prompt on stdin and stdout saved as the transcript. The empty `HOME` drops your skills; `CODEX_HOME` keeps the login, and also loads `$CODEX_HOME/AGENTS.md` when it exists.
++
++   Before the first candidate, prove the blank slate: in a throwaway dir, ask each CLI, with no tools, to list its skills and instruction files. Only what you planted may appear. Your own instructions or memory system in a candidate poisons both the run and the memory.
 +
 +   If a candidate produces no output, go on with N-1 and note the dropout.
 +5. **Spawn one blinded judge** on a different model family from yours, read-only, after every candidate finishes: `codex exec -s read-only` if you are a Claude model, `claude -p --permission-mode plan` otherwise. Judge sees outputs by sanitized label and the rubric, scores each criterion, and never sees a model name.
