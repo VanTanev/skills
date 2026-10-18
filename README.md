@@ -37,11 +37,12 @@ A **model-invoked** skill also runs when the agent finds that the task matches i
 
 ### build
 
-Implements a spec or tickets with the `risk-first` skill, then runs `code-review`.
-It fixes each defect with the smallest change, and adds a type, helper, or layer only when the fix removes as much code as it adds.
+Implements a request, spec, or tickets with the `risk-first` and `less-code` skills, then runs `code-review`.
+It fixes each defect and spec gap that the review finds, and takes another finding only when `less-code` allows it.
+Then it cuts the diff with `less-code`.
 
 ```bash
-npx skills@latest add VanTanev/skills --skill build --skill risk-first
+npx skills@latest add VanTanev/skills --skill build --skill risk-first --skill less-code
 ```
 
 Then invoke:
