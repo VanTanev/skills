@@ -253,13 +253,14 @@ Then invoke:
 
 Finds the risks in a change before code: unclear spec lines and likely mistakes.
 It settles each risk with an oracle and proves the result with a check that tells the correct behavior apart from the wrong one.
-It builds the smallest change: it deletes the old code that the change replaces, adds a guard or a layer only when the work needs it, and cuts the diff before it reports.
+It keeps a new test only when no other test catches its mistake.
+It is the test step of `build` and `build-spec`, in place of Matt Pocock's `tdd`.
 
 ```bash
 npx skills@latest add VanTanev/skills --skill risk-first
 ```
 
-The agent uses it when it implements a spec, ticket, feature, or bug fix.
+The agent uses it when it implements a feature, ticket, or spec, or fixes a bug.
 To start it yourself:
 
 ```
