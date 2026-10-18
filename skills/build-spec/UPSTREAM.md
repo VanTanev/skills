@@ -24,7 +24,7 @@ Each file is a byte copy of its source at the base below.
 ## Local changes
 
 None.
-`references/no-comments.md` points to `references/comment-sicko.md`, and `SKILL.md` step 8 says that this is `{SKILLBASE}/references/comment-sicko.md`, so the copy needs no change.
+`references/no-comments.md` points to `references/comment-sicko.md`, and `SKILL.md` step 7 says that this is `{SKILLBASE}/references/comment-sicko.md`, so the copy needs no change.
 The `visual-pr` files point to `{SKILLBASE}/references/`, which is this skill's `references/`.
 
 ## Update procedure

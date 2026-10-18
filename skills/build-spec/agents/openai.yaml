@@ -1,5 +1,5 @@
 interface:
   display_name: "Build Spec"
-  short_description: "Build a spec's tickets in parallel, cut the diff, and open the PR"
+  short_description: "Build a spec's tickets in parallel, review and cut the diff, and open the PR"
 policy:
   allow_implicit_invocation: false

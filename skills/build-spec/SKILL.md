@@ -1,6 +1,6 @@
 ---
 name: build-spec
-description: "Implement the result of /to-spec and /to-tickets risk-first, cut and review the diff, and open the PR with visual-pr."
+description: "Implement the result of /to-spec and /to-tickets risk-first with less code, review and cut the diff, and open the PR with visual-pr."
 disable-model-invocation: true
 metadata:
   opencode/autoinvoke: false
@@ -15,6 +15,7 @@ The goal is the entire spec implemented on a single **integration branch**, with
 The tickets are not a list of steps. They are a **task graph** with blocking relationships between them. This means there is always a **frontier** of tickets which are ready to be grabbed.
 
 Communication to and from subagents should be sparse. Communicate primarily through **context pointers**: to the spec, tickets, research notes, and previous commits. Don't duplicate information already available via pointers.
+A brief to an implementer names no tests, inputs, or standards files: `risk-first` chooses the checks, and `code-review` applies the standards.
 
 **Implementer subagents** should be run in the background where possible for maximum concurrency.
 
@@ -32,35 +33,35 @@ Stop and ask the user only for an irreversible action, a change of scope or goal
 
 4. Use **implementer subagents** to implement each ticket, each in its own worktree on its own branch. Each implementer subagent:
    - confirms its worktree is based on the integration branch before starting, and resets onto it if not;
-   - calls the Skill tool with `risk-first` to build the ticket;
-   - rebases its branch onto the integration branch tip before reporting done with the **account** from `risk-first`.
+   - calls the Skill tool with `risk-first`, and calls the Skill tool with `less-code`;
+   - builds the ticket by both skills, until it works and the repository's required checks pass;
+   - for a `risk-first` question whose readings lead to materially different work, stops before it writes code, and reports the question with its readings;
+   - rebases its branch onto the integration branch tip before reporting done with the **account** from `risk-first` and the report from `less-code`.
 
 5. Once an **implementer subagent** completes, land its work on the integration branch with a **merger subagent**: rebase onto the tip if it moved, then fast-forward. If the implementer reports a question instead, decide it yourself or ask the user, by the rule above, and send the answer to that same subagent.
 
 6. If this changes the **frontier** of available tickets, kick off more **implementer subagents** to work on the new tickets. This allows for maximum concurrency.
 
-7. Once all tickets are complete, give a single **implementer subagent** the whole integration diff against the base branch, and each ticket's **account**.
-   It calls the Skill tool with `risk-first` and does only its Cut step, with the accounts as the record of what each hunk serves.
-   Tickets built in parallel repeat each other: two helpers or two tests for one behavior, or an old path that a later ticket replaced.
-
-8. Read `{SKILLBASE}/references/no-comments.md` and follow it on the integration branch, with the base branch as the fixed point.
+7. Once all tickets are complete, read `{SKILLBASE}/references/no-comments.md` and follow it on the integration branch, with the base branch as the fixed point.
    Its `references/comment-sicko.md` is `{SKILLBASE}/references/comment-sicko.md`.
    You are its caller: approve or decline each encoding offer yourself.
    If it fails, report it open and continue.
 
-9. Call the Skill tool with `code-review` on the integration branch.
-   Choose the findings to fix: each defect and spec gap, and a finding that asks for more structure, such as a new type, helper, or layer, only when its fix removes at least as much code or reader effort as it adds.
-   Give them to a single **implementer subagent**, to fix each one with the smallest change that removes it, and with a deletion where one works.
-   Its Cut step also covers the step 8 changes.
+8. Call the Skill tool with `code-review` on the integration branch.
+   Give its findings, the whole integration diff against the base branch, and each ticket's **account** to a single **implementer subagent**.
+   It calls the Skill tool with `risk-first`, and calls the Skill tool with `less-code`.
+   It fixes each defect and spec gap, and each other finding that the `less-code` Plan allows.
+   Then it does the `less-code` Cut on the whole integration diff, with the accounts as the record of what each hunk serves.
+   Tickets built in parallel repeat each other: two helpers or two tests for one behavior, or an old path that a later ticket replaced.
 
-10. Call the Skill tool with `unslop`.
-    Rebase the integration branch into small, ordered commits that tell the story: fold a fix into the commit it corrects, and keep a separable change as its own commit.
-    Write each commit message in the repository's style, by the `unslop` rules.
-    Run the repository's required checks on the branch tip.
+9. Call the Skill tool with `unslop`.
+   Rebase the integration branch into small, ordered commits that tell the story: fold a fix into the commit it corrects, and keep a separable change as its own commit.
+   Write each commit message in the repository's style, by the `unslop` rules.
+   Run the repository's required checks on the branch tip.
 
-11. Clean up all **implementer subagent** worktrees.
+10. Clean up all **implementer subagent** worktrees.
 
-12. Read `{SKILLBASE}/references/visual-pr.md` and follow it for the integration branch.
+11. Read `{SKILLBASE}/references/visual-pr.md` and follow it for the integration branch.
     If the issue tracker closes work through PRs, put a closing line for the spec and for each ticket, such as `Closes #12`, in the header of the PR body.
     Otherwise, when the PR exists, resolve each ticket the way the issue tracker closes work.
-    In the final answer, also report each ticket's **account** and decisions, the `no-comments` report, and the account of the step 9 fixes: every gap and unconfirmed assumption.
+    In the final answer, also report each ticket's **account** and decisions, the `no-comments` report, and the account of the step 8 fixes: every gap and unconfirmed assumption.

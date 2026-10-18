@@ -54,13 +54,13 @@ Then invoke:
 ### build-spec
 
 Implements a whole spec from `/to-spec` and `/to-tickets` on one integration branch, and opens the PR.
-Implementer subagents build each ready ticket in parallel with the `risk-first` skill.
-Then it cuts what the tickets repeat, runs `no-comments`, runs `code-review`, and writes the PR description with `visual-pr`.
+Implementer subagents build each ready ticket in parallel with the `risk-first` and `less-code` skills.
+Then it runs `no-comments` and `code-review`, fixes the findings, cuts what the tickets repeat, and writes the PR description with `visual-pr`.
 It has its own copies of `no-comments` and [HumanLayer](https://github.com/humanlayer/skills)'s `visual-pr` (MIT), so you do not install them.
 Requires the GitHub CLI, `gh`.
 
 ```bash
-npx skills@latest add VanTanev/skills --skill build-spec --skill risk-first --skill unslop
+npx skills@latest add VanTanev/skills --skill build-spec --skill risk-first --skill less-code --skill unslop
 ```
 
 Run `/setup-matt-pocock-skills` once in the repo, then invoke:
