@@ -1,0 +1,3 @@
+interface:
+  display_name: "Less Code"
+  short_description: "Build only the code that the request needs, then cut the diff"

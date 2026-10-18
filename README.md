@@ -266,6 +266,23 @@ To start it yourself:
 /risk-first
 ```
 
+### less-code
+
+Keeps a change to the code that the request needs.
+While the agent writes code, it builds only what a caller reads, uses the helpers that the repository has, and deletes the code that the change replaces.
+Before it reports, and after a code review, it reverts each hunk that serves no requirement.
+
+```bash
+npx skills@latest add VanTanev/skills --skill less-code
+```
+
+The agent uses it when it implements a change, and after a code review.
+To start it yourself:
+
+```
+/less-code
+```
+
 ### bash
 
 Rules to write, review, and debug Bash scripts, with ShellCheck and proof of behavior.
