@@ -1,15 +1,18 @@
 # Upstream
 
-This skill is a vendored copy of `blast-radius` from the Cursor pstack plugin.
+This skill is a vendored copy of `blast-radius` from the Cursor pstack plugin, with the `unslop` skill as a reference.
 
 ## Source
 
 - Repository: https://github.com/cursor/plugins, branch `main`.
-- Path: `pstack/skills/blast-radius/`.
-- Base: `df581122cde17e6e27686b5a448bde23e4ad4318` (2026-10-05, "feat(pstack): drop Sol, default to Opus xhigh and Grok (#511)").
-  The files here are equal to upstream at this commit, except for the local changes below.
-- Checked up to: `1e5c90a4b6f249917bd21fe361b3a2a7deb741b8` (upstream `main`, 2026-10-14).
-  Upstream has no changes to this directory between the base and this commit.
+- Paths:
+  - `pstack/skills/blast-radius/SKILL.md`, which is `SKILL.md` here.
+  - `pstack/skills/unslop/SKILL.md`, which is `references/unslop.md` here.
+- Base of `SKILL.md`: `df581122cde17e6e27686b5a448bde23e4ad4318` (2026-10-05, "feat(pstack): drop Sol, default to Opus xhigh and Grok (#511)").
+- Base of `references/unslop.md`: `bc697d0a5a163cec979e362b601e36f5616083fd` (2026-10-11, "fix(pstack): drop "Must always apply." from unslop description (#572)").
+  The files here are equal to upstream at these commits, except for the local changes below.
+- Checked up to: `9580c23696ac8d7abed0c166f2f9918800afb819` (upstream `main`, 2026-10-23).
+  Upstream has no changes to either file between its base and this commit.
 
 `VanTanev/skills` added the copy on 2026-10-14.
 
@@ -24,12 +27,13 @@ All changes let Claude Code, OpenCode, and Codex run the skill without the rest 
 - `why`: step 1 gives the git and `gh` commands from step 2 of `why` in place of "Use `why` step 2", because `why` is user-invoked, and another skill cannot start it.
   "Same rules as `why`." is removed from step 4, because the rules follow in the same step.
 - `arena`: step 6 asks a model of another family through its CLI, read-only, with the same commands as `interrogate`, because this repo does not vendor `arena`.
-- `unslop`: "Write it through `unslop`" becomes "Call the Skill tool with `unslop` for the writeup", the form that this repo uses to start a skill.
-  `unslop` is model-invoked here, so the call works, and the README install command for this skill also installs `unslop`.
+- `unslop`: "Write it through `unslop`" becomes "Write it through `unslop` in `{SKILLBASE}/references/unslop.md`".
+  `unslop` is user-invoked, and another skill cannot start it, so `references/unslop.md` is a byte copy of the upstream skill, with its frontmatter.
 - `agents/openai.yaml`: added, with `policy.allow_implicit_invocation: false`, the Codex form of the same setting.
 - `LICENSE`: added as a byte copy of upstream `pstack/LICENSE` (MIT), to keep the license notice with the copy.
 
-This is the exact diff of `SKILL.md` from the upstream base to this copy:
+This is the exact diff of `SKILL.md` from the upstream base to this copy.
+`references/unslop.md` is equal to upstream, so it has no diff.
 
 ```diff
 --- a/SKILL.md
@@ -74,17 +78,18 @@ This is the exact diff of `SKILL.md` from the upstream base to this copy:
  - **Before you merge.** The cheapest test or repro that catches the real bug, including the script you wrote.
  
 -Write it through `unslop`, cite real code, and strip anything private before it goes anywhere public.
-+Call the Skill tool with `unslop` for the writeup. Cite real code, and strip anything private before it goes anywhere public.
++Write it through `unslop` in `{SKILLBASE}/references/unslop.md`, cite real code, and strip anything private before it goes anywhere public.
  
  **Reply:** the writeup above, with the one safety fact either proven or marked unproven.
 ```
 
 ## Update procedure
 
-1. In an up-to-date clone of https://github.com/cursor/plugins, run `git diff <checked-up-to>..origin/main -- pstack/skills/blast-radius/ pstack/LICENSE`.
+1. In an up-to-date clone of https://github.com/cursor/plugins, run `git diff <checked-up-to>..origin/main -- pstack/skills/blast-radius/ pstack/skills/unslop/ pstack/LICENSE`.
    If the diff is empty, set "Checked up to" to the `origin/main` SHA and date, and stop.
-2. Replace the files in this directory with the upstream files at `origin/main`, and copy `pstack/LICENSE` to `LICENSE`.
+2. In this directory, run `git -C <clone> show origin/main:pstack/skills/blast-radius/SKILL.md > SKILL.md` and `git -C <clone> show origin/main:pstack/skills/unslop/SKILL.md > references/unslop.md`, and copy `pstack/LICENSE` to `LICENSE`.
    Keep `UPSTREAM.md` and `agents/openai.yaml`.
 3. Re-apply the local changes: in this directory, run `sed -n '/^```diff$/,/^```$/p' UPSTREAM.md | sed '1d;$d' | patch -p1`.
    If a hunk fails, apply that change by hand from the list above.
-4. In this file, replace the diff with the output of `diff -u --label a/SKILL.md --label b/SKILL.md <clone>/pstack/skills/blast-radius/SKILL.md SKILL.md`, and set "Base" and "Checked up to" to the new upstream SHA and date.
+4. In this file, replace the diff with the output of `diff -u --label a/SKILL.md --label b/SKILL.md <(git -C <clone> show origin/main:pstack/skills/blast-radius/SKILL.md) SKILL.md`.
+   Set both bases and "Checked up to" to the new upstream SHA and date.

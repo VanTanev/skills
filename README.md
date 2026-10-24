@@ -199,7 +199,7 @@ It proves the one fact that makes the change safe with a script that runs the re
 Based on the [Cursor pstack](https://github.com/cursor/plugins/tree/main/pstack) skill (MIT).
 
 ```bash
-npx skills@latest add VanTanev/skills --skill blast-radius --skill unslop
+npx skills@latest add VanTanev/skills --skill blast-radius
 ```
 
 Then invoke:
@@ -241,6 +241,21 @@ Then invoke:
 
 ```
 /correct
+```
+
+### unslop
+
+A numbered list of AI writing patterns, with the fix for each: filler, AI vocabulary, metaphor nouns, mannered prose, and over-compressed text.
+Based on the [Cursor pstack](https://github.com/cursor/plugins/tree/main/pstack) skill (MIT).
+
+```bash
+npx skills@latest add VanTanev/skills --skill unslop
+```
+
+Then invoke, with the text or file to fix:
+
+```
+/unslop <text or file>
 ```
 
 ## Model-invoked
@@ -292,22 +307,6 @@ To start it yourself:
 
 ```
 /benchmark-checklist
-```
-
-### unslop
-
-A numbered list of AI writing patterns, with the fix for each: filler, AI vocabulary, metaphor nouns, mannered prose, and over-compressed text.
-Based on the [Cursor pstack](https://github.com/cursor/plugins/tree/main/pstack) skill (MIT).
-
-```bash
-npx skills@latest add VanTanev/skills --skill unslop
-```
-
-The agent uses it when it writes prose that a person reads, such as a doc, a PR description, or a ticket.
-To start it yourself:
-
-```
-/unslop
 ```
 
 ### hillclimb

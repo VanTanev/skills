@@ -1,6 +1,9 @@
 ---
 name: unslop
-description: "Cut AI tells from any writing. Use when you write or edit prose that a person reads, such as a doc, PR description, commit message, ticket, review comment, or report, or when the user asks to remove slop or mannered prose."
+description: Cut AI tells from any writing.
+disable-model-invocation: true
+metadata:
+  opencode/autoinvoke: false
 ---
 
 # Unslop

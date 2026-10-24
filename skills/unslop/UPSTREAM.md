@@ -8,33 +8,33 @@ This skill is a vendored copy of `unslop` from the Cursor pstack plugin.
 - Path: `pstack/skills/unslop/`.
 - Base: `bc697d0a5a163cec979e362b601e36f5616083fd` (2026-10-11, "fix(pstack): drop "Must always apply." from unslop description (#572)").
   The files here are equal to upstream at this commit, except for the local changes below.
-- Checked up to: `1e5c90a4b6f249917bd21fe361b3a2a7deb741b8` (upstream `main`, 2026-10-14).
+- Checked up to: `9580c23696ac8d7abed0c166f2f9918800afb819` (upstream `main`, 2026-10-23).
   Upstream has no changes to this directory between the base and this commit.
 
 `VanTanev/skills` added the copy on 2026-10-14.
 
 ## Local changes
 
-All changes let the agent start the skill by itself, and let other skills call it.
+All changes let Claude Code, OpenCode, and Codex run the skill without the rest of pstack.
 
-- Invocation: model-invoked.
-  `disable-model-invocation: true` is removed, so the agent starts the skill when it writes prose for a person.
-  Other skills in this repo, such as `blast-radius`, call it with the Skill tool, which works only for a model-invoked skill.
-- Description: the upstream sentence stays first, and a second sentence says when to use the skill: prose that a person reads, or a request to remove slop or mannered prose.
-- `agents/openai.yaml`: added, with `interface` only, because the skill is model-invoked.
+- Frontmatter: keeps `disable-model-invocation: true`, which Claude Code and Cursor read, and adds `metadata.opencode/autoinvoke: false`, the OpenCode form of the same setting.
+- `agents/openai.yaml`: added, with `policy.allow_implicit_invocation: false`, the Codex form of the same setting.
 - `LICENSE`: added as a byte copy of upstream `pstack/LICENSE` (MIT), to keep the license notice with the copy.
+
+Other skills in this repo cannot start `unslop`, because it is user-invoked.
+`blast-radius` and `technical-writing` read a byte copy of the upstream file in their own `references/unslop.md`, and their `UPSTREAM.md` files keep those copies up to date.
 
 This is the exact diff of `SKILL.md` from the upstream base to this copy:
 
 ```diff
 --- a/SKILL.md
 +++ b/SKILL.md
-@@ -1,7 +1,6 @@
- ---
+@@ -2,6 +2,8 @@
  name: unslop
--description: Cut AI tells from any writing.
--disable-model-invocation: true
-+description: "Cut AI tells from any writing. Use when you write or edit prose that a person reads, such as a doc, PR description, commit message, ticket, review comment, or report, or when the user asks to remove slop or mannered prose."
+ description: Cut AI tells from any writing.
+ disable-model-invocation: true
++metadata:
++  opencode/autoinvoke: false
  ---
  
  # Unslop
@@ -49,3 +49,4 @@ This is the exact diff of `SKILL.md` from the upstream base to this copy:
 3. Re-apply the local changes: in this directory, run `sed -n '/^```diff$/,/^```$/p' UPSTREAM.md | sed '1d;$d' | patch -p1`.
    If a hunk fails, apply that change by hand from the list above.
 4. In this file, replace the diff with the output of `diff -u --label a/SKILL.md --label b/SKILL.md <clone>/pstack/skills/unslop/SKILL.md SKILL.md`, and set "Base" and "Checked up to" to the new upstream SHA and date.
+5. Follow the update procedure of `blast-radius` and `technical-writing`, so that their copies in `references/unslop.md` stay equal to upstream.
