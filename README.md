@@ -243,6 +243,23 @@ Then invoke:
 /correct
 ```
 
+### technical-writing
+
+A layered standard to write and review docs, RFCs, READMEs, PR descriptions, and commit messages.
+It picks one Diátaxis mode for each document (tutorial, how-to, reference, or explanation), then applies Google developer style, STE rules, and Global English to each sentence.
+Then it applies the `unslop` rules.
+Based on the [Cursor pstack](https://github.com/cursor/plugins/tree/main/pstack) skill (MIT).
+
+```bash
+npx skills@latest add VanTanev/skills --skill technical-writing
+```
+
+Then invoke, with what to write or review:
+
+```
+/technical-writing <task>
+```
+
 ### unslop
 
 A numbered list of AI writing patterns, with the fix for each: filler, AI vocabulary, metaphor nouns, mannered prose, and over-compressed text.
