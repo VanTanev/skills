@@ -1,0 +1,3 @@
+interface:
+  display_name: "Writing for People"
+  short_description: "Write PRs, reviews, issues, commits, tickets, and docs to a layered standard, then check them"

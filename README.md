@@ -343,6 +343,27 @@ To start it yourself:
 /hillclimb
 ```
 
+### writing-for-people
+
+The model-invoked form of `technical-writing`, for text that people read outside the chat: PR bodies, PR reviews and replies, issues, commit messages, Jira tickets, and docs.
+It applies the same layers and the `unslop` rules, then runs a script that finds the faults that a pattern can find.
+The script reports Markdown that renders wrong as an error, and every other finding as a suggestion that the agent applies or keeps on purpose.
+With `--markdown`, the script also finds Markdown that renders wrong and line breaks inside a sentence.
+With `--changed`, it reports only the lines that differ from git `HEAD`, so an edit to an old doc does not rewrite lines that the task did not touch.
+Requires Python 3.
+Based on the [Cursor pstack](https://github.com/cursor/plugins/tree/main/pstack) skill (MIT).
+
+```bash
+npx skills@latest add VanTanev/skills --skill writing-for-people
+```
+
+The agent uses it before it writes or edits any of these texts.
+To start it yourself:
+
+```
+/writing-for-people <task>
+```
+
 ## License
 
 [MIT](LICENSE), except for the skills that have an `UPSTREAM.md` file.
