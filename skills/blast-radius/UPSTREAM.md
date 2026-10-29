@@ -27,7 +27,7 @@ All changes let Claude Code, OpenCode, and Codex run the skill without the rest 
 - `why`: step 1 gives the git and `gh` commands from step 2 of `why` in place of "Use `why` step 2", because `why` is user-invoked, and another skill cannot start it.
   "Same rules as `why`." is removed from step 4, because the rules follow in the same step.
 - `arena`: step 6 asks a model of another family through its CLI, read-only, with the same commands as `interrogate`, because this repo does not vendor `arena`.
-- `unslop`: "Write it through `unslop`" becomes "Write it through `unslop` in `{SKILLBASE}/references/unslop.md`".
+- `unslop`: "Write it through `unslop`" becomes "Write it through `unslop` in `references/unslop.md` in this skill's folder".
   `unslop` is user-invoked, and another skill cannot start it, so `references/unslop.md` is a byte copy of the upstream skill, with its frontmatter.
 - `agents/openai.yaml`: added, with `policy.allow_implicit_invocation: false`, the Codex form of the same setting.
 - `LICENSE`: added as a byte copy of upstream `pstack/LICENSE` (MIT), to keep the license notice with the copy.
@@ -78,7 +78,7 @@ This is the exact diff of `SKILL.md` from the upstream base to this copy.
  - **Before you merge.** The cheapest test or repro that catches the real bug, including the script you wrote.
  
 -Write it through `unslop`, cite real code, and strip anything private before it goes anywhere public.
-+Write it through `unslop` in `{SKILLBASE}/references/unslop.md`, cite real code, and strip anything private before it goes anywhere public.
++Write it through `unslop` in `references/unslop.md` in this skill's folder, cite real code, and strip anything private before it goes anywhere public.
  
  **Reply:** the writeup above, with the one safety fact either proven or marked unproven.
 ```

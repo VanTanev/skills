@@ -23,8 +23,9 @@ All changes let Claude Code, OpenCode, and Codex run the skill without the rest 
 - Frontmatter: keeps `disable-model-invocation: true`, which Claude Code and Cursor read, and adds `metadata.opencode/autoinvoke: false`, the OpenCode form of the same setting.
 - Description: "Use for /technical-writing or when writing or reviewing" is removed, because model invocation is off.
   The list of document types moves to the start, so the line tells a person what the command is for.
-- `unslop`: "Apply the **unslop** skill to every doc this skill touches" becomes "Apply the **unslop** skill in `{SKILLBASE}/references/unslop.md` to every doc this skill touches".
+- `unslop`: "Apply the **unslop** skill to every doc this skill touches" becomes "Apply the **unslop** skill in `references/unslop.md` in this skill's folder to every doc this skill touches".
   `unslop` is user-invoked, and another skill cannot start it, so `references/unslop.md` is a byte copy of the upstream skill, with its frontmatter.
+  The path is relative to the skill's folder, because Claude Code does not replace a `{SKILLBASE}` placeholder.
   The abstract-metaphor rule that the skill names is rule 26 of `unslop`.
 - `swarm`: "swarm logs" becomes "agent logs", because this repo does not vendor `swarm`.
 - Indentation: "Indent code snippets with tabs" becomes "Indent code snippets the way the repo indents its code", because tabs are the rule of the pstack repo, not of every repo.
@@ -54,7 +55,7 @@ This is the exact diff of `SKILL.md` from the upstream base to this copy.
  
 -- Apply the **unslop** skill to every doc this skill touches. That skill owns the slop-pattern catalog: AI vocabulary, filler, hedging, formatting tells.
 -- PR descriptions and commit messages are writing too. Every layer except Diátaxis applies to them. A PR body is a briefing that a reviewer can read in under a minute. Do not paste swarm logs, SHA lists, or metric tables. Link them.
-+- Apply the **unslop** skill in `{SKILLBASE}/references/unslop.md` to every doc this skill touches. That skill owns the slop-pattern catalog: AI vocabulary, filler, hedging, formatting tells.
++- Apply the **unslop** skill in `references/unslop.md` in this skill's folder to every doc this skill touches. That skill owns the slop-pattern catalog: AI vocabulary, filler, hedging, formatting tells.
 +- PR descriptions and commit messages are writing too. Every layer except Diátaxis applies to them. A PR body is a briefing that a reviewer can read in under a minute. Do not paste agent logs, SHA lists, or metric tables. Link them.
  - Product UI strings are not documentation. Use your product's copy guidelines for those.
 -- Indent code snippets with tabs. Write real paths. Make every count or tree claim true at the commit that lands it, and include the command that regenerates it.
