@@ -30,6 +30,7 @@ All changes let Claude Code, OpenCode, and Codex run the skill without the rest 
 - Effort: "Pick each subagent's reasoning level and fast or standard speed for the job, per the Subagents section of the **poteto-mode** skill." becomes "Set its effort one step below your own. If you do not know your effort, do not set it."
   This is the rule for judgment work in that section, in the same form as in `no-comments`.
   This repo does not vendor `poteto-mode`, and Claude Code has no speed setting for each subagent.
+- Fresh context: each reviewer subagent starts with a fresh context window, because Claude Code and Codex can both fork the parent conversation into a subagent, and a forked reviewer gets the author's reasoning.
 - "one reviewer per configured model" becomes "one reviewer per model", because there is no configuration.
 - `references/`: equal to upstream.
 - `agents/openai.yaml`: added, with `policy.allow_implicit_invocation: false`, the Codex form of the same setting.
@@ -68,7 +69,7 @@ This is the exact diff of `SKILL.md` from the upstream base to this copy:
 -|----------|---------------|
 -| Reviewer A | `claude-opus-5-5-xhigh` |
 -| Reviewer B | `grok-4.7-xhigh-fast` |
-+Start all reviewers at the same time. Each reviewer is read-only: it reads the repo and runs read-only commands, and edits nothing.
++Start all reviewers at the same time. Each reviewer is read-only: it reads the repo and runs read-only commands, and edits nothing. Start each reviewer subagent with a fresh context window.
  
 -Each reviewer gets `subagent_type: generalPurpose`, `readonly: true`, and `model` set to its configured entry, or its table default when there is no configured line. Omit `model` for an `auto` or `inherit-parent` entry, so that reviewer runs on the parent model.
 +- **Reviewer A** is a subagent on your own model. Set its effort one step below your own. If you do not know your effort, do not set it.

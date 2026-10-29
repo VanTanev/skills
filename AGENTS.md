@@ -26,6 +26,11 @@ A skill starts another skill with "Call the Skill tool with `<name>`", one skill
 Only a model-invoked skill can be started this way.
 For a user-invoked skill, tell the user to type it.
 
+## Subagents
+
+A skill that starts a subagent tells the agent to start it with a fresh context window.
+Claude Code and Codex can both fork the parent conversation into a subagent, and a forked subagent gets the context it exists to avoid.
+
 ## README
 
 `README.md` has one section for each skill, under **User-invoked** or **Model-invoked**.

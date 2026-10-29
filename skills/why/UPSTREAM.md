@@ -26,9 +26,10 @@ All changes let Claude Code, OpenCode, and Codex run the skill without the rest 
 - Effort: investigators run two steps below the agent's own effort, and the synthesizer one step below.
   These are the rules for routine work and for judgment work in the Subagents section of `poteto-mode`, which upstream points to.
   This repo does not vendor `poteto-mode`.
-- Subagent mode: "Every spawn is `generalPurpose` with `readonly: false` (agent mode). **Do not use readonly/Ask mode.**" becomes "Every spawn is a general-purpose subagent that can call your MCP tools."
+- Subagent mode: "Every spawn is `generalPurpose` with `readonly: false` (agent mode). **Do not use readonly/Ask mode.**" becomes "Every spawn is a general-purpose subagent that starts with a fresh context window and can call your MCP tools."
   The Cursor read-only mode removes MCP access.
   The rule stays, without the Cursor names.
+  The fresh context window is added, because Claude Code and Codex can both fork the parent conversation into a subagent.
 - Discovery: the Cursor `mcps/` directory and available-tools map become "the MCP servers whose tools you can call", including tools that the agent lists by name only and loads on demand, as Claude Code does.
   A server that offers only an authentication tool is not available, and is a gap.
 - MCPs for more than one category: "If an MCP could fit more than one category, choose the one matching its primary evidence." becomes "map it to each category it serves".
@@ -63,7 +64,7 @@ This is the exact diff of `SKILL.md` from the upstream base to this copy:
 +Set each investigator's effort two steps below your own, and the synthesizer's effort one step below your own. If you do not know your effort, do not set it.
  
 -Every spawn is `generalPurpose` with `readonly: false` (agent mode). **Do not use readonly/Ask mode.** It strips MCP access, which disables the MCP-backed investigators and the synthesizer's citation spot-checks. Investigators still shouldn't write anything.
-+Every spawn is a general-purpose subagent that can call your MCP tools. Without them, the MCP-backed investigators and the synthesizer's citation spot-checks do not work. Investigators still shouldn't write anything.
++Every spawn is a general-purpose subagent that starts with a fresh context window and can call your MCP tools. Without them, the MCP-backed investigators and the synthesizer's citation spot-checks do not work. Investigators still shouldn't write anything.
  
  ## Operating Posture
  

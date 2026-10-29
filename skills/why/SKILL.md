@@ -12,7 +12,7 @@ Investigate the motivation and intent behind code. `why` answers what forces led
 
 Set each investigator's effort two steps below your own, and the synthesizer's effort one step below your own. If you do not know your effort, do not set it.
 
-Every spawn is a general-purpose subagent that can call your MCP tools. Without them, the MCP-backed investigators and the synthesizer's citation spot-checks do not work. Investigators still shouldn't write anything.
+Every spawn is a general-purpose subagent that starts with a fresh context window and can call your MCP tools. Without them, the MCP-backed investigators and the synthesizer's citation spot-checks do not work. Investigators still shouldn't write anything.
 
 ## Operating Posture
 
