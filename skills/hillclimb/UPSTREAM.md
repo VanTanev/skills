@@ -33,6 +33,7 @@ The playbook becomes a skill that Claude Code, OpenCode, and Codex run without t
 - Principle links: the links to `build-the-lever`, `guard-the-context-window`, `separate-before-serializing-shared-state`, `sequence-verifiable-units`, and `laziness-protocol` are removed, because the sentence before each link already states the rule.
   Step 5 keeps the reason of `guard-the-context-window` as "so your context holds the loop, not the code".
 - Subagents: step 5 drops the Grok model slug and the poteto-mode effort rule.
+  Its subagent starts with a fresh context window, because Claude Code and Codex can both fork the parent conversation into a subagent, and a forked subagent gets the whole loop.
 - Parallel attempts: step 5 adds "measure each one alone: parallel runs on one machine measure each other's load".
 - Holdout: step 1 splits labeled or sampled data into a dev set for the loop and a held-out test set, and step 7 scores the baseline and the final version on the test set once.
   The Reply adds the test score.
@@ -72,7 +73,7 @@ The `a/SKILL.md` side is upstream `pstack/skills/poteto-mode/playbooks/hillclimb
 +4. Ground each hypothesis in the architecture model from step 1, so it names a specific mechanism ("defer X off the boot path because it blocks first paint"), not "try memoizing something". For a perf metric, order hypotheses cheapest first: don't do it, do it once, do it less, do it later, do it when nobody waits, do it concurrently, do it cheaper.
  5. Loop, one hypothesis per iteration:
 -   - Hand the change to a subagent using your configured hillclimb model (default `grok-4.7-xhigh-fast`) with a tight scope. Pick each subagent's reasoning level and fast or standard speed for the job, per the Subagents section. Supervise and review the diff rather than typing it (the **guard-the-context-window** principle skill). When several independent hypotheses are live, fan them to parallel subagents, each in its own worktree (the **separate-before-serializing-shared-state** principle skill).
-+   - Hand the change to a subagent with a tight scope. Supervise and review the diff rather than typing it, so your context holds the loop, not the code. When several independent hypotheses are live, fan them to parallel subagents, each in its own worktree, and measure each one alone: parallel runs on one machine measure each other's load.
++   - Hand the change to a subagent with a fresh context window and a tight scope. Supervise and review the diff rather than typing it, so your context holds the loop, not the code. When several independent hypotheses are live, fan them to parallel subagents, each in its own worktree, and measure each one alone: parallel runs on one machine measure each other's load.
     - Measure before and after with the frozen harness, and run the regression gate.
     - Accept only when the metric moves past noise and the gate stays green. Otherwise revert the change in full. A tweak that "might help" is not kept.
     - One commit per accepted fix, staging only the files you changed (`git add <files>`, never `-A`). Log the row either way, kept or reverted.

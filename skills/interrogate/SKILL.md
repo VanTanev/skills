@@ -28,7 +28,7 @@ Before spawning reviewers, state the intent in one clear paragraph from the user
 
 Read `references/reviewer-prompt.md` and fill in the same template for every reviewer with the stated intent, the diff or file contents, the rubric from `references/rubric.md`, and the code-quality lens from `references/code-quality-review.md`.
 
-Start all reviewers at the same time. Each reviewer is read-only: it reads the repo and runs read-only commands, and edits nothing.
+Start all reviewers at the same time. Each reviewer is read-only: it reads the repo and runs read-only commands, and edits nothing. Start each reviewer subagent with a fresh context window.
 
 - **Reviewer A** is a subagent on your own model. Set its effort one step below your own. If you do not know your effort, do not set it.
 - **Reviewer B** runs on a different model family, through that family's CLI, in the background, with the filled template on stdin. If you are a Claude model, run `codex exec -s read-only -C <repo> -o <output-file> -`. Otherwise, run `claude -p --permission-mode plan` and send its output to a file. The CLI uses its own configured model.
