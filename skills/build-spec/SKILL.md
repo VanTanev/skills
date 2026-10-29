@@ -45,8 +45,8 @@ Stop and ask the user only for an irreversible action, a change of scope or goal
    It calls the Skill tool with `risk-first` and does only its Cut step, with the accounts as the record of what each hunk serves.
    Tickets built in parallel repeat each other: two helpers or two tests for one behavior, or an old path that a later ticket replaced.
 
-8. Read `{SKILLBASE}/references/no-comments.md` and follow it on the integration branch, with the base branch as the fixed point.
-   Its `references/comment-sicko.md` is `{SKILLBASE}/references/comment-sicko.md`.
+8. Read `references/no-comments.md` in this skill's folder and follow it on the integration branch, with the base branch as the fixed point.
+   Its `references/comment-sicko.md` is in this skill's folder too.
    You are its caller: approve or decline each encoding offer yourself.
    If it fails, report it open and continue.
 
@@ -62,7 +62,8 @@ Stop and ask the user only for an irreversible action, a change of scope or goal
 
 11. Clean up all **implementer subagent** worktrees.
 
-12. Read `{SKILLBASE}/references/visual-pr.md` and follow it for the integration branch.
+12. Read `references/visual-pr.md` in this skill's folder and follow it for the integration branch.
+    In that file, `{SKILLBASE}` is this skill's folder.
     If the issue tracker closes work through PRs, put a closing line for the spec and for each ticket, such as `Closes #12`, in the header of the PR body.
     Otherwise, when the PR exists, resolve each ticket the way the issue tracker closes work.
     In the final answer, also report each ticket's **account** and decisions, the `no-comments` report, and the account of the step 9 fixes: every gap and unconfirmed assumption.
