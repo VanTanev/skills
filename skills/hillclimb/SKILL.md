@@ -7,7 +7,7 @@ description: "Improve one measured number in a loop against a target: one change
 
 **You own the metric and the experiment's integrity. Supervise and review. Delegate the attempts.** For sustained, iterative improvement of one measurable thing against a target. A one-off fix needs no loop. This is the loop.
 
-Core discipline: one change, one measurement, keep or revert. Never stack untested changes, and never claim a win from code inspection. Before the first keep, read `{SKILLBASE}/references/prove-it-works.md`.
+Core discipline: one change, one measurement, keep or revert. Never stack untested changes, and never claim a win from code inspection. Before the first keep, read `references/prove-it-works.md` in this skill's folder.
 
 1. Ground the workload and architecture before choosing the metric. Read the code that produces the metric end to end, name the realistic workload dimensions that can move the result (data size, history, state, concurrency), and select a case that reproduces the user's complaint. If no case reproduces it, fix the repro instead of hillclimbing. Then fix one metric, the direction that counts as better, and a checkable stop predicate that pairs a target with a floor on attempts so a lucky early win can't end the run (the example "at least 50% better than baseline and at least 10 iterations" is this shape). Use the user's numbers when given, otherwise agree them.
    If the metric is a score on labeled or sampled data, split the data before the first measurement: a dev set for the loop, and a held-out test set that no attempt, hypothesis, or subagent sees. The loop measures only the dev set.
