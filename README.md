@@ -199,7 +199,7 @@ It proves the one fact that makes the change safe with a script that runs the re
 Based on the [Cursor pstack](https://github.com/cursor/plugins/tree/main/pstack) skill (MIT).
 
 ```bash
-npx skills@latest add VanTanev/skills --skill blast-radius --skill unslop
+npx skills@latest add VanTanev/skills --skill blast-radius
 ```
 
 Then invoke:
@@ -241,6 +241,38 @@ Then invoke:
 
 ```
 /correct
+```
+
+### technical-writing
+
+A layered standard to write and review docs, RFCs, READMEs, PR descriptions, and commit messages.
+It picks one Diátaxis mode for each document (tutorial, how-to, reference, or explanation), then applies Google developer style, STE rules, and Global English to each sentence.
+Then it applies the `unslop` rules.
+Based on the [Cursor pstack](https://github.com/cursor/plugins/tree/main/pstack) skill (MIT).
+
+```bash
+npx skills@latest add VanTanev/skills --skill technical-writing
+```
+
+Then invoke, with what to write or review:
+
+```
+/technical-writing <task>
+```
+
+### unslop
+
+A numbered list of AI writing patterns, with the fix for each: filler, AI vocabulary, metaphor nouns, mannered prose, and over-compressed text.
+Based on the [Cursor pstack](https://github.com/cursor/plugins/tree/main/pstack) skill (MIT).
+
+```bash
+npx skills@latest add VanTanev/skills --skill unslop
+```
+
+Then invoke, with the text or file to fix:
+
+```
+/unslop <text or file>
 ```
 
 ## Model-invoked
@@ -294,22 +326,6 @@ To start it yourself:
 /benchmark-checklist
 ```
 
-### unslop
-
-A numbered list of AI writing patterns, with the fix for each: filler, AI vocabulary, metaphor nouns, mannered prose, and over-compressed text.
-Based on the [Cursor pstack](https://github.com/cursor/plugins/tree/main/pstack) skill (MIT).
-
-```bash
-npx skills@latest add VanTanev/skills --skill unslop
-```
-
-The agent uses it when it writes prose that a person reads, such as a doc, a PR description, or a ticket.
-To start it yourself:
-
-```
-/unslop
-```
-
 ### hillclimb
 
 Improves one measured number in a loop: one change, one measurement, keep or revert.
@@ -325,6 +341,27 @@ To start it yourself:
 
 ```
 /hillclimb
+```
+
+### writing-for-people
+
+The model-invoked form of `technical-writing`, for text that people read outside the chat: PR bodies, PR reviews and replies, issues, commit messages, Jira tickets, and docs.
+It applies the same layers and the `unslop` rules, then runs a script that finds the faults that a pattern can find.
+The script reports Markdown that renders wrong as an error, and every other finding as a suggestion that the agent applies or keeps on purpose.
+With `--markdown`, the script also finds Markdown that renders wrong and line breaks inside a sentence.
+With `--changed`, it reports only the lines that differ from git `HEAD`, so an edit to an old doc does not rewrite lines that the task did not touch.
+Requires Python 3.
+Based on the [Cursor pstack](https://github.com/cursor/plugins/tree/main/pstack) skill (MIT).
+
+```bash
+npx skills@latest add VanTanev/skills --skill writing-for-people
+```
+
+The agent uses it before it writes or edits any of these texts.
+To start it yourself:
+
+```
+/writing-for-people <task>
 ```
 
 ## License

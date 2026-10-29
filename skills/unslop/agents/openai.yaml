@@ -1,3 +1,5 @@
 interface:
   display_name: "Unslop"
   short_description: "Cut AI tells and mannered prose from writing"
+policy:
+  allow_implicit_invocation: false
