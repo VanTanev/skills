@@ -8,7 +8,7 @@ Each file is a byte copy of its source at the base below.
 
 - Source: `skills/no-comments/` in this repo, a changed copy of pstack `no-comments` (see `skills/no-comments/UPSTREAM.md`).
 - Paths: `skills/no-comments/SKILL.md` is `references/no-comments.md`, and `skills/no-comments/references/comment-sicko.md` is `references/comment-sicko.md`.
-- Base: `37bb8fb3a9b9f27c34d97f8af29c5aa9e86795f9` (2026-10-14, "Port pstack #613 effort rule to no-comments and check pstack to 79afd75"), the last change to these files.
+- Base: `2257f9768971772efec8e5161295287310a3cffd` (2026-10-29, "Start subagents with a fresh context window, and port Matt's build and tracker fixes"), the last change to these files.
 - License: the pstack notice in `LICENSE`.
 
 ## `visual-pr`
