@@ -42,9 +42,11 @@ When you change the skill, update the list of local changes and the diff in `UPS
 
 A copy can depend on a skill from its source that this repo does not have.
 Write the rule inline when the copy needs only one sentence of it.
-When the copy needs the whole text, copy that skill's `SKILL.md`, frontmatter included, to a file in `references/`, and point to it as `{SKILLBASE}/references/<file>.md`.
+When the copy needs the whole text, copy that skill's `SKILL.md`, frontmatter included, to a file in `references/`, and point to it as "`references/<file>.md` in this skill's folder".
 This also works when the source skill is user-invoked, because the copy reads a file and does not start a skill.
 Record each reference file in `UPSTREAM.md`, with its upstream path, base, and diff.
+Rewrite each `{SKILLBASE}/` path from upstream in this form, because Claude Code does not replace `{SKILLBASE}`.
+A reference file that stays a byte copy keeps its `{SKILLBASE}`, and `SKILL.md` says that `{SKILLBASE}` is this skill's folder.
 
 ## Agent skills
 
