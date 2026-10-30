@@ -245,7 +245,7 @@ Then invoke:
 
 ### technical-writing
 
-A layered standard to write and review docs, RFCs, READMEs, PR descriptions, and commit messages.
+A layered standard to write and review docs, RFCs, READMEs, PR descriptions, PR reviews, and commit messages.
 It picks one Diátaxis mode for each document (tutorial, how-to, reference, or explanation), then applies Google developer style, STE rules, and Global English to each sentence.
 Then it applies the `unslop` rules.
 Based on the [Cursor pstack](https://github.com/cursor/plugins/tree/main/pstack) skill (MIT).
@@ -346,7 +346,7 @@ To start it yourself:
 ### writing-for-people
 
 The model-invoked form of `technical-writing`, for text that people read outside the chat: PR bodies, PR reviews and replies, issues, commit messages, Jira tickets, and docs.
-It applies the same layers and the `unslop` rules, then runs a script that finds the faults that a pattern can find.
+It applies the same layers, checks the text against each `unslop` pattern, then runs a script that finds the faults that a pattern can find.
 The script reports Markdown that renders wrong as an error, and every other finding as a suggestion that the agent applies or keeps on purpose.
 With `--markdown`, the script also finds Markdown that renders wrong and line breaks inside a sentence.
 With `--changed`, it reports only the lines that differ from git `HEAD`, so an edit to an old doc does not rewrite lines that the task did not touch.
