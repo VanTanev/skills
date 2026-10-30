@@ -21,13 +21,15 @@ It is the model-invoked form of `technical-writing` in this repo: the agent star
 - Frontmatter: no `disable-model-invocation`, so the agent can start the skill.
   The description names each kind of text that triggers it.
 - The intro says to run the check at the end.
-- `unslop`: "Apply the **unslop** skill" becomes "Apply the **unslop** skill in `references/unslop.md` in this skill's folder".
+- `unslop`: the "Apply the **unslop** skill" bullet in "Voice and repo specifics" becomes the first step of "Check the text before you publish it".
+  The step reads `references/unslop.md` in this skill's folder and ends on a completion criterion, because agents skipped the bullet.
   `unslop` is user-invoked, and another skill cannot start it, so `references/unslop.md` is a byte copy of the upstream skill, with its frontmatter.
   The path is relative to the skill's folder, because Claude Code does not replace a `{SKILLBASE}` placeholder.
 - `swarm`: "swarm logs" becomes "agent logs", because this repo does not vendor `swarm`.
 - Indentation: "Indent code snippets with tabs" becomes "Indent code snippets the way the repo indents its code", because tabs are the rule of the pstack repo, not of every repo.
+- PR reviews: a new bullet in "Voice and repo specifics" says that a review body states the verdict, the items that block, and answers to the author's questions, and that every other point goes into an inline comment.
 - "Check the text before you publish it": a new section that runs `scripts/check_text.py`.
-  The script finds the unslop and Global English faults that a pattern can find, and with `--markdown`, Markdown that renders wrong and line breaks inside a sentence.
+  The script finds the unslop and Global English faults that a pattern can find, a colon that joins two clauses included, and with `--markdown`, Markdown that renders wrong and line breaks inside a sentence.
   Only Markdown that renders wrong is an error. Every other finding is a suggestion, because the top rule lets a writer keep a sentence that a rule makes worse.
   With `--changed`, it reports only the lines that differ from git `HEAD`, so an edit to an old doc does not rewrite lines that the task did not touch.
   The script is new in this repo, not from upstream.
@@ -57,26 +59,27 @@ This is the exact diff of `SKILL.md` from the upstream base to this copy.
  
  Three rules sit above the layers:
  
-@@ -90,10 +89,21 @@
+@@ -90,10 +89,22 @@
  
  ## Voice and repo specifics
  
 -- Apply the **unslop** skill to every doc this skill touches. That skill owns the slop-pattern catalog: AI vocabulary, filler, hedging, formatting tells.
 -- PR descriptions and commit messages are writing too. Every layer except Diátaxis applies to them. A PR body is a briefing that a reviewer can read in under a minute. Do not paste swarm logs, SHA lists, or metric tables. Link them.
-+- Apply the **unslop** skill in `references/unslop.md` in this skill's folder to every doc this skill touches. That skill owns the slop-pattern catalog: AI vocabulary, filler, hedging, formatting tells.
 +- PR descriptions and commit messages are writing too. Every layer except Diátaxis applies to them. A PR body is a briefing that a reviewer can read in under a minute. Do not paste agent logs, SHA lists, or metric tables. Link them.
++- A PR review body states the verdict and the items that block, and answers any question the author asked. Every other point goes into an inline comment on the line it is about.
  - Product UI strings are not documentation. Use your product's copy guidelines for those.
 -- Indent code snippets with tabs. Write real paths. Make every count or tree claim true at the commit that lands it, and include the command that regenerates it.
 +- Indent code snippets the way the repo indents its code. Write real paths. Make every count or tree claim true at the commit that lands it, and include the command that regenerates it.
 +
 +## Check the text before you publish it
 +
-+`scripts/check_text.py`, in this skill's folder, finds the faults that a pattern can find. It reads files, so write the text to a file first.
++Two passes find the faults that have a name. The first reads the text against the unslop catalog, and the second runs `scripts/check_text.py` in this skill's folder.
 +
-+1. Run `python3 <this skill's folder>/scripts/check_text.py <file>`. If the text renders as Markdown, as GitHub text and docs in a repo do, add `--markdown`. A Jira ticket and a commit message take no flag. If you edit a file that git tracks, add `--changed`: the script then reports only the lines that differ from `HEAD`, and the lines that the task did not touch stay as they are.
-+2. Fix each error. An error is Markdown that renders wrong.
-+3. Weigh each suggestion. Apply it, or keep the text when the change makes the sentence worse. Code, commands, and quoted messages belong in code font, which the script skips.
-+4. Run the script again. The check is done when it exits 0 and you applied or kept each suggestion on purpose.
++1. Read `references/unslop.md` in this skill's folder, and check the text against each of its patterns. Rewrite each hit. The step is done when you have checked every pattern, also the ones that no script finds, such as a figurative verb or a "which" that points at a whole clause.
++2. Write the text to a file, because the script reads files. Run `python3 <this skill's folder>/scripts/check_text.py <file>`. If the text renders as Markdown, as GitHub text and docs in a repo do, add `--markdown`. A Jira ticket and a commit message take no flag. If you edit a file that git tracks, add `--changed`: the script then reports only the lines that differ from `HEAD`, and the lines that the task did not touch stay as they are.
++3. Fix each error. An error is Markdown that renders wrong.
++4. Weigh each suggestion. Apply it, or keep the text when the change makes the sentence worse. Code, commands, and quoted messages belong in code font, which the script skips.
++5. Run the script again. The check is done when it exits 0 and you applied or kept each suggestion on purpose.
 +
 +The script finds patterns only. The four layers still need your judgement.
  

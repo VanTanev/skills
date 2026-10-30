@@ -89,19 +89,20 @@ Don't mix modes: no reference tables inside a tutorial, no tutorial hand-holding
 
 ## Voice and repo specifics
 
-- Apply the **unslop** skill in `references/unslop.md` in this skill's folder to every doc this skill touches. That skill owns the slop-pattern catalog: AI vocabulary, filler, hedging, formatting tells.
 - PR descriptions and commit messages are writing too. Every layer except Diátaxis applies to them. A PR body is a briefing that a reviewer can read in under a minute. Do not paste agent logs, SHA lists, or metric tables. Link them.
+- A PR review body states the verdict and the items that block, and answers any question the author asked. Every other point goes into an inline comment on the line it is about.
 - Product UI strings are not documentation. Use your product's copy guidelines for those.
 - Indent code snippets the way the repo indents its code. Write real paths. Make every count or tree claim true at the commit that lands it, and include the command that regenerates it.
 
 ## Check the text before you publish it
 
-`scripts/check_text.py`, in this skill's folder, finds the faults that a pattern can find. It reads files, so write the text to a file first.
+Two passes find the faults that have a name. The first reads the text against the unslop catalog, and the second runs `scripts/check_text.py` in this skill's folder.
 
-1. Run `python3 <this skill's folder>/scripts/check_text.py <file>`. If the text renders as Markdown, as GitHub text and docs in a repo do, add `--markdown`. A Jira ticket and a commit message take no flag. If you edit a file that git tracks, add `--changed`: the script then reports only the lines that differ from `HEAD`, and the lines that the task did not touch stay as they are.
-2. Fix each error. An error is Markdown that renders wrong.
-3. Weigh each suggestion. Apply it, or keep the text when the change makes the sentence worse. Code, commands, and quoted messages belong in code font, which the script skips.
-4. Run the script again. The check is done when it exits 0 and you applied or kept each suggestion on purpose.
+1. Read `references/unslop.md` in this skill's folder, and check the text against each of its patterns. Rewrite each hit. The step is done when you have checked every pattern, also the ones that no script finds, such as a figurative verb or a "which" that points at a whole clause.
+2. Write the text to a file, because the script reads files. Run `python3 <this skill's folder>/scripts/check_text.py <file>`. If the text renders as Markdown, as GitHub text and docs in a repo do, add `--markdown`. A Jira ticket and a commit message take no flag. If you edit a file that git tracks, add `--changed`: the script then reports only the lines that differ from `HEAD`, and the lines that the task did not touch stay as they are.
+3. Fix each error. An error is Markdown that renders wrong.
+4. Weigh each suggestion. Apply it, or keep the text when the change makes the sentence worse. Code, commands, and quoted messages belong in code font, which the script skips.
+5. Run the script again. The check is done when it exits 0 and you applied or kept each suggestion on purpose.
 
 The script finds patterns only. The four layers still need your judgement.
 

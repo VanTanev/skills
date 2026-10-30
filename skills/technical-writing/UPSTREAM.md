@@ -29,6 +29,7 @@ All changes let Claude Code, OpenCode, and Codex run the skill without the rest 
   The abstract-metaphor rule that the skill names is rule 26 of `unslop`.
 - `swarm`: "swarm logs" becomes "agent logs", because this repo does not vendor `swarm`.
 - Indentation: "Indent code snippets with tabs" becomes "Indent code snippets the way the repo indents its code", because tabs are the rule of the pstack repo, not of every repo.
+- PR reviews: a new bullet in "Voice and repo specifics" says that a review body states the verdict, the items that block, and answers to the author's questions, and that every other point goes into an inline comment.
 - `agents/openai.yaml`: added, with `policy.allow_implicit_invocation: false`, the Codex form of the same setting.
 - `LICENSE`: added as a byte copy of upstream `pstack/LICENSE` (MIT), to keep the license notice with the copy.
 
@@ -49,7 +50,7 @@ This is the exact diff of `SKILL.md` from the upstream base to this copy.
  ---
  
  # Technical writing
-@@ -90,10 +92,10 @@
+@@ -90,10 +92,11 @@
  
  ## Voice and repo specifics
  
@@ -57,6 +58,7 @@ This is the exact diff of `SKILL.md` from the upstream base to this copy.
 -- PR descriptions and commit messages are writing too. Every layer except Diátaxis applies to them. A PR body is a briefing that a reviewer can read in under a minute. Do not paste swarm logs, SHA lists, or metric tables. Link them.
 +- Apply the **unslop** skill in `references/unslop.md` in this skill's folder to every doc this skill touches. That skill owns the slop-pattern catalog: AI vocabulary, filler, hedging, formatting tells.
 +- PR descriptions and commit messages are writing too. Every layer except Diátaxis applies to them. A PR body is a briefing that a reviewer can read in under a minute. Do not paste agent logs, SHA lists, or metric tables. Link them.
++- A PR review body states the verdict and the items that block, and answers any question the author asked. Every other point goes into an inline comment on the line it is about.
  - Product UI strings are not documentation. Use your product's copy guidelines for those.
 -- Indent code snippets with tabs. Write real paths. Make every count or tree claim true at the commit that lands it, and include the command that regenerates it.
 +- Indent code snippets the way the repo indents its code. Write real paths. Make every count or tree claim true at the commit that lands it, and include the command that regenerates it.

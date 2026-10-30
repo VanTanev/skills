@@ -18,6 +18,12 @@ import sys
 PROSE_RULES = [
     ("dash", re.compile(r"[—–]"), "em or en dash: end the sentence or use a comma (unslop 13)"),
     ("semicolon", re.compile(r";"), "semicolon: use a period"),
+    (
+        "colon",
+        # Three words, a colon, and a clause. An inline list (two commas after the colon) may follow a colon.
+        re.compile(r"(?:\b[\w'-]+[ ,]+){2}\b[\w'-]+: [a-z](?![^.!?]*,[^.!?]*,)"),
+        "colon joins two clauses: end the sentence, or let the point stand without it (unslop 14)",
+    ),
     ("curly-quote", re.compile(r"[“”‘’]"), "curly quote: use a straight quote (unslop 19)"),
     (
         "ai-word",
