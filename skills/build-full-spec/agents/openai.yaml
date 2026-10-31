@@ -1,0 +1,5 @@
+interface:
+  display_name: "Build Full Spec"
+  short_description: "Build a spec unattended, up to a PR that is ready to merge"
+policy:
+  allow_implicit_invocation: false
