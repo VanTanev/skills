@@ -192,6 +192,22 @@ Then invoke:
 /interrogate
 ```
 
+### architect
+
+Sketches types, signatures, and module boundaries before code, with competing candidate designs on two model families, then implements against the chosen sketch.
+Requires the CLI of the other model family: `codex` for a Claude agent, or `claude` for other agents.
+Based on the [Cursor pstack](https://github.com/cursor/plugins/tree/main/pstack) skill (MIT).
+
+```bash
+npx skills@latest add VanTanev/skills --skill architect
+```
+
+Then invoke:
+
+```
+/architect
+```
+
 ### blast-radius
 
 Finds what a change can break outside the diff: library code at the pinned version, wire formats, DB columns, feature flags, and code three calls away.
