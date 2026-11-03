@@ -30,9 +30,23 @@ For each check, choose a **discriminating input** that distinguishes the intende
 Derive the expected result from the oracle or stated assumption.
 Prefer a **boundary pair**, one input on each side of the boundary, plus the boundary itself, and an **asymmetric** input, where swapped arguments or a reversed comparison give a different answer.
 
-Call the code as its users do, and assert the literal result or effect they see: for a mock, the payload it received; for an absence, also the presence on another input; for a constant, the behavior of the code that reads it.
-A test that would still pass if every imported function returned `undefined` or a wrong value discriminates nothing: `toBeDefined`, `toBeTruthy`, `toHaveBeenCalled`, `expect(f(a)).toBe(f(a))`, a restated constant or prompt string, an assertion on data the test built.
-Rewrite or delete each such test in the change.
+A test checks **behavior**: what the code's users can observe through the interface they use.
+That is return values, errors, state they can read back, and effects outside the code, such as a request sent, a row written, or a message emitted.
+Judge each test that you use as a check, and each test in the change, against two imagined edits:
+
+- **Break the behavior**: make the code return a wrong value, skip an effect, or do it twice.
+  The test must fail.
+  A test that still passes discriminates nothing: an assertion looser than the contract, an expected value computed by the code under test, a restated constant or prompt string that never runs the code that reads it, an assertion on data the test built.
+- **Change the internals**: restructure the code and keep every observable result.
+  The test must still pass.
+  A test that fails is pinned to the implementation: private helpers, internal call order, intermediate data, or which internal collaborator did the work.
+
+Rewrite or delete each test that fails either edit.
+Drive the code through its users' interface with a concrete input, and assert what the contract promises, no less and no more.
+The contract decides, not the shape of the assertion.
+The payload that a mocked external service receives is behavior, and a call to an internal helper is not.
+An asserted absence, such as no call to the payment client, needs a paired case where the effect happens.
+The error type that callers branch on is the contract, and the exact error message usually is not.
 
 Extend existing property tests when the change affects the behavior they cover.
 When a risk generalises into a **relation** that must hold across valid inputs, put it in a property test: extend the one that covers the behavior, or write one.

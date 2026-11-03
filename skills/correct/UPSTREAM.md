@@ -7,13 +7,14 @@ This skill is a vendored copy of `correct` from the Cursor pstack plugin, with t
 - Repository: https://github.com/cursor/plugins, branch `main`.
 - Paths: `pstack/skills/correct/SKILL.md` and `pstack/skills/architect/references/design-red-flags.md`.
   Here the red flags are `references/design-red-flags.md`.
-- Base: `a58628271271837ef5f386adca29c0812683a19a` (2026-10-03, "feat(pstack): make /architect designs resist agent mistakes (#495)").
-  The last upstream change to `SKILL.md` is `9511e60321f7e533a187d62854a3d53a53752874` (2026-10-03, "feat(pstack): add /correct skill (#494)").
-  The files here are equal to upstream at the base, except for the local changes below.
-- Checked up to: `1e5c90a4b6f249917bd21fe361b3a2a7deb741b8` (upstream `main`, 2026-10-14).
-  Upstream has no changes to these files between the base and this commit.
+- Base of `SKILL.md`: `e5136d82418d2db3165ea1050d17577cd618cc05` (2026-10-15, "pstack: restate four overspecified principles as reasoning, not rules (#633)").
+- Base of `references/design-red-flags.md`: `a58628271271837ef5f386adca29c0812683a19a` (2026-10-03, "feat(pstack): make /architect designs resist agent mistakes (#495)").
+  The files here are equal to upstream at these commits, except for the local changes below.
+- Checked up to: `ae5650febf4320793844c12c4adaa937f417f8da` (upstream `main`, 2026-10-31).
+  Upstream has no changes to either file between its base and this commit.
 
 `VanTanev/skills` added the copy on 2026-10-14.
+`SKILL.md` was updated to upstream #633 on 2026-11-03.
 
 ## Local changes
 
@@ -36,7 +37,7 @@ All changes let Claude Code, OpenCode, and Codex run the skill from one canonica
 - `agents/openai.yaml`: added, with `policy.allow_implicit_invocation: false`, the Codex form of the same setting.
 - `LICENSE`: added as a byte copy of upstream `pstack/LICENSE` (MIT), to keep the license notice with the copy.
 
-This is the exact diff from the upstream base to this copy.
+This is the exact diff from the upstream bases to this copy.
 The `a/references/design-red-flags.md` side is upstream `pstack/skills/architect/references/design-red-flags.md`.
 
 ```diff
@@ -65,7 +66,7 @@ The `a/references/design-red-flags.md` side is upstream `pstack/skills/architect
 -1. **Eliminate it with architecture.** Give each piece of state one owner and each task one supported way. Hide internals so the wrong import fails. Replace hand-synced lists with one source of truth. Delete old ways and dead code an agent would copy.
 +1. **Eliminate it with architecture.** Give each piece of state one owner and each task one supported way. Hide internals so the wrong import fails. Replace hand-synced lists with one source of truth. Delete old ways and dead code an agent would copy. Screen the repo for each flag in [`references/design-red-flags.md`](references/design-red-flags.md).
  2. **Enforce it with types so the bad state can't be written.** If bad code still compiles, add a lint or CI check whose error names the file, type, or function to use instead. If the pattern is already common, fail only when a change adds more.
- 3. **Test the behavior.** Fix or delete any test that would still pass if every function it calls returned nothing.
+ 3. **Test the behavior.** Fix or delete any test that still passes when the behavior it checks breaks, or that fails when only the internals change.
  4. **Write docs or agent rules last, only for judgment calls.** Nothing fails when an agent skips them.
 @@ -27,6 +29,6 @@
  
@@ -98,4 +99,5 @@ The `a/references/design-red-flags.md` side is upstream `pstack/skills/architect
 4. In this file, replace the diff with the output of these two commands, in this order:
    `diff -u --label a/SKILL.md --label b/SKILL.md <(git -C <clone> show origin/main:pstack/skills/correct/SKILL.md) SKILL.md` and
    `diff -u --label a/references/design-red-flags.md --label b/references/design-red-flags.md <(git -C <clone> show origin/main:pstack/skills/architect/references/design-red-flags.md) references/design-red-flags.md`.
-   Set "Base" and "Checked up to" to the new upstream SHA and date.
+   Set each base and "Checked up to" to the new upstream SHA and date.
+
