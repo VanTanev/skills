@@ -1,0 +1,5 @@
+interface:
+  display_name: "Ketchup Video"
+  short_description: "Catch up on what changed in a short subtitled video"
+policy:
+  allow_implicit_invocation: false
