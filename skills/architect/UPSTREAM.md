@@ -49,12 +49,12 @@ All changes let Claude Code, OpenCode, and Codex run the skill without the rest 
     Claude Code subagents can use only Claude models.
     So Runner 1 is a subagent on the agent's own model, and Runner 2 is the CLI of the other family: `codex exec -s workspace-write` from a Claude model, and `claude -p --permission-mode acceptEdits` from any other model.
     If that CLI is missing or fails, Runner 2 is a second subagent, and the arena says that it has one model family.
-    These are the rules of `interrogate`, with write access, because a runner writes its candidate.
+    These are the adversary rules of `interrogate`, because a runner writes its candidate.
     The user can name more models for more runners, in place of the runner list in the rule file.
   - Effort: Runner 1 runs at the agent's own effort, because a runner does the whole task.
     This replaces the pointer to the Subagents section of `poteto-mode`, which this setup does not vendor.
   - Fan out: "Spawn all N subagents in one message with `run_in_background: true`" becomes "Start all N runners at the same time, in the background", because Runner 2 is a CLI, not a subagent.
-  - Judge: the cross-judge is the CLI of the other family, read-only, with the commands of `interrogate`.
+  - Judge: the cross-judge is the CLI of the other family, read-only: `codex exec -s read-only` from a Claude model, and `claude -p --permission-mode plan` from any other model.
     If the CLI is missing or fails, the agent picks the base alone, as upstream does when no judge model runs.
   - Output location: `/tmp/arena-<slug>/candidate-<n>/` becomes a directory in the scratch or temporary directory, because Claude Code gives each session its own scratch directory.
   - Principle links: `redesign-from-first-principles` and `prove-it-works` point to their copies in `references/`.
