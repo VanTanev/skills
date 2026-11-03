@@ -1,5 +1,5 @@
 interface:
   display_name: "Sharpen"
-  short_description: "Approach a task as a top expert would, then do it"
+  short_description: "Rewrite a task prompt to ask for what a top expert would do"
 policy:
   allow_implicit_invocation: false

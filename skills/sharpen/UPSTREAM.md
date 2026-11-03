@@ -6,12 +6,14 @@ This skill is a vendored copy of `sharpen` from the Cursor pstack plugin.
 
 - Repository: https://github.com/cursor/plugins, branch `main`.
 - Path: `pstack/skills/sharpen/`.
-- Base: `79afd75d5bd51383fbb526b72f36db03180b8301` (2026-10-14, "feat(pstack): add /sharpen (#615)").
+- Base: `88d47514b82e7c44f00f2b2a72ff6dd12158038c` (2026-10-19, "pstack: restore /sharpen to the original prompt, return only the rewrite (#729)").
   The files here are equal to upstream at this commit, except for the local changes below.
-- Checked up to: `79afd75d5bd51383fbb526b72f36db03180b8301` (upstream `main`, 2026-10-14).
+- Checked up to: `ae5650febf4320793844c12c4adaa937f417f8da` (upstream `main`, 2026-10-31).
   Upstream has no changes to this directory between the base and this commit.
 
 `VanTanev/skills` added the copy on 2026-10-14.
+The skill was updated to upstream #729 on 2026-11-03.
+After upstream #712 and #729, the skill gives back a rewritten prompt and does not do the task.
 
 ## Local changes
 
@@ -31,14 +33,14 @@ This is the exact diff of `SKILL.md` from the upstream base to this copy:
 @@ -1,7 +1,9 @@
  ---
  name: sharpen
--description: "Sharpen a task before starting: the expert approach, what the user is really after, and the right level of specification. Use for /sharpen."
-+description: "Sharpen a task before starting: the expert approach, what the user is really after, and the right level of specification."
+-description: "Make a task deeper, not bigger, then rewrite the prompt. Use for /sharpen."
++description: "Make a task deeper, not bigger, then rewrite the prompt."
  disable-model-invocation: true
 +metadata:
 +  opencode/autoinvoke: false
  ---
  
- Before starting, ask how a top expert would approach this task (their raw sources, their real methods, an outside check that the result is right), what the user is really after, and whether the task is over- or underspecified. Loosen constraints that don't serve the goal as readily as you add ones that do, and leave choices that are the user's to make open instead of deciding them. Fold in only what makes the work better, not bigger, but always keep one outside check that the result is right, without narrating the framing, then do the work. Don't hand back a rewritten prompt.
+ I want a deeper version of this task, not a bigger one. Before rewriting it, do four things:
 ```
 
 ## Update procedure

@@ -1,6 +1,6 @@
 ---
 name: interrogate
-description: "Reviewers from different model families challenge changes from independent angles."
+description: "Adversaries try to break a change or design, and only findings proven by a run survive."
 disable-model-invocation: true
 metadata:
   opencode/autoinvoke: false
@@ -8,66 +8,34 @@ metadata:
 
 # Interrogate
 
-Spawn one reviewer per model to adversarially review code changes. The adversarial signal comes from model diversity, not assigned personas. The deliverable is a synthesized verdict. Do NOT auto-apply changes.
+Adversaries try to break a change or a design. A finding survives only when a run proves it. Report the findings. Do not apply fixes.
 
-## Step 1, Scope
+## Frame
 
-Identify what to review from context:
+The scope is what the user names. Otherwise it is the branch diff from its merge base with the base branch, through the working tree. From the user's message, the commits, and the PR description, restate in your own words what you think the user's goals are and what problem they are trying to solve. This restatement is the intent. Ask the user when the intent is unclear.
 
-- If the user points at specific files or a diff, use that.
-- If on a feature branch, run `git diff main...HEAD` (or the appropriate base branch) for the full changeset.
-- If the user's message references recent work, gather the relevant files.
+## Fan out
 
-Package the diff or file contents with any surrounding context files the reviewers need to understand the code.
+By default there are two adversaries, on two model families. Start each subagent with a fresh context window.
 
-## Step 2, Intent
+- **Adversary A** is a subagent on your own model. Set its effort one step below your own. If you do not know your effort, do not set it.
+- **Adversary B** runs on a different model family, through that family's CLI, with its prompt on stdin. If you are a Claude model, run `codex exec -s workspace-write -C <worktree> -o <output-file> -`. Otherwise, run `claude -p --permission-mode auto` in its worktree, and send its output to a file. The CLI uses its own configured model. If the CLI is missing or fails, run Adversary B as a second subagent on your own model, and say in the output that the review has one model family.
+- If the user names more models, add one adversary for each, labeled Adversary C, D, and so on.
 
-Before spawning reviewers, state the intent in one clear paragraph from the user's message, commit messages, the PR description if one exists, and the code. If you're unsure about the intent, ask the user before proceeding.
+Give each adversary its own git worktree, so no two adversaries write to the same file. Copy the scope's uncommitted changes into each worktree. Start all adversaries at the same time, in the background. Give each adversary the scope, the intent, the path of its worktree, and this brief:
 
-## Step 3, Spawn Reviewers
+> Break this change. Prove each finding with a run against the real code, such as a failing test, a repro script, or command output that shows the wrong behavior. For a design or plan, run a prototype or probe the current tree. Keep repros in your own worktree. Report each finding with a title, the exact command, the output it printed, and the output the intent requires. Leave out anything you did not run. That covers style, naming, structure, and risks that need a future change to matter. No findings is a valid result.
 
-Read `references/reviewer-prompt.md` and fill in the same template for every reviewer with the stated intent, the diff or file contents, the rubric from `references/rubric.md`, and the code-quality lens from `references/code-quality-review.md`.
+If an adversary produces no output, go on with the others and note the dropout.
 
-Start all reviewers at the same time. Each reviewer is read-only: it reads the repo and runs read-only commands, and edits nothing. Start each reviewer subagent with a fresh context window.
+## Verify
 
-- **Reviewer A** is a subagent on your own model. Set its effort one step below your own. If you do not know your effort, do not set it.
-- **Reviewer B** runs on a different model family, through that family's CLI, in the background, with the filled template on stdin. If you are a Claude model, run `codex exec -s read-only -C <repo> -o <output-file> -`. Otherwise, run `claude -p --permission-mode plan` and send its output to a file. The CLI uses its own configured model.
-- If the user names more models, add one reviewer for each, labeled Reviewer C, D, and so on.
+Verify each finding by rerunning its command in that adversary's worktree. Keep a finding when the output shows the failure and the failure breaks the intent. Drop the rest. Merge findings that share a root cause.
 
-If the other family's CLI is missing or fails, run Reviewer B as a second subagent on your own model, and say in the output that the review has one model family. Do not block the review on it.
+Adversaries find different failures, so the verdict keeps every verified finding, not one adversary's list. Then remove the adversary worktrees.
 
-## Step 4, Synthesize
+## Output
 
-As results come back, build a unified picture. Parse every reviewer's findings. Merge findings that describe the same issue differently, and note which models raised each one. Findings two or more models raised independently are the highest signal. Read a lone model's finding, but weight it accordingly. Note disagreements. If one model flags something and another explicitly says the opposite, that is context for the verdict.
-
-## Step 5, Lead Judgment
-
-You are the lead reviewer, a pragmatic senior engineer, not a neutral aggregator. Read `references/lead-judgment.md` for the full framework. Put every finding in one of four buckets, with the model(s) that raised it and a one-line rationale.
-
-- **Act on**. Real issues affecting correctness, security, or maintainability given the actual goals. They would block a real PR.
-- **Consider**. Legitimate, but you're not sure they outweigh the cost of addressing them now. Worth the user's attention.
-- **Noted**. Technically valid but not actionable. Context-dependent, premature optimization, or low-impact at this stage.
-- **Dismissed**. Wrong, nitpicky, or missing context, with a brief reason.
-
-## Output Format
-
-### Intent
-> [The stated intent paragraph from Step 2]
-
-### Reviewers
-- Reviewer [label]: [model name], [N findings] (one bullet per reviewer)
-
-### Act On
-[Each: description, which models raised it, why it matters.]
-
-### Consider
-[Each: description, which models raised it, the tradeoff.]
-
-### Noted
-[Brief list.]
-
-### Dismissed
-[Each with a brief rationale.]
-
-### Agreement Map
-[Where models agreed and diverged, and what that pattern tells us.]
+- **Intent**: the restatement.
+- **Findings**: for each verified finding, the command, its output, how it breaks the intent, and the adversaries that found it. Say "no verified findings" when none survive.
+- **Dropped**: for each adversary, the count of dropped findings and why.

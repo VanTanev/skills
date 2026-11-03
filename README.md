@@ -81,8 +81,8 @@ Then invoke:
 
 ### sharpen
 
-Before the work starts, the agent asks how a top expert would do the task, what you really want, and whether the task has too many or too few constraints.
-Then it does the work, with one outside check that the result is correct.
+The agent finds what a top expert would do in the task that you do not ask for: their raw material, their methods and tools, and an outside check that the result is correct.
+Then it gives you your prompt again, rewritten to ask for that, and does not do the work.
 Based on the [Cursor pstack](https://github.com/cursor/plugins/tree/main/pstack) skill (MIT).
 
 ```bash
@@ -112,8 +112,8 @@ Then invoke:
 
 ### ketchup
 
-Catches you up on what changed in the chat since your last message, in less than 150 words.
-It lists each decision that waits on you, with a recommendation and what happens if you do not answer.
+Catches you up on what changed in the chat since your last message, in plain words.
+It lists every decision that waits on you, each with the agent's pick, the evidence, and the risk, so that you can decide from the reply alone.
 Based on the [Cursor pstack](https://github.com/cursor/plugins/tree/main/pstack) skill (MIT).
 
 ```bash
@@ -124,6 +124,23 @@ Then invoke:
 
 ```
 /ketchup
+```
+
+### ketchup-video
+
+Catches you up as `ketchup` does, but shows what happened in a short silent video of slides with subtitles.
+The decisions that wait on you are text under the video.
+The agent makes and renders the video by itself, for example with `ffmpeg`.
+Based on the [Cursor pstack](https://github.com/cursor/plugins/tree/main/pstack) skill (MIT).
+
+```bash
+npx skills@latest add VanTanev/skills --skill ketchup-video
+```
+
+Then invoke:
+
+```
+/ketchup-video
 ```
 
 ### no-comments
@@ -175,10 +192,43 @@ Then invoke:
 /maintain-verification-skill
 ```
 
+### create-formal-verification-skill
+
+Finds the code where a bug costs the most and tests reach the least, and formally verifies one property of it with the tool that fits, such as TLA+.
+Then it writes a project skill that lets the next agent check a change against that property.
+For a TLA+ model, the project skill reads each result with the `statechart` skill.
+Based on the [Cursor pstack](https://github.com/cursor/plugins/tree/main/pstack) skill (MIT).
+
+```bash
+npx skills@latest add VanTanev/skills --skill create-formal-verification-skill --skill maintain-formal-verification-skill --skill statechart
+```
+
+Then invoke:
+
+```
+/create-formal-verification-skill
+```
+
+### maintain-formal-verification-skill
+
+Brings a project's formal verification back in line with the code after changes that did not recheck it.
+It reads the commits that touched verified code, updates the model or harness, reruns each check, and says whether each failure is drift in the verification or a bug in the code.
+Based on the [Cursor pstack](https://github.com/cursor/plugins/tree/main/pstack) skill (MIT).
+
+```bash
+npx skills@latest add VanTanev/skills --skill maintain-formal-verification-skill --skill statechart
+```
+
+Then invoke:
+
+```
+/maintain-formal-verification-skill
+```
+
 ### interrogate
 
-Sends a change to two reviewers on different model families, and sorts their findings into Act on, Consider, Noted, and Dismissed.
-A map shows where the models agree, because a finding that two models raise on their own is the strongest signal.
+Sends adversaries on two model families to break a change or a design, each in its own git worktree.
+An adversary reports only a finding that it proved with a run, such as a failing test or a repro script, and the agent reruns each command before it keeps the finding.
 Requires the CLI of the other model family: `codex` for a Claude agent, or `claude` for other agents.
 Based on the [Cursor pstack](https://github.com/cursor/plugins/tree/main/pstack) skill (MIT).
 
@@ -341,6 +391,26 @@ To start it yourself:
 
 ```
 /hillclimb
+```
+
+### statechart
+
+Checks a TLA+ model with TLC and draws it as a Mermaid statechart, in the words of the person who reads it.
+The report gives the shortest path to each state that breaks a rule.
+It needs Node 22.18 or later, Bun, or Deno.
+The first run installs TLC and Java with [mise](https://mise.jdx.dev).
+Without mise, set `TLA2TOOLS` to the path of `tla2tools.jar` and `JAVA` to Java 11 or later.
+Based on the [Cursor pstack](https://github.com/cursor/plugins/tree/main/pstack) skill (MIT).
+
+```bash
+npx skills@latest add VanTanev/skills --skill statechart
+```
+
+The agent uses it when it checks a TLA+ model or reads its result.
+To start it yourself:
+
+```
+/statechart
 ```
 
 ### writing-for-people
