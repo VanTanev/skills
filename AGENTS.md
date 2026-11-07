@@ -24,7 +24,7 @@ Every `agents/openai.yaml` has `interface.display_name` and `interface.short_des
 
 A skill starts another skill with "Call the Skill tool with `<name>`", one skill for each call.
 Only a model-invoked skill can be started this way.
-For a user-invoked skill, tell the user to type it.
+For a user-invoked skill, tell the user to type it, or give the skill a reference copy of it (see "Upstream copies").
 
 ## Subagents
 
@@ -41,7 +41,7 @@ When you add, rename, or change a skill, update its section.
 
 ## Upstream copies
 
-A skill with an `UPSTREAM.md` is a changed copy of another project's skill.
+A skill with an `UPSTREAM.md` is a changed copy of another project's skill, or has reference copies of other skills.
 Keep its `LICENSE` file.
 When you change the skill, update the list of local changes and the diff in `UPSTREAM.md`.
 
@@ -52,6 +52,9 @@ This also works when the source skill is user-invoked, because the copy reads a 
 Record each reference file in `UPSTREAM.md`, with its upstream path, base, and diff.
 Rewrite each `{SKILLBASE}/` path from upstream in this form, because Claude Code does not replace `{SKILLBASE}`.
 A reference file that stays a byte copy keeps its `{SKILLBASE}`, and `SKILL.md` says that `{SKILLBASE}` is this skill's folder.
+
+A skill can also read a reference copy of a user-invoked skill of this repo, as `build-spec` reads `no-comments`.
+When you change a skill that another skill copies, copy it again and update the base in that `UPSTREAM.md`.
 
 ## Agent skills
 
