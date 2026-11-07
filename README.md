@@ -68,6 +68,25 @@ Run `/setup-matt-pocock-skills` once in the repo, then invoke:
 /build-spec
 ```
 
+### build-full-spec
+
+Does the `build-spec` work unattended, up to a PR that is ready to merge, and stops there for you to merge.
+After `code-review`, it also runs `sol-loop` on the integration branch.
+Then it opens the PR and runs `babysit-pr` until checks and reviews pass, and it asks you only when it cannot continue alone.
+It has its own copies of `no-comments` and `visual-pr`, as `build-spec` has, and rules adapted from the `full-send` and `full-stop` skills of [tstack](https://github.com/t3dotgg/tstack) (MIT).
+Requires the GitHub CLI, `gh`, and a way to run OpenAI's GPT Sol, for `sol-loop`.
+
+```bash
+npx skills@latest add VanTanev/skills --skill build-full-spec --skill risk-first --skill unslop
+npx skills@latest add VanTanev/tstack --skill sol-loop --skill babysit-pr
+```
+
+Run `/setup-matt-pocock-skills` once in the repo, then invoke:
+
+```
+/build-full-spec
+```
+
 ### expert-test
 
 Tests each decision against the best expert in its field.
