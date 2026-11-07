@@ -431,10 +431,11 @@ To start it yourself:
 
 ### writing-for-people
 
-The model-invoked form of `technical-writing`, for text that people read outside the chat: PR bodies, PR reviews and replies, issues, commit messages, Jira tickets, and docs.
+The model-invoked form of `technical-writing`, for text that people read outside the chat: PR bodies in any repository, PR reviews and replies, issues, commit messages, Jira tickets, docs, design rationales, and the text of HTML pages that you publish, such as Artifacts.
 It applies the same layers, checks the text against each `unslop` pattern, then runs a script that finds the faults that a pattern can find.
 The script reports Markdown that renders wrong as an error, and every other finding as a suggestion that the agent applies or keeps on purpose.
 With `--markdown`, the script also finds Markdown that renders wrong and line breaks inside a sentence.
+With `--html`, it checks the text in the markup of an HTML page, and skips the tags, scripts, styles, and code.
 With `--changed`, it reports only the lines that differ from git `HEAD`, so an edit to an old doc does not rewrite lines that the task did not touch.
 Requires Python 3.
 Based on the [Cursor pstack](https://github.com/cursor/plugins/tree/main/pstack) skill (MIT).

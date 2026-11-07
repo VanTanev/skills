@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 """Find the writing faults that a pattern can find.
 
-Usage: check_text.py [--markdown] [--changed] FILE...
+Usage: check_text.py [--markdown | --html] [--changed] FILE...
 
 An error is Markdown that renders wrong. A suggestion is a pattern that is usually a fault, and the
 writer applies it or keeps the text on purpose. It skips code blocks, code spans, and URLs.
+With --html, it checks the text in the markup of an HTML page, and skips the tags, scripts, styles,
+and code. Each finding keeps the line number of the page.
 With --changed, it reports only the lines that differ from git HEAD, or every line of a file that
 git does not track.
 Exit 0: no errors. Exit 1: errors. Exit 2: usage.
@@ -14,6 +16,7 @@ import os
 import re
 import subprocess
 import sys
+from html.parser import HTMLParser
 
 PROSE_RULES = [
     ("dash", re.compile(r"[—–]"), "em or en dash: end the sentence or use a comma (unslop 13)"),
@@ -162,6 +165,41 @@ def check_markdown(lines):
         yield fence_line, "fence", "code block does not close"
 
 
+class PageText(HTMLParser):
+    """Collects the text of an HTML page by its line, outside the tags that hold no prose."""
+
+    SKIPPED = {"script", "style", "code", "pre", "kbd", "samp", "textarea"}
+
+    def __init__(self, count):
+        super().__init__()
+        self.lines = [[] for _ in range(count)]
+        self.skipped = []
+
+    def handle_starttag(self, tag, attrs):
+        if tag in self.SKIPPED:
+            self.skipped.append(tag)
+
+    def handle_endtag(self, tag):
+        if tag in self.skipped:
+            del self.skipped[len(self.skipped) - 1 - self.skipped[::-1].index(tag):]
+
+    def handle_data(self, data):
+        if self.skipped:
+            return
+        number = self.getpos()[0]
+        for offset, part in enumerate(data.split("\n")):
+            if part.strip() and number + offset <= len(self.lines):
+                self.lines[number + offset - 1].append(part.strip())
+
+
+def page_text(lines):
+    """The text that each line of an HTML page holds, one entry for each line of the page."""
+    parser = PageText(len(lines))
+    parser.feed("\n".join(lines))
+    parser.close()
+    return [" ".join(parts) for parts in parser.lines]
+
+
 def changed_lines(path):
     """The line numbers that differ from git HEAD, or None when git does not track the file."""
     folder, name = os.path.split(os.path.abspath(path))
@@ -182,15 +220,18 @@ def changed_lines(path):
 
 
 def main(argv):
-    flags = {"--markdown", "--changed"}
+    flags = {"--markdown", "--html", "--changed"}
     paths = [arg for arg in argv if arg not in flags]
-    if not paths or any(path.startswith("-") for path in paths):
+    both_formats = "--markdown" in argv and "--html" in argv
+    if not paths or both_formats or any(path.startswith("-") for path in paths):
         print(__doc__.strip(), file=sys.stderr)
         return 2
     errors = 0
     for path in paths:
         with open(path, encoding="utf-8") as file:
             lines = file.read().splitlines()
+        if "--html" in argv:
+            lines = page_text(lines)
         findings = list(check_prose(lines))
         if "--markdown" in argv:
             findings += list(check_markdown(lines))
