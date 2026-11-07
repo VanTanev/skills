@@ -379,7 +379,8 @@ To start it yourself:
 ### benchmark-checklist
 
 Checks a measured number before the agent reports it or acts on it: a speedup, a regression, or an eval score such as precision and recall.
-It asks what limits the number, whether both sides were tuned, whether errors or skipped work explain it, and whether it repeats.
+Before the run, it asks which result would change a decision.
+After the run, it asks what limits the number, whether both sides were tuned, whether errors or skipped work explain it, and whether it repeats.
 Based on the [Cursor pstack](https://github.com/cursor/plugins/tree/main/pstack) skill (MIT).
 
 ```bash
