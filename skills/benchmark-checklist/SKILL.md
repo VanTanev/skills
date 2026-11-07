@@ -1,6 +1,6 @@
 ---
 name: benchmark-checklist
-description: "Vet a measured number (limiter, tuning, limits, errors, repeatability, relevance, and whether the work happened) before you report or act on it. Use when you run a benchmark, or report a speedup, regression, or eval result you measured."
+description: "Vet a measured number (limiter, tuning, limits, errors, repeatability, relevance, and whether the work happened) before you report or act on it. Use before you run a benchmark or an eval, and when you report a speedup, regression, or eval result you measured."
 ---
 
 # Benchmark checklist
@@ -12,6 +12,7 @@ For a quick ballpark the user asked for, one run is enough. Still check question
 ## Before you run anything
 
 - Write down the claim you expect to make, in the words you would ship ("export is 30% faster at p50 on the 60k-row dataset"). The questions test that sentence.
+- Write down the result that would change a decision, and the noise floor. Stop when the run-to-run spread is larger than the effect.
 - Read the measurement script. Note what it times, counts, and ignores.
 - Check the load average with `uptime` and the core count with `nproc`. If the machine is busy, find out what is running. If you cannot stop it, interleave the sides so both see the same noise, and say so in the report.
 
@@ -34,4 +35,4 @@ For a quick ballpark the user asked for, one run is enough. Still check question
 
 ## Eval results
 
-An eval result is a score from trials of a task, such as a pass rate, or the precision and recall of a matcher on labeled pairs. List what else the score could be measuring, and rule out each one with evidence: errors, skipped or cached work, trials that never ran, an untuned side, noise, and a scenario too small to matter. Then ask the same of the trials: did every run do the task, does the gap hold across trials and models, and does the scenario matter. Keep the trial count, the spread, and what limits the score with the number.
+An eval result is a score from trials of a task, such as a pass rate, or the precision and recall of a matcher on labeled pairs. Before the trials, write down the score that would change a decision, and the noise floor. List what else the score could be measuring, and rule out each one with evidence: errors, skipped or cached work, trials that never ran, an untuned side, noise, and a scenario too small to matter. Then ask the same of the trials: did every run do the task, does the gap hold across trials and models, and does the scenario matter. Keep the trial count, the spread, and what limits the score with the number.
