@@ -194,13 +194,14 @@ Then invoke:
 
 ### create-formal-verification-skill
 
-Finds the code where a bug costs the most and tests reach the least, and formally verifies one property of it with the tool that fits, such as TLA+.
+Finds the code where a bug costs the most and tests reach the least, and formally verifies one property of it with the tool that fits, such as Quint.
 Then it writes a project skill that lets the next agent check a change against that property.
-For a TLA+ model, the project skill reads each result with the `statechart` skill.
+For a bug where events happen in a bad order, it writes a Quint model and checks it with `quint run`, or with `quint verify` when Java 21 is installed.
+It includes the `quint-lang` reference from [Quint LLM Kit](https://github.com/quint-co/quint-llm-kit) (Apache-2.0).
 Based on the [Cursor pstack](https://github.com/cursor/plugins/tree/main/pstack) skill (MIT).
 
 ```bash
-npx skills@latest add VanTanev/skills --skill create-formal-verification-skill --skill maintain-formal-verification-skill --skill statechart
+npx skills@latest add VanTanev/skills --skill create-formal-verification-skill --skill maintain-formal-verification-skill
 ```
 
 Then invoke:
@@ -216,7 +217,7 @@ It reads the commits that touched verified code, updates the model or harness, r
 Based on the [Cursor pstack](https://github.com/cursor/plugins/tree/main/pstack) skill (MIT).
 
 ```bash
-npx skills@latest add VanTanev/skills --skill maintain-formal-verification-skill --skill statechart
+npx skills@latest add VanTanev/skills --skill maintain-formal-verification-skill
 ```
 
 Then invoke:
@@ -409,26 +410,6 @@ To start it yourself:
 /hillclimb
 ```
 
-### statechart
-
-Checks a TLA+ model with TLC and draws it as a Mermaid statechart, in the words of the person who reads it.
-The report gives the shortest path to each state that breaks a rule.
-It needs Node 22.18 or later, Bun, or Deno.
-The first run installs TLC and Java with [mise](https://mise.jdx.dev).
-Without mise, set `TLA2TOOLS` to the path of `tla2tools.jar` and `JAVA` to Java 11 or later.
-Based on the [Cursor pstack](https://github.com/cursor/plugins/tree/main/pstack) skill (MIT).
-
-```bash
-npx skills@latest add VanTanev/skills --skill statechart
-```
-
-The agent uses it when it checks a TLA+ model or reads its result.
-To start it yourself:
-
-```
-/statechart
-```
-
 ### writing-for-people
 
 The model-invoked form of `technical-writing`, for text that people read outside the chat: PR bodies in any repository, PR reviews and replies, issues, commit messages, Jira tickets, docs, design rationales, and the text of HTML pages that you publish, such as Artifacts.
@@ -456,3 +437,4 @@ To start it yourself:
 [MIT](LICENSE), except for the skills that have an `UPSTREAM.md` file.
 These skills are changed copies of skills from [cursor/plugins](https://github.com/cursor/plugins), under the MIT license in their own `LICENSE` file.
 Their `UPSTREAM.md` file records the upstream version and each change.
+The `references/quint-lang/` folders in `create-formal-verification-skill` and `maintain-formal-verification-skill` are copies from [Quint LLM Kit](https://github.com/quint-co/quint-llm-kit), under the Apache License 2.0 in their own `LICENSE` file.

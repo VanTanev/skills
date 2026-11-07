@@ -24,6 +24,7 @@ All changes let Claude Code, OpenCode, and Codex run the skill without the rest 
 - Step 1: the agent looks in `.agents/skills` and `.claude/skills`, where `create-formal-verification-skill` puts the generated skill and its symlink.
   A symlink and its target are one match, and the agent edits the target, as in `maintain-verification-skill`.
 - Step 1: "stop and point at `/create-formal-verification-skill`" becomes "stop and tell the user to type `/create-formal-verification-skill`", because only the user can start a user-invoked skill.
+- Edit scope: a new sentence tells the agent to read `references/quint-lang/quint-lang.md` before it edits a Quint model, because `create-formal-verification-skill` in this repo makes Quint the default.
 - `agents/openai.yaml`: added, with `policy.allow_implicit_invocation: false`, the Codex form of the same setting.
 - `LICENSE`: added as a byte copy of upstream `pstack/LICENSE` (MIT), to keep the license notice with the copy.
 
@@ -49,7 +50,12 @@ This is the exact diff of `SKILL.md` from the upstream base to this copy:
  
  ## Outcomes
  
-@@ -25,7 +27,7 @@
+@@ -21,11 +23,11 @@
+ 
+ ## Edit scope
+ 
+-Edit only the verification: models, harnesses, property files, and the verify skill itself. Never edit product code during a run, unless the user asks you to. When a property fails on the current code, do not weaken the property or the model to make it pass. Report the failure.
++Edit only the verification: models, harnesses, property files, and the verify skill itself. Never edit product code during a run, unless the user asks you to. When a property fails on the current code, do not weaken the property or the model to make it pass. Report the failure. If a check is a Quint model, read `references/quint-lang/quint-lang.md` in this skill's folder before you edit the model.
  
  ## Pass
  
@@ -60,6 +66,16 @@ This is the exact diff of `SKILL.md` from the upstream base to this copy:
  
 ```
 
+## Reference files
+
+`references/quint-lang/` is a byte copy of the `quint-lang` skill from Quint LLM Kit, with its license.
+
+- Repository: https://github.com/quint-co/quint-llm-kit, branch `main`.
+- Path: `quint-llm-kit-plugin/skills/quint-lang/`, which is `references/quint-lang/` here. Its `SKILL.md` is `quint-lang.md` here, so that no agent finds a second skill named `quint-lang` in this folder. Its links to `guidelines/` still work. The repository's `LICENSE` (Apache-2.0) is `references/quint-lang/LICENSE`. The repository has no `NOTICE` file.
+- Base: `cc75369f741af7d490936f82002c2d28e3b3d78d` (2026-07-01, "Merge quint skill suite updates onto main (#12)").
+- Checked against Quint 0.33.1: each CLI flag in the copy exists. The example modules fail to type-check only on imports of files that the copy does not include, template names, or an empty function body.
+  The copy does not say that `quint verify` needs Java 21, or that it takes `--backend=tlc`, so `SKILL.md` in this skill says both where it needs them.
+
 ## Update procedure
 
 Update this skill together with `create-formal-verification-skill`, because this skill maintains the skills that it generates.
@@ -67,7 +83,10 @@ Update this skill together with `create-formal-verification-skill`, because this
 1. In an up-to-date clone of https://github.com/cursor/plugins, run `git diff <checked-up-to>..origin/main -- pstack/skills/maintain-formal-verification-skill/ pstack/LICENSE`.
    If the diff is empty, set "Checked up to" to the `origin/main` SHA and date, and stop.
 2. Replace the files in this directory with the upstream files at `origin/main`, and copy `pstack/LICENSE` to `LICENSE`.
-   Keep `UPSTREAM.md` and `agents/openai.yaml`.
+   Keep `UPSTREAM.md`, `agents/openai.yaml`, and `references/`.
 3. Re-apply the local changes: in this directory, run `sed -n '/^```diff$/,/^```$/p' UPSTREAM.md | sed '1d;$d' | patch -p1`.
    If a hunk fails, apply that change by hand from the list above.
 4. In this file, replace the diff with the output of `diff -u --label a/SKILL.md --label b/SKILL.md <clone>/pstack/skills/maintain-formal-verification-skill/SKILL.md SKILL.md`, and set "Base" and "Checked up to" to the new upstream SHA and date.
+
+To update `references/quint-lang/`, copy `quint-llm-kit-plugin/skills/quint-lang/` and `LICENSE` from https://github.com/quint-co/quint-llm-kit at `main` into `references/quint-lang/` of both `create-formal-verification-skill` and `maintain-formal-verification-skill`.
+Rename its `SKILL.md` to `quint-lang.md`. Check each CLI flag in the copy against `quint <command> --help` of the newest Quint release, and set "Base" under "Reference files" in both `UPSTREAM.md` files.
