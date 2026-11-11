@@ -1,0 +1,5 @@
+interface:
+  display_name: "Cut review"
+  short_description: "Four models propose cuts and design simplifications; one verified review"
+policy:
+  allow_implicit_invocation: false

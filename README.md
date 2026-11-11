@@ -342,6 +342,22 @@ Then invoke, with the text or file to fix:
 /unslop <text or file>
 ```
 
+### cut-review
+
+Four models read a PR or diff and propose cuts and design simplifications against the next scope the code must serve, then the agent compiles one verified review as a page.
+Requires the `codex` CLI for two of the reviewers.
+On the `experimental` branch only.
+
+```bash
+npx skills@latest add https://github.com/VanTanev/skills/tree/experimental/skills/cut-review
+```
+
+Then invoke:
+
+```
+/cut-review
+```
+
 ## Model-invoked
 
 ### risk-first

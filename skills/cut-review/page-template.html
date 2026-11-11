@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>PR NNNN Cut Review</title>
+<style>
+:root {
+  --bg: #f7f7f5; --panel: #ffffff; --ink: #1d1d1b; --muted: #5f5f5a; --line: #e2e1dc;
+  --code: #f0efea; --accent: #2f5bd3; --add: #1f7a3a; --add-bg: #e6f4ea; --del: #b3261e; --del-bg: #fbe9e7;
+  --warn: #9a6200; --warn-bg: #fff4dc; --bad: #b3261e; --bad-bg: #fde8e6; --ok: #1f7a3a; --ok-bg: #e6f4ea;
+  --f: #8a4fd6; --o: #c4561d; --s: #1f7a8c; --a: #3f6fd8;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #161615; --panel: #1f1f1d; --ink: #ecebe6; --muted: #a8a79f; --line: #34332f;
+    --code: #2a2926; --accent: #8fb0ff; --add: #7fd39a; --add-bg: #1d3325; --del: #ff9b8f; --del-bg: #3a1f1c;
+    --warn: #f0c060; --warn-bg: #3a2f14; --bad: #ff9b8f; --bad-bg: #3a1f1c; --ok: #7fd39a; --ok-bg: #1d3325;
+    --f: #b892f0; --o: #f0905a; --s: #5fc3d4; --a: #8fb0ff;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #161615; --panel: #1f1f1d; --ink: #ecebe6; --muted: #a8a79f; --line: #34332f;
+  --code: #2a2926; --accent: #8fb0ff; --add: #7fd39a; --add-bg: #1d3325; --del: #ff9b8f; --del-bg: #3a1f1c;
+  --warn: #f0c060; --warn-bg: #3a2f14; --bad: #ff9b8f; --bad-bg: #3a1f1c; --ok: #7fd39a; --ok-bg: #1d3325;
+  --f: #b892f0; --o: #f0905a; --s: #5fc3d4; --a: #8fb0ff;
+}
+* { box-sizing: border-box; }
+html { font-size: 17px; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 1rem/1.55 system-ui, -apple-system, "Segoe UI", sans-serif; }
+main { max-width: 1400px; margin: 0 auto; padding: 28px 16px 64px; }
+h1 { font-size: 1.75rem; margin: 0 0 6px; }
+h2 { font-size: 1.3rem; margin: 40px 0 12px; padding-top: 8px; border-top: 1px solid var(--line); }
+h3 { font-size: 1.08rem; margin: 0 0 8px; }
+p { margin: 6px 0; }
+a { color: var(--accent); }
+.sub { color: var(--muted); }
+code, pre { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 0.9rem; }
+code { background: var(--code); padding: 1px 5px; border-radius: 4px; overflow-wrap: anywhere; }
+pre { background: var(--code); padding: 12px 14px; border-radius: 8px; overflow-x: auto; margin: 10px 0; line-height: 1.45; }
+pre .p { color: var(--add); background: var(--add-bg); display: block; }
+pre .m { color: var(--del); background: var(--del-bg); display: block; }
+pre .c { color: var(--muted); }
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; margin: 18px 0 8px; }
+.tile { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
+.tile b { display: block; font-size: 1.6rem; line-height: 1.2; }
+.tile span { color: var(--muted); }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; margin: 12px 0; }
+.card.bad { border-left: 5px solid var(--bad); }
+.card.warn { border-left: 5px solid var(--warn); }
+.card.q { border-left: 5px solid var(--accent); }
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(520px, 1fr)); gap: 12px; }
+@media (max-width: 600px) { .grid2 { grid-template-columns: 1fr; } }
+.chips { display: inline-flex; gap: 3px; vertical-align: middle; }
+.r { display: inline-block; min-width: 1.45em; text-align: center; font-size: 0.82rem; font-weight: 700; border-radius: 4px; padding: 0 4px; color: #fff; }
+.r.f { background: var(--f); } .r.o { background: var(--o); } .r.s { background: var(--s); } .r.a { background: var(--a); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .r { color: #111; } }
+:root[data-theme="dark"] .r { color: #111; }
+.tag { display: inline-block; font-size: 0.82rem; font-weight: 600; padding: 1px 8px; border-radius: 999px; margin-left: 6px; vertical-align: middle; }
+.tag.bad { background: var(--bad-bg); color: var(--bad); }
+.tag.warn { background: var(--warn-bg); color: var(--warn); }
+.tag.ok { background: var(--ok-bg); color: var(--ok); }
+.tag.info { background: var(--code); color: var(--muted); }
+.rec { margin-top: 8px; padding: 8px 12px; background: var(--ok-bg); border-radius: 6px; }
+.rec b { color: var(--ok); }
+.tw { overflow-x: auto; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; margin: 10px 0; }
+table { border-collapse: collapse; width: 100%; min-width: 760px; }
+th, td { text-align: left; vertical-align: top; padding: 8px 12px; border-bottom: 1px solid var(--line); }
+th { font-size: 0.88rem; color: var(--muted); font-weight: 600; background: var(--code); }
+tr.g td { background: var(--code); font-weight: 700; }
+td.n { white-space: nowrap; text-align: right; }
+dl.kv { display: grid; grid-template-columns: max-content 1fr; gap: 4px 14px; margin: 8px 0 0; }
+dl.kv dt { color: var(--muted); font-weight: 600; }
+dl.kv dd { margin: 0; }
+@media (max-width: 600px) { dl.kv { grid-template-columns: 1fr; } dl.kv dt { margin-top: 6px; } }
+ol.steps li { margin: 6px 0; }
+.legend { color: var(--muted); margin-top: 10px; }
+</style>
+</head>
+<body>
+<main>
+
+<h1>PR NNNN: cut and design review</h1>
+<p class="sub">PR URL at <code>sha8</code>. What the reviewers read, and the horizon. What you checked in the code. Date, Sofia time.</p>
+<p class="legend">Reviewers: <span class="r f">F</span> Fable (subagent, xhigh) · <span class="r o">O</span> Opus (subagent, xhigh) · <span class="r s">S</span> Codex gpt-6.1-sol (xhigh, read-only) · <span class="r a">A</span> Codex gpt-6-astra (xhigh, read-only).</p>
+
+<div class="tiles">
+  <div class="tile"><b>N defects</b><span>The worst one, in one sentence.</span></div>
+  <div class="tile"><b>≈ N lines</b><span>can go with no decision from you.</span></div>
+  <div class="tile"><b>≈ N more</b><span>can go if you agree to Q1–Qn.</span></div>
+  <div class="tile"><b>N of 4</b><span>reviewers proposed D1. Its one-line title.</span></div>
+</div>
+
+<h2>Defects</h2>
+<div class="card bad">
+<h3>B1. Title <span class="tag bad">confirmed</span> <span class="chips"><span class="r o">O</span></span></h3>
+<p>The rule and its source line. Then the wrong result.</p>
+<pre><span class="c">input</span>
+call(args)   file.ts:57   → result   <span class="c">wrong</span></pre>
+<pre><span class="c">file.ts, the fix</span>
+<span class="m">-  old line</span>
+<span class="p">+  new line</span></pre>
+</div>
+
+<h2>Decisions for you</h2>
+<div class="card q">
+<h3>Q1. Question? <span class="chips"><span class="r f">F</span><span class="r s">S</span></span></h3>
+<p>What it is, with file:line, and what the choice changes.</p>
+<dl class="kv">
+<dt>Option A <span class="chips"><span class="r f">F</span></span></dt><dd>Effect and lines.</dd>
+<dt>Option B <span class="chips"><span class="r s">S</span></span></dt><dd>Effect and lines.</dd>
+</dl>
+<p class="rec"><b>My recommendation: A.</b> The reason.</p>
+</div>
+
+<h2>Cut list: no decision needed</h2>
+<div class="tw"><table>
+<tr><th>#</th><th>What</th><th>Smell</th><th>Where</th><th>Evidence</th><th>Refactoring</th><th>Horizon</th><th>Cost of carry</th><th>Source</th><th>Lines</th></tr>
+<tr class="g"><td colspan="10">Group name</td></tr>
+<tr><td>C1</td><td>What goes</td><td>Speculative Generality</td><td><code>file.ts:12</code></td><td><code>rg -n name</code>: only tests</td><td>Remove Dead Code</td><td>Why the horizon does not need it</td><td>What later changes skip</td><td><span class="chips"><span class="r a">A</span><span class="r s">S</span></span> <span class="sub">A.C3, S.C1</span></td><td class="n">−20</td></tr>
+</table></div>
+
+<h2>Design changes, ranked</h2>
+<div class="card">
+<h3>D1. Title <span class="chips"><span class="r f">F</span><span class="r o">O</span><span class="r s">S</span><span class="r a">A</span></span> <span class="tag ok">horizon needs it</span></h3>
+<p>The problem, with file:line.</p>
+<pre>target shape: a call tree, file tree or diff</pre>
+<dl class="kv"><dt>Interface</dt><dd>What callers must know now → after</dd><dt>Owner</dt><dd>The one module that owns each rule</dd><dt>Tests</dt><dd>Tests at the new interface; tests that become redundant</dd><dt>Gain</dt><dd>Depth and locality, then lines and imports</dd><dt>Cost and risk</dt><dd>…</dd><dt>Horizon</dt><dd>…</dd><dt>Source</dt><dd>F.D1, O.D2, S.D1, A.D4</dd></dl>
+</div>
+
+<h2>Keep for the horizon</h2>
+<div class="tw"><table>
+<tr><th>#</th><th>What</th><th>Where</th><th>Horizon line that needs it</th><th>Source</th></tr>
+<tr><td>K1</td><td>…</td><td><code>file.ts:9</code></td><td>…</td><td>F.K1</td></tr>
+</table></div>
+
+<h2>Rejected</h2>
+<div class="tw"><table>
+<tr><th>Item</th><th>Source</th><th>Reason</th></tr>
+<tr><td>…</td><td>F.C7</td><td>Settled: …</td></tr>
+</table></div>
+
+<h2>Order of work</h2>
+<ol class="steps"><li>First step.</li></ol>
+
+</main>
+</body>
+</html>
