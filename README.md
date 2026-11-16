@@ -83,6 +83,7 @@ Then invoke:
 
 The agent finds what a top expert would do in the task that you do not ask for: their raw material, their methods and tools, and an outside check that the result is correct.
 Then it gives you your prompt again, rewritten to ask for that, and does not do the work.
+The rewritten prompt asks the agent to prototype each choice that an experiment can settle, and leaves product and preference choices to you.
 Based on the [Cursor pstack](https://github.com/cursor/plugins/tree/main/pstack) skill (MIT).
 
 ```bash
@@ -278,9 +279,8 @@ Then invoke:
 ### why
 
 Finds why code has its current shape.
-One subagent searches git and the PRs, and one subagent searches each other source that the agent can reach through MCP: tickets, docs, chat, monitoring, error tracking, and analytics.
-The answer keeps what the sources say apart from what the agent infers, and lists what it could not find.
-Your agent must be able to start subagents.
+The agent reads the commits and PR discussions that made the code and each later change, and other sources when that trail is thin.
+The answer cites what the authors wrote, marks the agent's own inferences, and says what the record does not answer.
 Based on the [Cursor pstack](https://github.com/cursor/plugins/tree/main/pstack) skill (MIT).
 
 ```bash

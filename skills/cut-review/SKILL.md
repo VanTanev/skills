@@ -51,12 +51,12 @@ Default roster, all at `xhigh`. Arguments from the user replace it.
 | --- | --- | --- |
 | F | Fable | Agent tool, `model: fable`, `effort: xhigh`, background |
 | O | Opus | Agent tool, `model: opus`, `effort: xhigh`, background |
-| S | gpt-6.1-sol | `codex exec -m gpt-6.1-sol -c model_reasoning_effort=xhigh -s read-only --ephemeral -C <snapshot> -o <scratchpad>/cut-review/sol.md - < <brief>`, background Bash |
-| A | gpt-6-astra | the same command with `-m gpt-6-astra` and `astra.md` |
+| S | gpt-6.1-sol | In T3 Code, `delegate_task` with provider `codex`, model `gpt-6.1-sol`, `reasoningEffort: xhigh` and `role: "review"`, with the brief, the snapshot path and the report path `<scratchpad>/cut-review/sol.md` in the task. Elsewhere, `codex exec -m gpt-6.1-sol -c model_reasoning_effort=xhigh -s read-only --ephemeral -C <snapshot> -o <scratchpad>/cut-review/sol.md - < <brief>`, background Bash |
+| A | gpt-6-astra | the same with model `gpt-6-astra` and `astra.md` |
 
 Start all four in one response.
 Then tell the user, in one line per reviewer, what runs and where its report goes.
-The Codex reviewers are background shell commands, not agents, so the user does not see them in the agent list.
+Outside T3 Code, the Codex reviewers are background shell commands, not agents, so the user does not see them in the agent list.
 
 Done when: four reviewers run, and the user has the four lines.
 

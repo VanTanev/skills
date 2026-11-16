@@ -8,7 +8,7 @@ This skill is a vendored copy of `maintain-formal-verification-skill` from the C
 - Path: `pstack/skills/maintain-formal-verification-skill/`.
 - Base: `7b353f78f6ec193bdbe48ed8059444eb09b6878e` (2026-10-19, "pstack: add maintain-formal-verification-skill (#716)").
   The files here are equal to upstream at this commit, except for the local changes below.
-- Checked up to: `ae5650febf4320793844c12c4adaa937f417f8da` (upstream `main`, 2026-10-31).
+- Checked up to: `bf0c7cd80abdbf7fe47b634978a7d1b4071f71a7` (upstream `main`, 2026-11-14).
   Upstream has no changes to this directory between the base and this commit.
 
 `VanTanev/skills` added the copy on 2026-11-03.

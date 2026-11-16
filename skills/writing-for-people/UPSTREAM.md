@@ -12,7 +12,7 @@ It is the model-invoked form of `technical-writing` in this repo: the agent star
 - Base of `SKILL.md`: `00b14f1df36b32a8dd1529324a3a459f6563b127` (2026-10-10, "refactor(pstack): distill skill prompts to cut tokens (#538)").
 - Base of `references/unslop.md`: `bc697d0a5a163cec979e362b601e36f5616083fd` (2026-10-11, "fix(pstack): drop "Must always apply." from unslop description (#572)").
   The files here are equal to upstream at these commits, except for the local changes below.
-- Checked up to: `9580c23696ac8d7abed0c166f2f9918800afb819` (upstream `main`, 2026-10-23).
+- Checked up to: `bf0c7cd80abdbf7fe47b634978a7d1b4071f71a7` (upstream `main`, 2026-11-14).
 
 ## Local changes
 

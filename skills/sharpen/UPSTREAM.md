@@ -6,14 +6,14 @@ This skill is a vendored copy of `sharpen` from the Cursor pstack plugin.
 
 - Repository: https://github.com/cursor/plugins, branch `main`.
 - Path: `pstack/skills/sharpen/`.
-- Base: `88d47514b82e7c44f00f2b2a72ff6dd12158038c` (2026-10-19, "pstack: restore /sharpen to the original prompt, return only the rewrite (#729)").
+- Base: `bf0c7cd80abdbf7fe47b634978a7d1b4071f71a7` (2026-11-14, "feat(pstack): new default models, one-file why and how, statechart fixes, sharpen and reflect text (#1236)").
   The files here are equal to upstream at this commit, except for the local changes below.
-- Checked up to: `ae5650febf4320793844c12c4adaa937f417f8da` (upstream `main`, 2026-10-31).
-  Upstream has no changes to this directory between the base and this commit.
+- Checked up to: `bf0c7cd80abdbf7fe47b634978a7d1b4071f71a7` (upstream `main`, 2026-11-14).
 
 `VanTanev/skills` added the copy on 2026-10-14.
 The skill was updated to upstream #729 on 2026-11-03.
 After upstream #712 and #729, the skill gives back a rewritten prompt and does not do the task.
+The skill was updated to upstream #1236 on 2026-11-16. Since then, the rewritten prompt asks the agent to prototype each choice that an experiment can settle.
 
 ## Local changes
 

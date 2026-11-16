@@ -9,7 +9,7 @@ This skill is a vendored copy of `benchmark-checklist` from the Cursor pstack pl
 - Base of `benchmark-checklist`: `00b14f1df36b32a8dd1529324a3a459f6563b127` (2026-10-10, "refactor(pstack): distill skill prompts to cut tokens (#538)").
   The files here are equal to upstream `benchmark-checklist` at this commit, except for the local changes below.
 - Base of `principle-explain-the-number`: `ab1f702ce8e8b6557edb56b09f52cde8bfb83f17` (2026-10-27, "feat(pstack): port recent skill updates (#986)").
-- Checked up to: `6b0300214a09fd6029cfb7077043125758cd1fd2` (upstream `main`, 2026-11-06).
+- Checked up to: `bf0c7cd80abdbf7fe47b634978a7d1b4071f71a7` (upstream `main`, 2026-11-14).
   Upstream has no changes to either file between its base and this commit.
 
 `VanTanev/skills` added the copy on 2026-10-14.

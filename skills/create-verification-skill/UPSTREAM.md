@@ -8,7 +8,7 @@ This skill is a vendored copy of `create-verification-skill` from the Cursor pst
 - Path: `pstack/skills/create-verification-skill/`.
 - Base: `c49b37a2c0e7bede60a71ad7322e3f12c337a3da` (2026-10-12, "fix(pstack): create-verification-skill readiness means the app is usable (#573)").
   The files here are equal to upstream at this commit, except for the local changes below.
-- Checked up to: `79afd75d5bd51383fbb526b72f36db03180b8301` (upstream `main`, 2026-10-14).
+- Checked up to: `bf0c7cd80abdbf7fe47b634978a7d1b4071f71a7` (upstream `main`, 2026-11-14).
   Upstream has no changes to this directory between the base and this commit.
 
 The port recorded no upstream SHA, so the first base was `4483dcd` (#178), the last upstream commit that changed this directory before the port.

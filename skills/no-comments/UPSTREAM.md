@@ -9,9 +9,10 @@ This skill is a vendored copy of `no-comments` and the Comment Sicko agent from 
   Here the agent is `references/comment-sicko.md`.
 - Base: `99559f2f52047978602ef365589275831e76af07` (2026-08-02, "pstack: add bro, babysit/shipping/orchestrate/worktree-cleanup, and catch-up ports (0.14.0) (#187)").
   The files here are equal to upstream at this commit, except for the local changes below.
-- Checked up to: `79afd75d5bd51383fbb526b72f36db03180b8301` (upstream `main`, 2026-10-14).
-  Upstream has three changes after the base.
-  This copy has #613 in a changed form (see "Local changes"), and does not apply the other two (see "Upstream changes not applied").
+- Checked up to: `bf0c7cd80abdbf7fe47b634978a7d1b4071f71a7` (upstream `main`, 2026-11-14).
+  Upstream has four changes after the base.
+  This copy has #613 in a changed form (see "Local changes"), and does not apply #329 and #486 (see "Upstream changes not applied").
+  #1236 replaces `/how` with a trace of the symbol, and this copy already replaces `/how` and `/why` with its `## Trace` section.
 
 The copy recorded no upstream SHA.
 Its text has "Authoring agents defend comments.", which upstream #329 removed, so the base is the last upstream commit before #329 that changes these files.

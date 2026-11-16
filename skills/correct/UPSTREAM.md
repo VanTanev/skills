@@ -10,7 +10,7 @@ This skill is a vendored copy of `correct` from the Cursor pstack plugin, with t
 - Base of `SKILL.md`: `e5136d82418d2db3165ea1050d17577cd618cc05` (2026-10-15, "pstack: restate four overspecified principles as reasoning, not rules (#633)").
 - Base of `references/design-red-flags.md`: `a58628271271837ef5f386adca29c0812683a19a` (2026-10-03, "feat(pstack): make /architect designs resist agent mistakes (#495)").
   The files here are equal to upstream at these commits, except for the local changes below.
-- Checked up to: `ae5650febf4320793844c12c4adaa937f417f8da` (upstream `main`, 2026-10-31).
+- Checked up to: `bf0c7cd80abdbf7fe47b634978a7d1b4071f71a7` (upstream `main`, 2026-11-14).
   Upstream has no changes to either file between its base and this commit.
 
 `VanTanev/skills` added the copy on 2026-10-14.
