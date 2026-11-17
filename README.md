@@ -403,7 +403,7 @@ Based on the [Cursor pstack](https://github.com/cursor/plugins/tree/main/pstack)
 npx skills@latest add VanTanev/skills --skill benchmark-checklist
 ```
 
-The agent uses it when it runs a benchmark or reports a measured number.
+The agent uses it when it runs a benchmark, reports a measured number, or puts one in a report, a page, a video script or a PR body.
 To start it yourself:
 
 ```
