@@ -21,7 +21,8 @@ All changes let Claude Code, OpenCode, and Codex use the skill without the rest 
 - Invocation: model-invoked.
   `disable-model-invocation: true` is removed, so the agent starts the skill when it reports a measured number.
   The upstream description already says when to use the skill.
-- Description and scope: "a perf measurement" becomes "a measured number", and eval results are added to the triggers.
+- Description and scope: "a perf measurement" becomes "a number", and eval results are added to the triggers.
+  The description also fires when a measured number goes into a report, a page, a video script or a PR body, because numbers reached team documents with no check ([control-plane#71](https://github.com/VanTanev/control-plane/issues/71)).
   The first paragraph points to the new "Eval results" section.
 - Eval results: a new section, made from the `principle-explain-the-number` text for numbers that are not performance numbers.
   It keeps that skill's list of other things a number can measure, its three questions for eval trials, and its rule to keep the evidence with the number.
@@ -44,7 +45,7 @@ This is the exact diff of `SKILL.md` from upstream `benchmark-checklist` at the 
  name: benchmark-checklist
 -description: "Vet a perf measurement (limiter, tuning, limits, errors, repeatability, relevance, and whether the work happened) before you report or act on it. Use when you run a benchmark or report a speedup or regression you measured."
 -disable-model-invocation: true
-+description: "Vet a measured number (limiter, tuning, limits, errors, repeatability, relevance, and whether the work happened) before you report or act on it. Use before you run a benchmark or an eval, and when you report a speedup, regression, or eval result you measured."
++description: "Vet a number (limiter, tuning, limits, errors, repeatability, relevance, and whether the work happened) before you report or act on it. Use before you run a benchmark or an eval, when you report a speedup, regression or eval result, and when you put a measured number in a report, a page, a video script or a PR body."
  ---
  
  # Benchmark checklist

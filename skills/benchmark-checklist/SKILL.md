@@ -1,6 +1,6 @@
 ---
 name: benchmark-checklist
-description: "Vet a measured number (limiter, tuning, limits, errors, repeatability, relevance, and whether the work happened) before you report or act on it. Use before you run a benchmark or an eval, and when you report a speedup, regression, or eval result you measured."
+description: "Vet a number (limiter, tuning, limits, errors, repeatability, relevance, and whether the work happened) before you report or act on it. Use before you run a benchmark or an eval, when you report a speedup, regression or eval result, and when you put a measured number in a report, a page, a video script or a PR body."
 ---
 
 # Benchmark checklist
