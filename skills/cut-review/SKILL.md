@@ -45,6 +45,7 @@ Make one copy per reviewer that changes only the report name and the output line
 
 ## 4. Start the reviewers
 
+Read `~/.agents/docs/other-models.md` first: it names the provider, model, effort and command for each model.
 Default roster: Fable at `high`, the others at `xhigh`. Arguments from the user replace it.
 
 | Letter | Reviewer | How |

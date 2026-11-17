@@ -28,6 +28,8 @@ Skip Phase A only when the work is genuinely greenfield with no surrounding syst
 
 ## Phase B: Sketch
 
+Read `~/.agents/docs/other-models.md` first: it names the provider, model, effort and command for each model.
+
 Run the **arena** skill in `{SKILLBASE}/references/arena.md` with the design-sketch task and the Phase A grounding artifacts. Pass `references/runner-prompt.md` as each runner's prompt.
 
 Design it twice. Require at least two structurally distinct candidates before synthesis, even when the first looks sufficient. Whole-shape alternatives, not point fixes inside one shape.
