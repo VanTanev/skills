@@ -52,8 +52,8 @@ Default roster: Fable at `high`, the others at `xhigh`. Arguments from the user 
 | --- | --- | --- |
 | F | Fable | Agent tool, `model: fable`, `effort: high`, background |
 | O | Opus | Agent tool, `model: opus`, `effort: xhigh`, background |
-| S | gpt-6.1-sol | In T3 Code, `delegate_task` with provider `codex`, model `gpt-6.1-sol`, `reasoningEffort: xhigh` and `role: "review"`, with the brief, the snapshot path and the report path `<scratchpad>/cut-review/sol.md` in the task. Elsewhere, `codex exec -m gpt-6.1-sol -c model_reasoning_effort=xhigh -s read-only --ephemeral -C <snapshot> -o <scratchpad>/cut-review/sol.md - < <brief>`, background Bash |
-| A | gpt-6-astra | the same with model `gpt-6-astra` and `astra.md` |
+| S | gpt-6.2-sol | In T3 Code, `delegate_task` with provider `codex`, model `gpt-6.2-sol`, `reasoningEffort: xhigh` and `role: "review"`, with the brief, the snapshot path and the report path `<scratchpad>/cut-review/sol.md` in the task. Elsewhere, `codex exec -m gpt-6.2-sol -c model_reasoning_effort=xhigh -s read-only --ephemeral -C <snapshot> -o <scratchpad>/cut-review/sol.md - < <brief>`, background Bash |
+| A | gpt-6.2-astra | the same with model `gpt-6.2-astra` and `astra.md` |
 
 Start all four in one response.
 Then tell the user, in one line per reviewer, what runs and where its report goes.
