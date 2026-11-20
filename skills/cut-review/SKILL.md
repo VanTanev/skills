@@ -46,13 +46,13 @@ Make one copy per reviewer that changes only the report name and the output line
 ## 4. Start the reviewers
 
 Read `~/.agents/docs/other-models.md` first: it names the provider, model, effort and command for each model.
-Default roster: Fable at `high`, the others at `xhigh`. Arguments from the user replace it.
+Default roster: all four at `high`. Arguments from the user replace it.
 
 | Letter | Reviewer | How |
 | --- | --- | --- |
 | F | Fable | Agent tool, `model: fable`, `effort: high`, background |
-| O | Opus | Agent tool, `model: opus`, `effort: xhigh`, background |
-| S | gpt-6.2-sol | In T3 Code, `delegate_task` with provider `codex`, model `gpt-6.2-sol`, `reasoningEffort: xhigh` and `role: "review"`, with the brief, the snapshot path and the report path `<scratchpad>/cut-review/sol.md` in the task. Elsewhere, `codex exec -m gpt-6.2-sol -c model_reasoning_effort=xhigh -s read-only --ephemeral -C <snapshot> -o <scratchpad>/cut-review/sol.md - < <brief>`, background Bash |
+| O | Opus | Agent tool, `model: opus`, `effort: high`, background |
+| S | gpt-6.2-sol | In T3 Code, `delegate_task` with provider `codex`, model `gpt-6.2-sol`, `reasoningEffort: high` and `role: "review"`, with the brief, the snapshot path and the report path `<scratchpad>/cut-review/sol.md` in the task. Elsewhere, `codex exec -m gpt-6.2-sol -c model_reasoning_effort=high -s read-only --ephemeral -C <snapshot> -o <scratchpad>/cut-review/sol.md - < <brief>`, background Bash |
 | A | gpt-6.2-astra | the same with model `gpt-6.2-astra` and `astra.md` |
 
 Start all four in one response.
