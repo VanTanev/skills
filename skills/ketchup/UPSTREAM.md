@@ -8,7 +8,7 @@ This skill is a vendored copy of `ketchup` from the Cursor pstack plugin.
 - Path: `pstack/skills/ketchup/`.
 - Base: `bc1443790cc980d0ea857663260a831299884508` (2026-10-17, "fix(pstack): say outright that ketchup never cuts items to stay under a word count (#708)").
   The files here are equal to upstream at this commit, except for the local changes below.
-- Checked up to: `bf0c7cd80abdbf7fe47b634978a7d1b4071f71a7` (upstream `main`, 2026-11-14).
+- Checked up to: `792440e8a560a4a3f63748cdee70491ecd412982` (upstream `main`, 2026-11-20).
   Upstream has no changes to this directory between the base and this commit.
 
 `VanTanev/skills` added the copy on 2026-10-14.

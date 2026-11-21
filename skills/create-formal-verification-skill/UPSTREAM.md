@@ -8,8 +8,9 @@ This skill is a vendored copy of `create-formal-verification-skill` from the Cur
 - Path: `pstack/skills/create-formal-verification-skill/`.
 - Base: `34b1b7c96f09f81a21a6c78f65b7833f7dcb5b24` (2026-10-26, "feat(pstack): port the statechart compiler (#977)").
   The files here are equal to upstream at this commit, except for the local changes below.
-- Checked up to: `bf0c7cd80abdbf7fe47b634978a7d1b4071f71a7` (upstream `main`, 2026-11-14).
+- Checked up to: `792440e8a560a4a3f63748cdee70491ecd412982` (upstream `main`, 2026-11-20).
   Upstream has no changes to this directory between the base and this commit.
+  Upstream #1249 and #1292 change the `statechart` skill, which this copy does not name.
 
 `VanTanev/skills` added the copy on 2026-11-03.
 

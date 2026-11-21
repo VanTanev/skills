@@ -9,12 +9,13 @@ This skill is a vendored copy of `blast-radius` from the Cursor pstack plugin, w
   - `pstack/skills/blast-radius/SKILL.md`, which is `SKILL.md` here.
   - `pstack/skills/unslop/SKILL.md`, which is `references/unslop.md` here.
 - Base of `SKILL.md`: `bf0c7cd80abdbf7fe47b634978a7d1b4071f71a7` (2026-11-14, "feat(pstack): new default models, one-file why and how, statechart fixes, sharpen and reflect text (#1236)").
-- Base of `references/unslop.md`: `bf0c7cd80abdbf7fe47b634978a7d1b4071f71a7` (2026-11-14, "feat(pstack): new default models, one-file why and how, statechart fixes, sharpen and reflect text (#1236)").
+- Base of `references/unslop.md`: `2f87c854fe3e2fcda44ca86b46ede35aad3c46b7` (2026-11-16, "feat(pstack): shorter skill texts, worker.md, and Opus-first routing capped at xhigh (#1249)").
   The files here are equal to upstream at these commits, except for the local changes below.
-- Checked up to: `bf0c7cd80abdbf7fe47b634978a7d1b4071f71a7` (upstream `main`, 2026-11-14).
+- Checked up to: `792440e8a560a4a3f63748cdee70491ecd412982` (upstream `main`, 2026-11-20).
   Upstream has no changes to either file between its base and this commit.
 
 `VanTanev/skills` added the copy on 2026-10-14.
+`references/unslop.md` was updated to the shorter text of upstream #1249 on 2026-11-21.
 
 ## Local changes
 
@@ -70,7 +71,7 @@ This is the exact diff of `SKILL.md` from the upstream base to this copy.
  4. Be honest about each risk. Give it a real chance of happening and a real cost if it does. Keep the risks you confirmed. List the ones you checked and cleared separately. Cite a real `file:line`, a search that finds nothing is still an answer, and never make up a caller or an API.
  5. Prove the one fact. Write a script or test that runs the real code, run it, and paste what happened.
 -6. For a big or wide change, run it as an `arena`. Ask more than one model the same question and merge the answers. Different models catch different real bugs.
-+6. For a big or wide change, ask a model of another family the same question and merge the answers. In T3 Code, start it with `delegate_task`, with `role: "review"` and a task that says not to edit. Elsewhere, run its CLI read-only: `codex exec -s read-only` if you are a Claude model, `claude -p --permission-mode plan` otherwise. Different models catch different real bugs.
++6. For a big or wide change, ask a model of another family the same question and merge the answers. Read `~/.agents/docs/other-models.md` first: it names the provider, model, effort and command for each model. In T3 Code, start it with `delegate_task`, with `role: "review"` and a task that says not to edit. Elsewhere, run its CLI read-only: `codex exec -s read-only` if you are a Claude model, `claude -p --permission-mode plan` otherwise. Different models catch different real bugs.
  
  ## What to hand back
  

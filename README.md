@@ -246,8 +246,9 @@ Then invoke:
 
 ### architect
 
-Sketches types, signatures, and module boundaries before code, with competing candidate designs on two model families, then implements against the chosen sketch.
-Requires the CLI of the other model family: `codex` for a Claude agent, or `claude` for other agents.
+Traces every system that a change touches, then sketches two shapes before code and picks the one with one owner for each piece of state and the least for callers to know.
+For a large or contested design, it runs an arena of candidate designs on two model families.
+The arena requires the CLI of the other model family: `codex` for a Claude agent, or `claude` for other agents.
 Based on the [Cursor pstack](https://github.com/cursor/plugins/tree/main/pstack) skill (MIT).
 
 ```bash
