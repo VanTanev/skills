@@ -9,10 +9,10 @@ It is the model-invoked form of `technical-writing` in this repo: the agent star
 - Paths:
   - `pstack/skills/technical-writing/SKILL.md`, which is `SKILL.md` here.
   - `pstack/skills/unslop/SKILL.md`, which is `references/unslop.md` here.
-- Base of `SKILL.md`: `00b14f1df36b32a8dd1529324a3a459f6563b127` (2026-10-10, "refactor(pstack): distill skill prompts to cut tokens (#538)").
-- Base of `references/unslop.md`: `bc697d0a5a163cec979e362b601e36f5616083fd` (2026-10-11, "fix(pstack): drop "Must always apply." from unslop description (#572)").
+- Base of `SKILL.md`: `2f87c854fe3e2fcda44ca86b46ede35aad3c46b7` (2026-11-16, "feat(pstack): shorter skill texts, worker.md, and Opus-first routing capped at xhigh (#1249)").
+- Base of `references/unslop.md`: `2f87c854fe3e2fcda44ca86b46ede35aad3c46b7` (2026-11-16, "feat(pstack): shorter skill texts, worker.md, and Opus-first routing capped at xhigh (#1249)").
   The files here are equal to upstream at these commits, except for the local changes below.
-- Checked up to: `bf0c7cd80abdbf7fe47b634978a7d1b4071f71a7` (upstream `main`, 2026-11-14).
+- Checked up to: `792440e8a560a4a3f63748cdee70491ecd412982` (upstream `main`, 2026-11-20).
 
 ## Local changes
 
@@ -56,12 +56,12 @@ This is the exact diff of `SKILL.md` from the upstream base to this copy.
 -# Technical writing
 +# Writing for people
  
--Write so a tired engineer understands on the first read. Apply all four layers.
-+Write so a tired engineer understands on the first read. Apply all four layers, then run the check at the end.
+-Write so a tired engineer understands on the first read.
++Write so a tired engineer understands on the first read. Run the check at the end.
  
- Three rules sit above the layers:
- 
-@@ -90,10 +89,22 @@
+ - Cut every word that does no work.
+ - Use the short, everyday word: "use", not "utilize".
+@@ -64,7 +63,19 @@
  
  ## Voice and repo specifics
  
@@ -85,9 +85,6 @@ This is the exact diff of `SKILL.md` from the upstream base to this copy.
 +5. Run the script again. The check is done when it exits 0 and you applied or kept each suggestion on purpose.
 +
 +The script finds patterns only. The four layers still need your judgement.
- 
- ## Worked example
- 
 ```
 
 ## Update procedure

@@ -12,7 +12,7 @@ This skill is a vendored copy of `maintain-verification-skill` from the Cursor p
   We take only its `SKILL.md`: the coverage table, derived outcomes, and multi-directory Locate.
   We do not take its `poteto-mode` lint script and playbook edit, because this repo does not vendor `poteto-mode`.
   The files here are equal to `SKILL.md` at `f4588ce`, except for the local changes below.
-- Checked up to: `bf0c7cd80abdbf7fe47b634978a7d1b4071f71a7` (upstream `main`, 2026-11-14).
+- Checked up to: `792440e8a560a4a3f63748cdee70491ecd412982` (upstream `main`, 2026-11-20).
   Upstream `main` has no changes to this directory between the base and this commit, and PR 334 has the same head.
 
 The port recorded no upstream SHA, so the base is the last upstream commit that changes either verification skill.

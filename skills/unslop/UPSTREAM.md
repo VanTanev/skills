@@ -6,12 +6,13 @@ This skill is a vendored copy of `unslop` from the Cursor pstack plugin.
 
 - Repository: https://github.com/cursor/plugins, branch `main`.
 - Path: `pstack/skills/unslop/`.
-- Base: `bc697d0a5a163cec979e362b601e36f5616083fd` (2026-10-11, "fix(pstack): drop "Must always apply." from unslop description (#572)").
+- Base: `2f87c854fe3e2fcda44ca86b46ede35aad3c46b7` (2026-11-16, "feat(pstack): shorter skill texts, worker.md, and Opus-first routing capped at xhigh (#1249)").
   The files here are equal to upstream at this commit, except for the local changes below.
-- Checked up to: `bf0c7cd80abdbf7fe47b634978a7d1b4071f71a7` (upstream `main`, 2026-11-14).
+- Checked up to: `792440e8a560a4a3f63748cdee70491ecd412982` (upstream `main`, 2026-11-20).
   Upstream has no changes to this directory between the base and this commit.
 
 `VanTanev/skills` added the copy on 2026-10-14.
+It was updated to the shorter text of upstream #1249 on 2026-11-21.
 
 ## Local changes
 

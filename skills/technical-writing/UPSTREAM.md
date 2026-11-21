@@ -8,13 +8,14 @@ This skill is a vendored copy of `technical-writing` from the Cursor pstack plug
 - Paths:
   - `pstack/skills/technical-writing/SKILL.md`, which is `SKILL.md` here.
   - `pstack/skills/unslop/SKILL.md`, which is `references/unslop.md` here.
-- Base of `SKILL.md`: `00b14f1df36b32a8dd1529324a3a459f6563b127` (2026-10-10, "refactor(pstack): distill skill prompts to cut tokens (#538)").
-- Base of `references/unslop.md`: `bc697d0a5a163cec979e362b601e36f5616083fd` (2026-10-11, "fix(pstack): drop "Must always apply." from unslop description (#572)").
+- Base of `SKILL.md`: `2f87c854fe3e2fcda44ca86b46ede35aad3c46b7` (2026-11-16, "feat(pstack): shorter skill texts, worker.md, and Opus-first routing capped at xhigh (#1249)").
+- Base of `references/unslop.md`: `2f87c854fe3e2fcda44ca86b46ede35aad3c46b7` (2026-11-16, "feat(pstack): shorter skill texts, worker.md, and Opus-first routing capped at xhigh (#1249)").
   The files here are equal to upstream at these commits, except for the local changes below.
-- Checked up to: `bf0c7cd80abdbf7fe47b634978a7d1b4071f71a7` (upstream `main`, 2026-11-14).
+- Checked up to: `792440e8a560a4a3f63748cdee70491ecd412982` (upstream `main`, 2026-11-20).
   Upstream has no changes to either file between its base and this commit.
 
 `VanTanev/skills` added the copy on 2026-10-24.
+It was updated to the shorter texts of upstream #1249 on 2026-11-21.
 
 ## Local changes
 
@@ -26,7 +27,6 @@ All changes let Claude Code, OpenCode, and Codex run the skill without the rest 
 - `unslop`: "Apply the **unslop** skill to every doc this skill touches" becomes "Apply the **unslop** skill in `references/unslop.md` in this skill's folder to every doc this skill touches".
   `unslop` is user-invoked, and another skill cannot start it, so `references/unslop.md` is a byte copy of the upstream skill, with its frontmatter.
   The path is relative to the skill's folder, because Claude Code does not replace a `{SKILLBASE}` placeholder.
-  The abstract-metaphor rule that the skill names is rule 26 of `unslop`.
 - `swarm`: "swarm logs" becomes "agent logs", because this repo does not vendor `swarm`.
 - Indentation: "Indent code snippets with tabs" becomes "Indent code snippets the way the repo indents its code", because tabs are the rule of the pstack repo, not of every repo.
 - PR reviews: a new bullet in "Voice and repo specifics" says that a review body states the verdict, the items that block, and answers to the author's questions, and that every other point goes into an inline comment.
@@ -50,7 +50,7 @@ This is the exact diff of `SKILL.md` from the upstream base to this copy.
  ---
  
  # Technical writing
-@@ -90,10 +92,11 @@
+@@ -64,7 +66,8 @@
  
  ## Voice and repo specifics
  
@@ -62,9 +62,6 @@ This is the exact diff of `SKILL.md` from the upstream base to this copy.
  - Product UI strings are not documentation. Use your product's copy guidelines for those.
 -- Indent code snippets with tabs. Write real paths. Make every count or tree claim true at the commit that lands it, and include the command that regenerates it.
 +- Indent code snippets the way the repo indents its code. Write real paths. Make every count or tree claim true at the commit that lands it, and include the command that regenerates it.
- 
- ## Worked example
- 
 ```
 
 ## Update procedure

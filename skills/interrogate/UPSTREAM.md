@@ -8,10 +8,11 @@ This skill is a vendored copy of `interrogate` from the Cursor pstack plugin.
 - Path: `pstack/skills/interrogate/`.
 - Base: `bf0c7cd80abdbf7fe47b634978a7d1b4071f71a7` (2026-11-14, "feat(pstack): new default models, one-file why and how, statechart fixes, sharpen and reflect text (#1236)").
   The files here are equal to upstream at this commit, except for the local changes below.
-- Checked up to: `bf0c7cd80abdbf7fe47b634978a7d1b4071f71a7` (upstream `main`, 2026-11-14).
+- Checked up to: `792440e8a560a4a3f63748cdee70491ecd412982` (upstream `main`, 2026-11-20).
   Upstream has no changes to this directory between the base and this commit.
 - Inlined rules come from `pstack/skills/arena/SKILL.md` at `ab1f702ce8e8b6557edb56b09f52cde8bfb83f17` (2026-10-27) and `pstack/skills/in-your-own-words/SKILL.md` at `dbf49813a39c1a5389c5e28cb8e4c1c2379e2454` (2026-10-13, "refactor(pstack): reword /in-your-own-words around goals and the problem (#606)").
   Upstream #1236 changes only the default models of `arena`, which this copy does not inline.
+  Upstream #1249, #1283, and #1284 change only the runner models of Phase A step 3 and the cross-judge of Phase C, which this copy replaces with its own adversaries and does not run.
 
 `VanTanev/skills` added the copy on 2026-10-14.
 Upstream deleted `references/` in #986, and so does this copy.
@@ -75,7 +76,7 @@ This is the exact diff of `SKILL.md` from the upstream base to this copy:
 +By default there are two adversaries, on two model families. Start each subagent with a fresh context window.
 +
 +- **Adversary A** is a subagent on your own model. Set its effort one step below your own. If you do not know your effort, do not set it.
-+- **Adversary B** runs on a different model family. In T3 Code, start it with `delegate_task` on that family's model, with the path of its worktree in the task. Elsewhere, run that family's CLI with its prompt on stdin. If you are a Claude model, run `codex exec -s workspace-write -C <worktree> -o <output-file> -`. Otherwise, run `claude -p --permission-mode auto` in its worktree, and send its output to a file. The CLI uses its own configured model. If neither way starts Adversary B, run Adversary B as a second subagent on your own model, and say in the output that the review has one model family.
++- **Adversary B** runs on a different model family. Read `~/.agents/docs/other-models.md` first: it names the provider, model, effort and command for each model. In T3 Code, start it with `delegate_task` on that family's model, with the path of its worktree in the task. Elsewhere, run that family's CLI with its prompt on stdin. If you are a Claude model, run `codex exec -s workspace-write -C <worktree> -o <output-file> -`. Otherwise, run `claude -p --permission-mode auto` in its worktree, and send its output to a file. The CLI uses its own configured model. If neither way starts Adversary B, run Adversary B as a second subagent on your own model, and say in the output that the review has one model family.
 +- If the user names more models, add one adversary for each, labeled Adversary C, D, and so on.
 +
 +Give each adversary its own git worktree, so no two adversaries write to the same file. Copy the scope's uncommitted changes into each worktree. Start all adversaries at the same time, in the background. Give each adversary the scope, the intent, the path of its worktree, and this brief:

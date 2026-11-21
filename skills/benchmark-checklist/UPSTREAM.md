@@ -6,13 +6,14 @@ This skill is a vendored copy of `benchmark-checklist` from the Cursor pstack pl
 
 - Repository: https://github.com/cursor/plugins, branch `main`.
 - Paths: `pstack/skills/benchmark-checklist/SKILL.md`, and `pstack/skills/principle-explain-the-number/SKILL.md` for the "Eval results" section and the decision rule.
-- Base of `benchmark-checklist`: `00b14f1df36b32a8dd1529324a3a459f6563b127` (2026-10-10, "refactor(pstack): distill skill prompts to cut tokens (#538)").
+- Base of `benchmark-checklist`: `2f87c854fe3e2fcda44ca86b46ede35aad3c46b7` (2026-11-16, "feat(pstack): shorter skill texts, worker.md, and Opus-first routing capped at xhigh (#1249)").
   The files here are equal to upstream `benchmark-checklist` at this commit, except for the local changes below.
-- Base of `principle-explain-the-number`: `ab1f702ce8e8b6557edb56b09f52cde8bfb83f17` (2026-10-27, "feat(pstack): port recent skill updates (#986)").
-- Checked up to: `bf0c7cd80abdbf7fe47b634978a7d1b4071f71a7` (upstream `main`, 2026-11-14).
+- Base of `principle-explain-the-number`: `2f87c854fe3e2fcda44ca86b46ede35aad3c46b7` (2026-11-16, "feat(pstack): shorter skill texts, worker.md, and Opus-first routing capped at xhigh (#1249)").
+- Checked up to: `792440e8a560a4a3f63748cdee70491ecd412982` (upstream `main`, 2026-11-20).
   Upstream has no changes to either file between its base and this commit.
 
 `VanTanev/skills` added the copy on 2026-10-14.
+The "Eval results" section was updated to the shorter `principle-explain-the-number` of upstream #1249 on 2026-11-21.
 
 ## Local changes
 
@@ -30,8 +31,7 @@ All changes let Claude Code, OpenCode, and Codex use the skill without the rest 
 - Decision rule: from `principle-explain-the-number` at `ab1f702`, "Write the decision before you run. Name the result that would change a decision, and the noise floor. Stop when the run-to-run spread is larger than the effect."
   It is a new bullet in "Before you run anything", and one sentence at the start of "Eval results".
   The description says "Use before you run a benchmark or an eval", from that skill's new "Apply before you measure".
-- Playbooks: the links to the poteto-mode "Opening a PR", "Perf issue", and "Hillclimb" playbooks are removed, because this repo does not vendor `poteto-mode`.
-  "Keep a PR body to one primary number" stays as a rule.
+- Playbooks: the links to the poteto-mode "Perf issue" and "Hillclimb" playbooks are removed, because this repo does not vendor `poteto-mode`.
 - `agents/openai.yaml`: added, with `interface` only, because the skill is model-invoked.
 - `LICENSE`: added as a byte copy of upstream `pstack/LICENSE` (MIT), to keep the license notice with the copy.
 
@@ -62,19 +62,16 @@ This is the exact diff of `SKILL.md` from upstream `benchmark-checklist` at the 
  - Read the measurement script. Note what it times, counts, and ignores.
  - Check the load average with `uptime` and the core count with `nproc`. If the machine is busy, find out what is running. If you cannot stop it, interleave the sides so both see the same noise, and say so in the report.
  
-@@ -31,9 +31,8 @@
- - Lead with the verdict: faster, slower, no measurable difference, or inconclusive.
- - Give the number with its unit, the run count, the range, and the limiter. For example, "p50 41 ms → 33 ms, median of 7 runs per side, range 32 to 35 ms after, bound by JSON parsing on one core."
+@@ -33,7 +33,6 @@
  - Call the verdict inconclusive when you claim a difference but cannot name the limiter, when a side ran untuned, or when you could not check questions 4 and 7. Name the gap.
--- Keep a PR body to one primary number, per the **Opening a PR** playbook. Put the runs, range, and limiter evidence in a linked artifact or notes file.
-+- Keep a PR body to one primary number. Put the runs, range, and limiter evidence in a linked artifact or notes file.
+ - Keep a PR body to one primary number. Put the runs, range, and limiter evidence in a linked artifact or notes file.
  
 -## Other perf material
 +## Eval results
  
 -- Vet the **Perf issue** playbook's baseline before the playbook plans from it, and every number after that.
 -- Vet the **Hillclimb** playbook's harness before it is frozen. The frozen harness then prints error and work counts, so each keep-or-revert checks questions 4 and 7 for free.
-+An eval result is a score from trials of a task, such as a pass rate, or the precision and recall of a matcher on labeled pairs. Before the trials, write down the score that would change a decision, and the noise floor. List what else the score could be measuring, and rule out each one with evidence: errors, skipped or cached work, trials that never ran, an untuned side, noise, and a scenario too small to matter. Then ask the same of the trials: did every run do the task, does the gap hold across trials and models, and does the scenario matter. Keep the trial count, the spread, and what limits the score with the number.
++An eval result is a score from trials of a task, such as a pass rate, or the precision and recall of a matcher on labeled pairs. Before the trials, write down the score that would change a decision, and the noise floor. List what else the score could be measuring, and rule out each one with evidence: errors, skipped or cached work, trials that never ran, an untuned side, noise, and a scenario too small to matter. Then ask whether every run did the task, whether the gap holds across trials and models, and whether the scenario matters. Keep the trial count, the spread, and what limits the score with the number.
 ```
 
 ## Update procedure

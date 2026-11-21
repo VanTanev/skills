@@ -8,7 +8,7 @@ This skill is a vendored copy of `sharpen` from the Cursor pstack plugin.
 - Path: `pstack/skills/sharpen/`.
 - Base: `bf0c7cd80abdbf7fe47b634978a7d1b4071f71a7` (2026-11-14, "feat(pstack): new default models, one-file why and how, statechart fixes, sharpen and reflect text (#1236)").
   The files here are equal to upstream at this commit, except for the local changes below.
-- Checked up to: `bf0c7cd80abdbf7fe47b634978a7d1b4071f71a7` (upstream `main`, 2026-11-14).
+- Checked up to: `792440e8a560a4a3f63748cdee70491ecd412982` (upstream `main`, 2026-11-20).
 
 `VanTanev/skills` added the copy on 2026-10-14.
 The skill was updated to upstream #729 on 2026-11-03.
