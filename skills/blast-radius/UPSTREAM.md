@@ -27,7 +27,7 @@ All changes let Claude Code, OpenCode, and Codex run the skill without the rest 
 - `how`: removed from the companion line, because this repo does not vendor `how`.
 - `why`: step 1 gives the git and `gh` commands from step 2 of `why` in place of "Use `why` step 2", because `why` is user-invoked, and another skill cannot start it.
   "Same rules as `why`." is removed from step 4, because the rules follow in the same step.
-- `arena`: step 6 asks a model of another family, read-only, because this repo does not vendor `arena`.
+- `arena`: step 6 asks a model of another family, read-only, because `arena` is user-invoked, and another skill cannot start it.
   In T3 Code, the agent starts it with `delegate_task`, because T3 Code shows that child to the user.
   Elsewhere, the agent runs its CLI, with the same commands as `interrogate`.
 - `unslop`: "Write it through `unslop`" becomes "Write it through `unslop` in `references/unslop.md` in this skill's folder".

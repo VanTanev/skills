@@ -244,15 +244,31 @@ Then invoke:
 /interrogate
 ```
 
-### architect
+### arena
 
-Traces every system that a change touches, then sketches two shapes before code and picks the one with one owner for each piece of state and the least for callers to know.
-For a large or contested design, it runs an arena of candidate designs on two model families.
-The arena requires the CLI of the other model family: `codex` for a Claude agent, or `claude` for other agents.
+Runs candidates for one artifact in parallel on two model families, each in its own folder, against a rubric that it writes first.
+A read-only judge from the other family scores the candidates, and the agent picks a base and adds the best parts of the others to it.
+Requires the CLI of the other model family: `codex` for a Claude agent, or `claude` for other agents.
 Based on the [Cursor pstack](https://github.com/cursor/plugins/tree/main/pstack) skill (MIT).
 
 ```bash
-npx skills@latest add VanTanev/skills --skill architect
+npx skills@latest add VanTanev/skills --skill arena
+```
+
+Then invoke:
+
+```
+/arena
+```
+
+### architect
+
+Traces every system that a change touches, then sketches two shapes before code and picks the one with one owner for each piece of state and the least for callers to know.
+For a large or contested design, it asks you to start `arena`.
+Based on the [Cursor pstack](https://github.com/cursor/plugins/tree/main/pstack) skill (MIT).
+
+```bash
+npx skills@latest add VanTanev/skills --skill architect --skill arena
 ```
 
 Then invoke:

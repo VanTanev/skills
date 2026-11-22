@@ -10,4 +10,4 @@ metadata:
 
 Before writing code, trace every system the change touches, then sketch two different shapes for it (types, signatures, module boundaries) and pick the one where each piece of state has one owner, each task has one way to do it, and callers need to know least. Redesign instead of patching if workarounds repeat.
 
-For a large or contested design, run the **arena** skill in `references/arena.md` in this skill's folder instead of sketching alone. In that file, `{SKILLBASE}` is this skill's folder. Read `~/.agents/docs/other-models.md` first: it names the provider, model, effort and command for each model.
+For a large or contested design, ask the user to start the **arena** skill instead of sketching alone, because it is user-invoked, and only the user can start it.
