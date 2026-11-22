@@ -1,5 +1,5 @@
 interface:
   display_name: "Architect"
-  short_description: "Sketch two shapes before code, or run an arena for a large design"
+  short_description: "Sketch two shapes before code; for a large design, hand off to arena"
 policy:
   allow_implicit_invocation: false

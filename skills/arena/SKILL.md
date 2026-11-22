@@ -1,7 +1,9 @@
 ---
 name: arena
-description: "Spawn N parallel candidates at the same task, pick a base, graft the strongest parts of the losers into it. Use for /arena, 'arena this', 'throw it in the arena', or when one attempt at a non-trivial artifact would lock in the wrong shape."
+description: "Spawn N parallel candidates at the same task, pick a base, graft the strongest parts of the losers into it. Use when one attempt at a non-trivial artifact would lock in the wrong shape."
 disable-model-invocation: true
+metadata:
+  opencode/autoinvoke: false
 ---
 
 # Arena
@@ -14,7 +16,7 @@ Every candidate gets the same prompt, so the prompt is the contract.
 
 1. State the artifact each candidate is producing.
 2. Derive the rubric, 3-6 concrete gradeable criteria for what success looks like on *this* task. It is the picker's tool in Phase D. Candidates only see the task.
-3. Pick the runners. By default there are two, on two model families. **Runner 1** is a subagent on your own model, at your own effort, because a runner does the whole task. If you do not know your effort, do not set it. **Runner 2** runs on a different model family, in the background. In T3 Code, start it with `delegate_task` on that family's model, with its output location and rationale file in the task. Elsewhere, run that family's CLI with its prompt on stdin. If you are a Claude model, run `codex exec -s workspace-write --skip-git-repo-check -C <output location> -o <rationale file> -`. Otherwise, run `claude -p --permission-mode acceptEdits` in its output location, and send its output to the rationale file. The CLI uses its own configured model. If neither way starts Runner 2, run Runner 2 as a second subagent on your own model, and say that the arena has one model family. If the user names more models, add one runner for each. Spawn more runners when the arena covers multiple design directions. Use the same model N times when the work is generation-bound rather than judgment-sensitive.
+3. Pick the runners. Read `~/.agents/docs/other-models.md` first: it names the provider, model, effort and command for each model. By default there are two, on two model families. **Runner 1** is a subagent on your own model, at your own effort, because a runner does the whole task. If you do not know your effort, do not set it. **Runner 2** runs on a different model family, in the background. In T3 Code, start it with `delegate_task` on that family's model, with its output location and rationale file in the task. Elsewhere, run that family's CLI with its prompt on stdin. If you are a Claude model, run `codex exec -s workspace-write --skip-git-repo-check -C <output location> -o <rationale file> -`. Otherwise, run `claude -p --permission-mode acceptEdits` in its output location, and send its output to the rationale file. The CLI uses its own configured model. If neither way starts Runner 2, run Runner 2 as a second subagent on your own model, and say that the arena has one model family. If the user names more models, add one runner for each. Spawn more runners when the arena covers multiple design directions. Use the same model N times when the work is generation-bound rather than judgment-sensitive.
 4. Give each candidate its own output location (a git worktree where possible, otherwise a new directory `arena-<slug>/candidate-<n>/` in your scratch or temporary directory), so no two candidates write to the same file.
 
 ## Phase B: Fan out
@@ -35,13 +37,13 @@ Pick the base a future maintainer can extend most easily without breaking invari
 
 ## Phase E: Graft
 
-Walk each losing candidate once more for what is worth porting into the base, usually one or two things per candidate, not most of it. Fold each graft in by hand, per the **redesign-from-first-principles** principle skill in `{SKILLBASE}/references/redesign-from-first-principles.md`, so the result stays coherent under one mental model. Don't paste mechanically.
+Walk each losing candidate once more for what is worth porting into the base, usually one or two things per candidate, not most of it. Fold each graft in by hand, per the **redesign-from-first-principles** principle skill in `references/redesign-from-first-principles.md` in this skill's folder, so the result stays coherent under one mental model. Don't paste mechanically.
 
 If the candidates converge on one shape, that is strong agreement. Note it and ship the consensus shape. No graft is needed. If they wildly diverge, Phase A was under-specified. Reframe and re-run rather than averaging the divergence.
 
 ## Phase F: Verify
 
-Verify the synthesized artifact like any other output, per the **prove-it-works** principle skill in `{SKILLBASE}/references/prove-it-works.md`. If verification finds a problem the arena missed, either Phase A was wrong (re-frame and re-run) or a candidate caught it and you missed the graft (go back to Phase E). Don't paper over it.
+Verify the synthesized artifact like any other output, per the **prove-it-works** principle skill in `references/prove-it-works.md` in this skill's folder. If verification finds a problem the arena missed, either Phase A was wrong (re-frame and re-run) or a candidate caught it and you missed the graft (go back to Phase E). Don't paper over it.
 
 ## Outputs
 
