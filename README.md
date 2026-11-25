@@ -87,9 +87,10 @@ It adds terms from 2 or 3 neighboring fields that solved the same problem, and w
 Then it rewrites your description with the new words, and you can give the result to `sharpen`.
 The agent needs web access.
 Based on the [Cursor pstack](https://github.com/cursor/plugins/tree/main/pstack) skill (MIT).
+On the `experimental` branch only.
 
 ```bash
-npx skills@latest add VanTanev/skills --skill reframe
+npx skills@latest add https://github.com/VanTanev/skills/tree/experimental/skills/reframe
 ```
 
 Then invoke, with what you are building or what is wrong with it:
