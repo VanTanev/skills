@@ -79,6 +79,26 @@ Then invoke:
 /expert-test
 ```
 
+### reframe
+
+The agent reads your description and files, and gives you 8 to 12 expert terms for what you build, ranked by how much each would change it.
+Each term comes with a real project, paper or system that uses it, and the agent opens each link to check it.
+It adds terms from 2 or 3 neighboring fields that solved the same problem, and what you did not mention but should care about.
+Then it rewrites your description with the new words, and you can give the result to `sharpen`.
+The agent needs web access.
+Based on the [Cursor pstack](https://github.com/cursor/plugins/tree/main/pstack) skill (MIT).
+On the `experimental` branch only.
+
+```bash
+npx skills@latest add https://github.com/VanTanev/skills/tree/experimental/skills/reframe
+```
+
+Then invoke, with what you are building or what is wrong with it:
+
+```
+/reframe <description>
+```
+
 ### sharpen
 
 The agent finds what a top expert would do in the task that you do not ask for: their raw material, their methods and tools, and an outside check that the result is correct.
